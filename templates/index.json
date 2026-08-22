@@ -1,19 +1,103 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "image-banner",
       "blocks": {
-        "heading": { "type": "heading", "settings": { "heading": "Welcome to your store" } },
-        "text": { "type": "text", "settings": { "text": "<p>Add your headline and shop link here.</p>" } },
-        "button": { "type": "button", "settings": { "button_label": "Shop now" } }
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Welcome to your store"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Add your headline and shop link here.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop now",
+            "button_link": "",
+            "button_label_2": "",
+            "button_link_2": ""
+          }
+        }
       },
-      "block_order": ["heading", "text", "button"],
-      "settings": { "height": "medium", "text_alignment": "center" }
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "height": "medium",
+        "text_alignment": "center"
+      }
     },
     "featured": {
       "type": "featured-collection",
-      "settings": { "heading": "Featured collection", "products_to_show": 4, "columns_desktop": 4 }
+      "settings": {
+        "heading": "Featured collection",
+        "collection": "",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "show_view_all": true
+      }
+    },
+    "collection_list_wR8wRJ": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_ebVJQe": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "body"
+          }
+        },
+        "featured_collection_LFwrFB": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "face"
+          }
+        },
+        "featured_collection_wNBpEg": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "hair"
+          }
+        },
+        "featured_collection_HbWxxR": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "wellness-accessories"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_ebVJQe",
+        "featured_collection_LFwrFB",
+        "featured_collection_wNBpEg",
+        "featured_collection_HbWxxR"
+      ],
+      "name": "t:sections.collection_list.name",
+      "settings": {
+        "heading": "Collections",
+        "columns_desktop": 3
+      }
     }
   },
-  "order": ["hero", "featured"]
+  "order": [
+    "hero",
+    "featured",
+    "collection_list_wR8wRJ"
+  ]
 }
