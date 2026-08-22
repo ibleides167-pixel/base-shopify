@@ -59,7 +59,11 @@
                 alt: block.settings.image.alt | default: block.settings.heading | escape
             }}
           {%- else -%}
-            {{ 'velkrova-hero.jpg' | asset_url | image_tag: loading: loading_attr, fetchpriority: fetchpriority_attr, class: 'hero-slideshow__image', alt: block.settings.heading | escape }}
+            {%- case forloop.index0 -%}
+              {%- when 0 -%}{{ 'velkrova-hero.jpg' | asset_url | image_tag: loading: loading_attr, fetchpriority: fetchpriority_attr, class: 'hero-slideshow__image', alt: block.settings.heading | escape }}
+              {%- when 1 -%}{{ 'velkrova-hero-2.jpg' | asset_url | image_tag: loading: loading_attr, fetchpriority: fetchpriority_attr, class: 'hero-slideshow__image', alt: block.settings.heading | escape }}
+              {%- else -%}{{ 'velkrova-hero.jpg' | asset_url | image_tag: loading: loading_attr, fetchpriority: fetchpriority_attr, class: 'hero-slideshow__image', alt: block.settings.heading | escape }}
+            {%- endcase -%}
           {%- endif -%}
         </picture>
 

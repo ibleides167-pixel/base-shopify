@@ -36,7 +36,7 @@
         alt: section.settings.image.alt | default: section.settings.heading | escape
     }}
   {%- else -%}
-    {{ 'velkrova-hero.jpg' | asset_url | image_tag: loading: 'eager', fetchpriority: 'high', class: 'image-banner__image', alt: section.settings.heading | escape }}
+    {{ 'velkrova-banner.jpg' | asset_url | image_tag: loading: 'eager', fetchpriority: 'high', class: 'image-banner__image', alt: section.settings.heading | escape }}
   {%- endif -%}
 
   <div class="image-banner__content image-banner__content--{{ section.settings.text_alignment }}">

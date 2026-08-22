@@ -6,16 +6,38 @@
         "s1": {
           "type": "slide",
           "settings": {
-            "eyebrow": "New in",
+            "eyebrow": "Health & beauty, done right",
             "heading": "Discover the Power of Natural Beauty",
-            "text": "Dermatologist-loved, botanical formulas made for real results — no fluff, no filler.",
-            "button_label": "Shop now",
+            "text": "Dermatologist-loved skincare, haircare and beauty tech — chosen for results you can feel, not marketing you can't.",
+            "button_label": "Shop best sellers",
             "button_link": "/collections/best-sellers-1"
+          }
+        },
+        "s2": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "The glow, on repeat",
+            "heading": "Your Daily Ritual, Elevated",
+            "text": "Clean formulas and salon-grade devices that make an at-home routine feel like a treatment.",
+            "button_label": "Shop the routine",
+            "button_link": "/collections/face"
           }
         }
       },
-      "block_order": ["s1"],
+      "block_order": ["s1", "s2"],
       "settings": {}
+    },
+    "benefits": {
+      "type": "marquee",
+      "blocks": {
+        "b1": { "type": "item", "settings": { "text": "Free UK shipping over £40", "icon": "truck" } },
+        "b2": { "type": "item", "settings": { "text": "30-day easy returns", "icon": "return" } },
+        "b3": { "type": "item", "settings": { "text": "Tracked worldwide delivery", "icon": "pin" } },
+        "b4": { "type": "item", "settings": { "text": "Secure checkout", "icon": "shield" } },
+        "b5": { "type": "item", "settings": { "text": "Dermatologist-loved formulas", "icon": "shield" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5"],
+      "settings": { "label": "Store benefits", "brand": true }
     },
     "promo": {
       "type": "promo-blocks",
@@ -33,7 +55,8 @@
         "heading": "Most popular",
         "collection": "best-sellers-1",
         "products_to_show": 8,
-        "columns_desktop": 4
+        "columns_desktop": 4,
+        "show_view_all": true
       }
     },
     "categories": {
@@ -47,6 +70,16 @@
       "block_order": ["a", "b", "c", "d"],
       "settings": { "heading": "Shop by collection", "columns_desktop": 4 }
     },
+    "usp_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "h": { "type": "heading", "settings": { "heading": "Beauty that works as hard as you do" } },
+        "t": { "type": "text", "settings": { "text": "<p>Every Velkrova pick is chosen for real, visible results — backed by a 30-day promise and thousands of five-star reviews.</p>" } },
+        "btn": { "type": "button", "settings": { "button_label": "Shop best sellers", "button_link": "/collections/best-sellers-1", "button_label_2": "Explore all", "button_link_2": "/collections/all" } }
+      },
+      "block_order": ["h", "t", "btn"],
+      "settings": { "height": "medium", "text_alignment": "center" }
+    },
     "lifestyle": {
       "type": "shoppable-lifestyle",
       "blocks": {
@@ -56,12 +89,31 @@
         "h2": { "type": "hotspot", "settings": { "product": "anlan-9-in-1-rf-ems-facial-beauty-device-24k-gold-skin-tightening-anti-ageing-massager", "position_x": 78, "position_y": 68 } }
       },
       "block_order": ["p1", "p2", "h1", "h2"],
-      "settings": { "eyebrow": "The routine", "heading": "Shop the look" }
+      "settings": { "eyebrow": "The routine", "heading": "Shop the lookbook" }
+    },
+    "comparison": {
+      "type": "comparison",
+      "blocks": {
+        "r1": { "type": "row", "settings": { "label": "Dermatologist-loved, results-first formulas" } },
+        "r2": { "type": "row", "settings": { "label": "Salon-grade beauty tech at home prices" } },
+        "r3": { "type": "row", "settings": { "label": "Free UK shipping over £40, tracked worldwide" } },
+        "r4": { "type": "row", "settings": { "label": "30-day returns, no questions asked" } },
+        "r5": { "type": "row", "settings": { "label": "Real five-star reviews, not paid placements" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4", "r5"],
+      "settings": {
+        "eyebrow": "WHY VELKROVA",
+        "heading": "Built the way",
+        "heading_accent": "beauty should feel",
+        "text": "A few concrete things we do differently — spelled out, not left as a vague promise.",
+        "us_label": "Velkrova",
+        "them_label": "Others"
+      }
     },
     "more_products": {
       "type": "featured-collection",
       "settings": {
-        "heading": "More product style",
+        "heading": "More to love",
         "collection": "face",
         "products_to_show": 8,
         "columns_desktop": 4,
@@ -71,10 +123,36 @@
     "about": {
       "type": "rich-text",
       "blocks": {
-        "text": { "type": "text", "settings": { "text": "<p>Velkrova brings together dermatologist-loved skincare, haircare and wellness tools — chosen for results you can actually feel, not just marketing copy.</p>" } }
+        "heading": { "type": "heading", "settings": { "heading": "Real results, nothing to hide" } },
+        "text": { "type": "text", "settings": { "text": "<p>Velkrova brings together dermatologist-loved skincare, haircare and wellness tools — chosen for results you can actually feel, not just marketing copy. No fluff, no filler, just formulas and devices that earn their place on your shelf.</p>" } }
       },
-      "block_order": ["text"],
+      "block_order": ["heading", "text"],
       "settings": {}
+    },
+    "faq": {
+      "type": "home-faq",
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "How long does shipping take?", "answer": "<p>UK orders arrive in 3–5 business days. International orders are tracked and typically arrive within 7–12 business days.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "Are your products cruelty-free?", "answer": "<p>Yes. Our skincare and haircare formulas are cruelty-free and made without harsh unnecessary fillers.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "What's your returns policy?", "answer": "<p>We offer 30-day returns on unopened items. If something isn't right, reach out and we'll make it easy.</p>" } },
+        "q4": { "type": "question", "settings": { "question": "Do the beauty devices come with a warranty?", "answer": "<p>All Velkrova beauty devices include a 12-month warranty against manufacturing defects.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"],
+      "settings": {
+        "eyebrow": "FAQ",
+        "heading": "Frequently asked questions",
+        "subheading": "Shipping, returns and everything else you might wonder about."
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "a": { "type": "testimonial", "settings": { "rating": 5, "quote": "My skin has never looked this healthy. The LED mask is now non-negotiable in my routine.", "author": "Jordan", "role": "Verified customer" } },
+        "b": { "type": "testimonial", "settings": { "rating": 5, "quote": "The rosemary hair oil actually made a visible difference in a few weeks. Obsessed.", "author": "Sam", "role": "Verified customer" } },
+        "c": { "type": "testimonial", "settings": { "rating": 5, "quote": "Fast shipping, beautiful packaging, and products that genuinely work. Will reorder.", "author": "Casey", "role": "Verified customer" } }
+      },
+      "block_order": ["a", "b", "c"],
+      "settings": { "heading": "Loved by thousands" }
     },
     "logos": {
       "type": "logo-list",
@@ -87,26 +165,16 @@
       "block_order": ["a", "b", "c", "d"],
       "settings": { "heading": "As featured in" }
     },
-    "testimonials": {
-      "type": "testimonials",
-      "blocks": {
-        "a": { "type": "testimonial", "settings": { "rating": 5, "quote": "Exceptional quality. Thanks for the feedback, we are always looking to improve.", "author": "Jordan", "role": "Verified customer" } },
-        "b": { "type": "testimonial", "settings": { "rating": 5, "quote": "Life-changing experience. This is now part of my daily routine.", "author": "Sam", "role": "Verified customer" } },
-        "c": { "type": "testimonial", "settings": { "rating": 4, "quote": "Great product and fast shipping. Would order again.", "author": "Casey", "role": "Verified customer" } }
-      },
-      "block_order": ["a", "b", "c"],
-      "settings": { "heading": "Testimonials" }
-    },
     "newsletter": {
       "type": "newsletter",
       "settings": {
         "heading": "Subscribe to our emails",
-        "text": "Be the first to know about new collections and exclusive offers.",
+        "text": "Be the first to know about new collections and exclusive offers — plus 10% off your first order.",
         "placeholder": "Enter your email",
         "button_label": "Subscribe",
         "success": "Thanks for subscribing!"
       }
     }
   },
-  "order": ["hero", "promo", "featured", "categories", "lifestyle", "more_products", "about", "logos", "testimonials", "newsletter"]
+  "order": ["hero", "benefits", "promo", "featured", "categories", "usp_banner", "lifestyle", "comparison", "more_products", "about", "faq", "testimonials", "logos", "newsletter"]
 }

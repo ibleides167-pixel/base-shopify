@@ -54,7 +54,7 @@
                   {%- when 0 -%}{{ 'velkrova-category-face.jpg' | asset_url | image_tag: loading: 'lazy', class: 'collection-card__image', alt: collection.title | escape }}
                   {%- when 1 -%}{{ 'velkrova-category-hair.jpg' | asset_url | image_tag: loading: 'lazy', class: 'collection-card__image', alt: collection.title | escape }}
                   {%- when 2 -%}{{ 'velkrova-category-body.jpg' | asset_url | image_tag: loading: 'lazy', class: 'collection-card__image', alt: collection.title | escape }}
-                  {%- when 3 -%}{{ 'velkrova-category-skin.jpg' | asset_url | image_tag: loading: 'lazy', class: 'collection-card__image', alt: collection.title | escape }}
+                  {%- when 3 -%}{{ 'velkrova-category-wellness.jpg' | asset_url | image_tag: loading: 'lazy', class: 'collection-card__image', alt: collection.title | escape }}
                 {%- endcase -%}
               {%- endif -%}
               <span class="collection-card__pill">{{ collection.title | default: 'onboarding.collection_title' | t }}</span>
