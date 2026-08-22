@@ -1,6 +1,17 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
+    "logo": "shopify://shop_images/ChatGPT_Image_26_de_jul._de_2026_17_29_30_fe7c68aa-e63f-41c4-b845-b235eedcc2b9.png",
     "logo_width": 120,
+    "favicon": "shopify://shop_images/ChatGPT_Image_26_de_jul._de_2026_17_57_22_7aeb7f43-3c00-4c6c-9419-1297ec0d4981.png",
     "color_background": "#ffffff",
     "color_text": "#000000",
     "color_background_contrast": "#f2f3f8",
@@ -25,7 +36,8 @@
     "cart_show_note": true,
     "social_instagram_link": "",
     "social_facebook_link": "",
-    "social_linkedin_link": ""
+    "social_linkedin_link": "",
+    "content_for_index": []
   },
   "presets": {
     "Base Liquid": {
