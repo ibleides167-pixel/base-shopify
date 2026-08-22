@@ -1,0 +1,100 @@
+{%- comment -%}
+  ============================================================
+  HOME FAQ — perguntas frequentes em acordeão
+  ============================================================
+
+  O QUE FAZ:
+  Texto de um lado (eyebrow, título, subtítulo), lista de perguntas
+  em acordeão do outro. Usa <details>/<summary> nativos — abre/fecha
+  sem nenhum JS, funciona mesmo se o tema falhar em carregar script.
+
+  ONDE É USADA:
+  Seção reutilizável (tem preset com 4 blocos) — pensada para a home,
+  respondendo as dúvidas mais comuns antes do visitante sair sem
+  comprar (frete, prazo, trocas).
+
+  PRINCIPAIS PARTES:
+  - section.blocks do tipo 'question' (question + answer richtext)
+  - Primeiro item já vem aberto (atributo "open" no forloop.first)
+
+  OBSERVAÇÕES:
+  answer aceita HTML (richtext), então dá pra usar <strong>, links etc.
+{%- endcomment -%}
+<section class="home-faq">
+  <div class="page-width">
+    <div class="home-faq__grid">
+      <div class="home-faq__head">
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+        <h2 class="home-faq__title">{{ section.settings.heading | escape }}</h2>
+        {%- if section.settings.subheading != blank -%}<p class="home-faq__sub">{{ section.settings.subheading }}</p>{%- endif -%}
+      </div>
+
+      <div class="home-faq__list">
+        {%- for block in section.blocks -%}
+          <details class="home-faq__item"{% if forloop.first %} open{% endif %} {{ block.shopify_attributes }}>
+            <summary>
+              <span>{{ block.settings.question | escape }}</span>
+              {% render 'icon', name: 'chevron' %}
+            </summary>
+            <div class="home-faq__answer rte">{{ block.settings.answer }}</div>
+          </details>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-faq { padding-block: var(--spacing-sections); background: var(--color-background-contrast); }
+  .home-faq__grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: start; }
+  .home-faq__title { font-size: var(--f6); margin: 0; }
+  .home-faq__sub { margin: 14px 0 0; max-width: 40ch; opacity: 0.7; }
+
+  .home-faq__list { border-top: 1px solid var(--color-border); }
+  .home-faq__item { border-bottom: 1px solid var(--color-border); }
+  .home-faq__item summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 20px 0; cursor: pointer; font-weight: 600; list-style: none;
+  }
+  .home-faq__item summary::-webkit-details-marker { display: none; }
+  .home-faq__item summary svg { flex: none; transition: transform 0.2s ease; }
+  .home-faq__item[open] summary svg { transform: rotate(180deg); }
+  .home-faq__answer { padding: 0 0 20px; max-width: 60ch; opacity: 0.8; }
+
+  @media screen and (max-width: 900px) {
+    .home-faq__grid { grid-template-columns: 1fr; gap: 22px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Home FAQ",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FAQ" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently asked questions" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Shipping, returns and everything else you might wonder about." }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "How long does shipping take?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Orders are typically delivered within 5 to 9 business days.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home FAQ",
+      "blocks": [
+        { "type": "question" },
+        { "type": "question" },
+        { "type": "question" },
+        { "type": "question" }
+      ]
+    }
+  ]
+}
+{% endschema %}

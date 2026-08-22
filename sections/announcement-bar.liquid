@@ -1,0 +1,195 @@
+{%- comment -%}
+  ============================================================
+  ANNOUNCEMENT BAR — faixa fina acima do cabeçalho
+  ============================================================
+
+  O QUE FAZ:
+  Faixa estreita no topo do site, na cor de destaque da marca:
+  ícones de redes sociais à esquerda, uma ou mais mensagens
+  (alternando automaticamente quando há mais de uma) ao centro,
+  e um botão de fechar opcional à direita. Pensada para avisos
+  de frete, promoções por tempo limitado, etc.
+
+  ONDE É USADA:
+  header-group.json, acima do 'nav' — aparece em toda página.
+
+  PRINCIPAIS PARTES:
+  - section.blocks do tipo 'message' (até 5, texto + link opcional)
+  - Redes sociais reaproveitam os mesmos settings globais do rodapé
+    (settings.social_instagram_link / _facebook_link / _linkedin_link)
+    para não duplicar configuração de social em dois lugares.
+  - Rotação: só ativa com 2+ mensagens; troca a cada 5s via opacidade,
+    com <script> pequeno inline. Com 1 mensagem só, ou sem JS, a
+    primeira mensagem fica sempre visível (nada quebra).
+  - dismissible: quando ativo, mostra um botão de fechar que esconde
+    a faixa e lembra a escolha via sessionStorage (some só naquela
+    aba/sessão, volta a aparecer em uma visita nova).
+
+  OBSERVAÇÕES:
+  Sem JS, o carrossel de mensagens não roda, mas a primeira mensagem
+  continua legível — nada de conteúdo escondido atrás de JS.
+{%- endcomment -%}
+{%- if section.blocks.size > 0 -%}
+  <div
+    class="announcement-bar"
+    data-announcement-bar
+    data-section-id="{{ section.id }}"
+    {% if section.settings.dismissible %}data-dismissible data-storage-key="announcement-bar-dismissed-{{ section.id }}"{% endif %}
+  >
+    <div class="announcement-bar__inner page-width">
+      <ul class="announcement-bar__social" role="list">
+        {%- if settings.social_instagram_link != blank -%}
+          <li><a href="{{ settings.social_instagram_link }}" aria-label="Instagram" rel="noopener" target="_blank">{% render 'icon', name: 'instagram' %}</a></li>
+        {%- endif -%}
+        {%- if settings.social_facebook_link != blank -%}
+          <li><a href="{{ settings.social_facebook_link }}" aria-label="Facebook" rel="noopener" target="_blank">{% render 'icon', name: 'facebook' %}</a></li>
+        {%- endif -%}
+        {%- if settings.social_linkedin_link != blank -%}
+          <li><a href="{{ settings.social_linkedin_link }}" aria-label="LinkedIn" rel="noopener" target="_blank">{% render 'icon', name: 'linkedin' %}</a></li>
+        {%- endif -%}
+      </ul>
+
+      <div class="announcement-bar__messages" data-announcement-messages>
+        {%- for block in section.blocks -%}
+          {%- assign message_content = block.settings.text | escape -%}
+          {%- if block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}" class="announcement-bar__message" {% if forloop.first %}aria-current="true"{% else %}hidden{% endif %} {{ block.shopify_attributes }}>{{ message_content }}</a>
+          {%- else -%}
+            <p class="announcement-bar__message" {% if forloop.first %}aria-current="true"{% else %}hidden{% endif %} {{ block.shopify_attributes }}>{{ message_content }}</p>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.dismissible -%}
+        <button type="button" class="announcement-bar__close tap-target" data-announcement-close aria-label="Dismiss">
+          {% render 'icon', name: 'close' %}
+        </button>
+      {%- else -%}
+        <span class="announcement-bar__spacer" aria-hidden="true"></span>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+<style>
+  .announcement-bar {
+    background-color: {{ section.settings.background | default: 'var(--color-accent)' }};
+    color: {{ section.settings.text_color | default: 'var(--color-accent-text)' }};
+  }
+  .announcement-bar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 40px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .announcement-bar__social {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1 1 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .announcement-bar__social a { color: currentColor; display: inline-flex; opacity: 0.9; }
+  .announcement-bar__social a:hover { opacity: 1; }
+  .announcement-bar__social svg { width: 16px; height: 16px; }
+
+  .announcement-bar__messages {
+    position: relative;
+    flex: 2 1 0;
+    text-align: center;
+  }
+  .announcement-bar__message {
+    display: block;
+    margin: 0;
+    font-size: var(--f1);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: currentColor;
+    text-decoration: none;
+  }
+  a.announcement-bar__message:hover { text-decoration: underline; }
+
+  .announcement-bar__spacer,
+  .announcement-bar__close { flex: 1 1 0; display: flex; justify-content: flex-end; }
+  .announcement-bar__close { background: none; border: none; color: currentColor; cursor: pointer; margin-left: auto; }
+  .announcement-bar__close svg { width: 16px; height: 16px; }
+
+  @media screen and (max-width: 760px) {
+    .announcement-bar__social { display: none; }
+    .announcement-bar__spacer { display: none; }
+  }
+</style>
+
+<script>
+  (function () {
+    var root = document.querySelector('[data-announcement-bar][data-section-id="{{ section.id }}"]');
+    if (!root) return;
+
+    if (root.hasAttribute('data-dismissible')) {
+      var key = root.dataset.storageKey;
+      try {
+        if (key && sessionStorage.getItem(key) === '1') {
+          root.remove();
+          return;
+        }
+      } catch (e) {}
+
+      var closeButton = root.querySelector('[data-announcement-close]');
+      if (closeButton) {
+        closeButton.addEventListener('click', function () {
+          try { if (key) sessionStorage.setItem(key, '1'); } catch (e) {}
+          root.remove();
+        });
+      }
+    }
+
+    var messages = Array.prototype.slice.call(root.querySelectorAll('.announcement-bar__message'));
+    if (messages.length < 2) return;
+
+    var index = 0;
+    setInterval(function () {
+      messages[index].hidden = true;
+      messages[index].removeAttribute('aria-current');
+      index = (index + 1) % messages.length;
+      messages[index].hidden = false;
+      messages[index].setAttribute('aria-current', 'true');
+    }, 5000);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "tag": "section",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "color", "id": "background", "label": "Background colour" },
+    { "type": "color", "id": "text_color", "label": "Text colour" },
+    { "type": "checkbox", "id": "dismissible", "label": "Allow customers to dismiss", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Message", "default": "Free shipping on all orders over $50" },
+        { "type": "url", "id": "link", "label": "Link (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement bar",
+      "blocks": [
+        { "type": "message", "settings": { "text": "Free shipping on all orders over $50" } },
+        { "type": "message", "settings": { "text": "Up to 30% off new arrivals" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

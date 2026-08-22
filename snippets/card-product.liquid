@@ -5,8 +5,11 @@
 
   O QUE FAZ:
   Renderiza o card de um produto: imagem (com troca de imagem no hover se
-  ativado nas settings), badge de promoção/esgotado, vendor opcional,
-  título e preço (via snippet 'price').
+  ativado nas settings), badge de desconto/esgotado, botão de quick-add
+  (soma a variante padrão ao carrinho via AJAX, sem sair da página),
+  swatches de cor (se o produto tiver uma opção chamada "Color"/"Cor"
+  com swatch configurado no admin), vendor opcional, título e preço
+  (via snippet 'price').
 
   COMO USAR:
   {% render 'card-product', card_product: product %}
@@ -19,6 +22,13 @@
   O aspect ratio da imagem vem de settings.card_image_ratio
   ('portrait', 'square' ou 'adapt'). A segunda imagem no hover depende de
   settings.card_show_second_image; o vendor depende de settings.card_show_vendor.
+  O badge de desconto usa SEMPRE a mesma variante (selected_or_first_available)
+  para calcular preço e preço comparativo — misturar a maior comparação com
+  o menor preço do produto pode gerar um "% off" que nenhuma variante tem de fato.
+  O botão de quick-add fica FORA do <a> (não pode existir <button> dentro de
+  <a> — inválido em HTML e quebra leitor de tela), posicionado por cima da
+  mídia via CSS. As swatches só aparecem com swatch de verdade configurado;
+  sem isso, não inventamos uma cor que não existe.
 {%- endcomment -%}
 {%- liquid
   assign ratio = 1
@@ -32,6 +42,20 @@
         assign ratio = card_product.featured_media.aspect_ratio
       endif
   endcase
+
+  assign badge_variant = card_product.selected_or_first_available_variant
+  assign badge_discount = 0
+  if badge_variant.compare_at_price > badge_variant.price
+    assign badge_discount = badge_variant.compare_at_price | minus: badge_variant.price | times: 100 | divided_by: badge_variant.compare_at_price
+  endif
+
+  assign color_option = nil
+  for option in card_product.options_with_values
+    if option.name contains 'Color' or option.name contains 'Cor'
+      assign color_option = option
+      break
+    endif
+  endfor
 -%}
 <div class="card-product">
   <a href="{{ card_product.url }}" class="card-product__link">
@@ -60,11 +84,11 @@
           }}
         {%- endif -%}
       {%- else -%}
-        {{ 'product-1' | placeholder_svg_tag: 'card-product__image placeholder-svg' }}
+        {{ 'velkrova-product-serum.png' | asset_url | image_tag: loading: 'lazy', class: 'card-product__image' }}
       {%- endif -%}
 
-      {%- if card_product.compare_at_price > card_product.price and card_product.available -%}
-        <span class="card-product__badge">{{ 'products.product.on_sale' | t }}</span>
+      {%- if badge_discount > 0 -%}
+        <span class="card-product__badge">{{ badge_discount }}% {{ 'products.product.on_sale' | t }}</span>
       {%- elsif card_product.available == false -%}
         <span class="card-product__badge card-product__badge--sold-out">{{ 'products.product.sold_out' | t }}</span>
       {%- endif -%}
@@ -76,6 +100,25 @@
       {%- endif -%}
       <h3 class="card-product__title">{{ card_product.title | escape }}</h3>
       {% render 'price', product: card_product, use_variant: false, show_compare: true, price_class: 'price--card' %}
+      {%- if color_option -%}
+        <span class="card-product__swatches">
+          {%- for value in color_option.values limit: 4 -%}
+            <span class="card-product__swatch" style="background-color: {{ value.swatch.color | default: 'transparent' }};" title="{{ value | escape }}"></span>
+          {%- endfor -%}
+          {%- if color_option.values.size > 4 -%}
+            <span class="card-product__swatch-more">+{{ color_option.values.size | minus: 4 }}</span>
+          {%- endif -%}
+        </span>
+      {%- endif -%}
     </div>
   </a>
+
+  {%- if card_product.available -%}
+    <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" data-type="add-to-cart-form" class="card-product__quick-add">
+      <input type="hidden" name="id" value="{{ card_product.selected_or_first_available_variant.id }}">
+      <button type="submit" name="add" class="card-product__quick-add-button" aria-label="{{ 'products.product.add_to_cart' | t }}">
+        {% render 'icon', name: 'plus' %}
+      </button>
+    </form>
+  {%- endif -%}
 </div>

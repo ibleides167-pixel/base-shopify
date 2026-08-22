@@ -1,0 +1,124 @@
+{%- comment -%}
+  ============================================================
+  PROMO BLOCKS — blocos de oferta com fundo de cor sólida
+  ============================================================
+
+  O QUE FAZ:
+  De 1 a 3 blocos lado a lado, cada um com fundo de cor sólida
+  (escolhida no bloco), uma foto de produto "recortada" (sem cobrir
+  o fundo todo), título, linha de desconto e botão. Pensado pra ficar
+  logo abaixo do hero, destacando categorias ou promoções específicas.
+
+  ONDE É USADA:
+  Seção reutilizável (tem preset com 3 blocos) — comum na home.
+
+  PRINCIPAIS PARTES:
+  - section.blocks do tipo 'block' (background, image, heading,
+    discount_text, button_label, button_link)
+  - A imagem não usa object-fit: cover — ela aparece inteira,
+    ancorada embaixo, como um "recorte" sobre a cor sólida
+
+  OBSERVAÇÕES:
+  A cor de fundo é por bloco (não vem do tema), pra permitir blocos
+  com cores diferentes lado a lado, como numa vitrine de promoções.
+{%- endcomment -%}
+<div class="promo-blocks page-width" data-section-id="{{ section.id }}">
+  <ul class="promo-blocks__grid" role="list" style="--columns: {{ section.blocks.size | at_least: 1 }};">
+    {%- for block in section.blocks -%}
+      <li class="promo-block" style="background-color: {{ block.settings.background }};" {{ block.shopify_attributes }}>
+        <div class="promo-block__copy">
+          {%- if block.settings.heading != blank -%}<h3>{{ block.settings.heading | escape }}</h3>{%- endif -%}
+          {%- if block.settings.discount_text != blank -%}<p class="promo-block__discount">{{ block.settings.discount_text | escape }}</p>{%- endif -%}
+          {%- if block.settings.button_label != blank -%}
+            <a href="{{ block.settings.button_link | default: '#' }}" class="button button--sm promo-block__button">{{ block.settings.button_label | escape }}</a>
+          {%- endif -%}
+        </div>
+        {%- if block.settings.image != blank -%}
+          {{
+            block.settings.image
+            | image_url: width: 700
+            | image_tag: loading: 'lazy', class: 'promo-block__image', widths: '350, 500, 700', sizes: '(min-width: 1000px) 30vw, 90vw', alt: block.settings.heading | escape
+          }}
+        {%- else -%}
+          {%- case forloop.index0 | modulo: 3 -%}
+            {%- when 0 -%}{{ 'velkrova-product-serum.png' | asset_url | image_tag: loading: 'lazy', class: 'promo-block__image', alt: block.settings.heading | escape }}
+            {%- when 1 -%}{{ 'velkrova-product-cream.png' | asset_url | image_tag: loading: 'lazy', class: 'promo-block__image', alt: block.settings.heading | escape }}
+            {%- when 2 -%}{{ 'velkrova-product-pump.png' | asset_url | image_tag: loading: 'lazy', class: 'promo-block__image', alt: block.settings.heading | escape }}
+          {%- endcase -%}
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+<style>
+  .promo-blocks { padding-top: var(--spacing-sections); padding-bottom: var(--spacing-sections); }
+  .promo-blocks__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--columns, 3), 1fr);
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .promo-block {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 420px;
+    padding: 28px;
+    overflow: hidden;
+    border-radius: var(--media-radius);
+  }
+  .promo-block__copy { position: relative; z-index: 1; max-width: 220px; }
+  .promo-block h3 { font-size: var(--f4); line-height: 1.15; margin: 0 0 10px; }
+  .promo-block__discount { font-size: var(--f1); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 16px; }
+  .promo-block__image {
+    position: absolute;
+    right: -6%;
+    bottom: 0;
+    width: 78%;
+    height: auto;
+    max-height: 70%;
+    object-fit: contain;
+    object-position: bottom right;
+  }
+
+  @media screen and (max-width: 1000px) {
+    .promo-blocks__grid { grid-template-columns: 1fr; }
+    .promo-block { min-height: 320px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Promo blocks",
+  "tag": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Block",
+      "settings": [
+        { "type": "color", "id": "background", "label": "Background colour", "default": "#f3ede4" },
+        { "type": "image_picker", "id": "image", "label": "Product image" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Unleash your everyday glow" },
+        { "type": "text", "id": "discount_text", "label": "Discount text", "default": "UP TO 50% OFF" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
+        { "type": "url", "id": "button_link", "label": "Button link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo blocks",
+      "blocks": [
+        { "type": "block", "settings": { "background": "#e8a24f" } },
+        { "type": "block", "settings": { "background": "#b9ab8f" } },
+        { "type": "block", "settings": { "background": "#e1a3a0" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

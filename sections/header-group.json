@@ -2,9 +2,18 @@
   "type": "header",
   "name": "t:section_groups.header.name",
   "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "blocks": {
+        "a": { "type": "message", "settings": { "text": "HURRY UP! UP TO 30% OFF BEST SELLERS" } },
+        "b": { "type": "message", "settings": { "text": "Clean, botanical skincare — made to last" } }
+      },
+      "block_order": ["a", "b"],
+      "settings": {}
+    },
     "nav": {
       "type": "nav"
     }
   },
-  "order": ["nav"]
+  "order": ["announcement", "nav"]
 }

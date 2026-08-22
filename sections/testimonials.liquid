@@ -1,0 +1,151 @@
+{%- comment -%}
+  ============================================================
+  TESTIMONIALS — carrossel de depoimentos
+  ============================================================
+
+  O QUE FAZ:
+  Carrossel horizontal de cards de depoimento: nota em estrelas,
+  citação, foto/avatar, nome e função de quem deu o depoimento.
+
+  ONDE É USADA:
+  Seção reutilizável (tem preset com 3 blocos) — comum na home,
+  como prova social antes do newsletter/rodapé.
+
+  PRINCIPAIS PARTES:
+  - section.blocks do tipo 'testimonial' (rating, quote, avatar,
+    author, role)
+  - Estrelas: rating de 1 a 5, renderizadas cheias/vazias via loop
+  - Carrossel: mesmo padrão de assets/carousel.js (setas prev/next)
+
+  OBSERVAÇÕES:
+  avatar é opcional — sem foto, mostra as iniciais do nome num
+  círculo (sem precisar de imagem placeholder).
+{%- endcomment -%}
+<div class="testimonials page-width" data-section-id="{{ section.id }}">
+  {%- if section.settings.heading != blank -%}
+    <div class="section-head"><h2>{{ section.settings.heading | escape }}</h2></div>
+  {%- endif -%}
+
+  <div class="testimonials__carousel-wrap" data-carousel-wrap>
+    <button class="testimonials__nav" data-dir="prev" type="button" aria-label="Previous testimonial">{% render 'icon', name: 'chevron' %}</button>
+    <ul class="testimonials__carousel" role="list" data-carousel>
+      {%- for block in section.blocks -%}
+        <li class="testimonial-card" {{ block.shopify_attributes }}>
+          <div class="testimonial-card__stars" aria-hidden="true">
+            {%- assign rating = block.settings.rating | plus: 0 -%}
+            {%- for i in (1..5) -%}
+              {%- if i <= rating -%}★{%- else -%}☆{%- endif -%}
+            {%- endfor -%}
+          </div>
+          <span class="visually-hidden">{{ rating }} out of 5 stars</span>
+          <p class="testimonial-card__quote">&ldquo;{{ block.settings.quote }}&rdquo;</p>
+          <div class="testimonial-card__author">
+            {%- if block.settings.avatar != blank -%}
+              {{ block.settings.avatar | image_url: width: 96 | image_tag: loading: 'lazy', class: 'testimonial-card__avatar', alt: block.settings.author | escape }}
+            {%- else -%}
+              <span class="testimonial-card__avatar testimonial-card__avatar--initial" aria-hidden="true">{{ block.settings.author | slice: 0 }}</span>
+            {%- endif -%}
+            <div>
+              <strong>{{ block.settings.author | escape }}</strong>
+              {%- if block.settings.role != blank -%}<span class="testimonial-card__role">{{ block.settings.role | escape }}</span>{%- endif -%}
+            </div>
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+    <button class="testimonials__nav" data-dir="next" type="button" aria-label="Next testimonial">{% render 'icon', name: 'chevron' %}</button>
+  </div>
+</div>
+
+<style>
+  .testimonials { padding-top: var(--spacing-sections); padding-bottom: var(--spacing-sections); }
+
+  .testimonials__carousel-wrap { position: relative; display: flex; align-items: center; gap: 8px; }
+  .testimonials__carousel {
+    --gap: 24px;
+    display: flex;
+    gap: var(--gap);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    list-style: none;
+    margin: 0;
+    padding: 4px 0 12px;
+    scrollbar-width: none;
+  }
+  .testimonials__carousel::-webkit-scrollbar { display: none; }
+  .testimonials__carousel > li { flex: 0 0 calc((100% - var(--gap)) / 2); scroll-snap-align: start; }
+
+  .testimonial-card {
+    padding: 32px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--media-radius);
+  }
+  .testimonial-card__stars { color: var(--color-accent); font-size: var(--f3); letter-spacing: 2px; margin-bottom: 12px; }
+  .testimonial-card__quote { font-size: var(--f3); line-height: 1.6; margin: 0 0 20px; }
+  .testimonial-card__author { display: flex; align-items: center; gap: 12px; }
+  .testimonial-card__avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+  .testimonial-card__avatar--initial {
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-heading-family); font-size: var(--f3);
+    color: var(--color-accent-text); background: var(--color-accent);
+    text-transform: uppercase;
+  }
+  .testimonial-card__role { display: block; font-size: var(--f0); opacity: 0.6; }
+
+  .testimonials__nav {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+  .testimonials__nav[data-dir="prev"] svg { transform: rotate(90deg); }
+  .testimonials__nav[data-dir="next"] svg { transform: rotate(-90deg); }
+  .testimonials__nav:disabled { opacity: 0.3; cursor: default; }
+
+  @media screen and (max-width: 1000px) {
+    .testimonials__carousel > li { flex-basis: 100%; }
+    .testimonials__nav { display: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Loved by our customers" }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "This exceeded every expectation. Fast shipping and the product looks even better in person." },
+        { "type": "image_picker", "id": "avatar", "label": "Avatar (optional)" },
+        { "type": "text", "id": "author", "label": "Author", "default": "Verified customer" },
+        { "type": "text", "id": "role", "label": "Role (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        { "type": "testimonial" },
+        { "type": "testimonial" },
+        { "type": "testimonial" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,243 @@
+{%- comment -%}
+  ============================================================
+  HERO SLIDESHOW — carrossel de banners em tela cheia
+  ============================================================
+
+  O QUE FAZ:
+  Até 5 slides com imagem full-bleed, alternando automaticamente a
+  cada 6s. Cada slide pode ter texto (eyebrow, título, texto, botão)
+  sobreposto com um overlay para legibilidade, OU ficar sem nenhum
+  texto — nesse caso o slide inteiro vira um link clicável (útil
+  quando a arte da imagem já traz o texto embutido).
+
+  ONDE É USADA:
+  Seção reutilizável (tem preset) — topo da home.
+
+  PRINCIPAIS PARTES:
+  - Trilha (.hero-slides) que desliza via transform: translateX
+  - Dots + setas prev/next (só aparecem com 2+ slides)
+  - Script no fim do arquivo: autoplay, pausa no hover/foco,
+    swipe por toque, respeita prefers-reduced-motion
+  - Settings por slide: imagem desktop/mobile, eyebrow, heading,
+    texto, botão
+
+  OBSERVAÇÕES:
+  Primeira imagem carrega eager (é o LCP da home); as demais lazy.
+{%- endcomment -%}
+<div class="hero-slideshow" data-hero-slideshow data-section-id="{{ section.id }}">
+  <div class="hero-slideshow__track" data-hero-track>
+    {%- for block in section.blocks -%}
+      {%- assign has_copy = false -%}
+      {%- if block.settings.heading != blank or block.settings.text != blank or block.settings.button_label != blank or block.settings.eyebrow != blank -%}
+        {%- assign has_copy = true -%}
+      {%- endif -%}
+      {%- assign loading_attr = 'lazy' -%}
+      {%- assign fetchpriority_attr = 'auto' -%}
+      {%- if forloop.first -%}
+        {%- assign loading_attr = 'eager' -%}
+        {%- assign fetchpriority_attr = 'high' -%}
+      {%- endif -%}
+      {%- assign is_link_slide = false -%}
+      {%- if has_copy == false and block.settings.button_link != blank -%}{%- assign is_link_slide = true -%}{%- endif -%}
+      <div class="hero-slideshow__slide" {{ block.shopify_attributes }}>
+        {%- if is_link_slide -%}<a href="{{ block.settings.button_link }}" class="hero-slideshow__link" aria-label="{{ block.settings.heading | default: 'Shop now' }}">{%- endif -%}
+
+        <picture>
+          {%- if block.settings.image_mobile != blank -%}
+            <source media="(max-width: 760px)" srcset="{{ block.settings.image_mobile | image_url: width: 1100 }}">
+          {%- endif -%}
+          {%- if block.settings.image != blank -%}
+            {{
+              block.settings.image
+              | image_url: width: 2400
+              | image_tag:
+                loading: loading_attr,
+                fetchpriority: fetchpriority_attr,
+                class: 'hero-slideshow__image',
+                widths: '750, 1100, 1500, 2000, 2400',
+                sizes: '100vw',
+                alt: block.settings.image.alt | default: block.settings.heading | escape
+            }}
+          {%- else -%}
+            {{ 'velkrova-hero.jpg' | asset_url | image_tag: loading: loading_attr, fetchpriority: fetchpriority_attr, class: 'hero-slideshow__image', alt: block.settings.heading | escape }}
+          {%- endif -%}
+        </picture>
+
+        {%- if is_link_slide -%}</a>{%- endif -%}
+
+        {%- if has_copy -%}
+          <div class="hero-slideshow__overlay">
+            <div class="page-width">
+              <div class="hero-slideshow__copy">
+                {%- if block.settings.eyebrow != blank -%}<p class="eyebrow">{{ block.settings.eyebrow | escape }}</p>{%- endif -%}
+                {%- if block.settings.heading != blank -%}<h2>{{ block.settings.heading | escape }}</h2>{%- endif -%}
+                {%- if block.settings.text != blank -%}<p class="hero-slideshow__text">{{ block.settings.text }}</p>{%- endif -%}
+                {%- if block.settings.button_label != blank -%}
+                  <a class="button" href="{{ block.settings.button_link | default: '#' }}">{{ block.settings.button_label | escape }}</a>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.blocks.size > 1 -%}
+    <div class="hero-slideshow__controls">
+      <button type="button" class="hero-slideshow__arrow" data-hero-prev aria-label="Previous slide">{% render 'icon', name: 'chevron' %}</button>
+      <div class="hero-slideshow__dots">
+        {%- for block in section.blocks -%}
+          <button type="button" class="hero-slideshow__dot" data-index="{{ forloop.index0 }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Go to slide {{ forloop.index }}"></button>
+        {%- endfor -%}
+      </div>
+      <button type="button" class="hero-slideshow__arrow" data-hero-next aria-label="Next slide">{% render 'icon', name: 'chevron' %}</button>
+    </div>
+  {%- endif -%}
+</div>
+
+<style>
+  .hero-slideshow { position: relative; overflow: hidden; }
+  .hero-slideshow__track { display: flex; }
+  .hero-slideshow__slide { position: relative; flex: 0 0 100%; min-height: 82vh; }
+  .hero-slideshow__image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-slideshow__link { position: absolute; inset: 0; z-index: 2; }
+  .hero-slideshow__overlay {
+    position: absolute; inset: 0; z-index: 1;
+    display: flex; align-items: center;
+    background: linear-gradient(90deg, var(--color-background-contrast, #faf4e6) 0%, rgba(250,244,230,0.72) 34%, rgba(250,244,230,0.15) 55%, rgba(250,244,230,0) 70%);
+  }
+  .hero-slideshow__copy { max-width: 560px; padding: 40px 20px; }
+  .hero-slideshow__copy h2 {
+    font-size: var(--f8); line-height: 1.05; letter-spacing: -0.01em;
+    color: var(--color-text, #1c1c1c); margin: 0 0 20px;
+  }
+  .hero-slideshow__text { font-size: var(--f3); color: var(--color-text, #1c1c1c); opacity: 0.85; margin: 0 0 28px; }
+  .hero-slideshow__overlay .eyebrow { color: var(--color-text, #1c1c1c); opacity: 0.65; margin-bottom: 14px; }
+
+  .hero-slideshow__controls {
+    position: absolute; z-index: 3;
+    left: max(20px, calc((100vw - var(--page-width)) / 2 + 20px)); bottom: 28px;
+    display: flex; align-items: center; justify-content: flex-start; gap: 16px;
+  }
+  .hero-slideshow__dots { display: flex; gap: 10px; }
+  .hero-slideshow__dot {
+    width: 12px; height: 12px; padding: 0; border-radius: 50%; border: 1.5px solid var(--color-text, #1c1c1c);
+    background: transparent; cursor: pointer;
+  }
+  .hero-slideshow__dot[aria-current="true"] { background: var(--color-text, #1c1c1c); }
+  .hero-slideshow__arrow {
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; padding: 0;
+    color: var(--color-text, #1c1c1c);
+    background: transparent; border: 1px solid var(--color-text, #1c1c1c); border-radius: 50%;
+    cursor: pointer;
+  }
+  .hero-slideshow__arrow svg { stroke: currentColor; }
+  .hero-slideshow__arrow[data-hero-prev] svg { transform: rotate(90deg); }
+  .hero-slideshow__arrow[data-hero-next] svg { transform: rotate(-90deg); }
+
+  @media screen and (max-width: 1000px) {
+    .hero-slideshow__controls { justify-content: space-between; }
+  }
+
+  @media screen and (max-width: 1000px) {
+    .hero-slideshow__copy h2 { font-size: var(--f6); }
+    .hero-slideshow__slide { min-height: 60vh; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-slideshow__track { scroll-behavior: auto; }
+  }
+</style>
+
+<script>
+  (function () {
+    var root = document.querySelector('[data-hero-slideshow][data-section-id="{{ section.id }}"]');
+    if (!root) return;
+    var track = root.querySelector('[data-hero-track]');
+    var dots = Array.prototype.slice.call(root.querySelectorAll('.hero-slideshow__dot'));
+    var total = track ? track.children.length : 0;
+    if (total < 2) return;
+
+    var index = 0;
+    var timer = null;
+
+    function goTo(next) {
+      index = (next + total) % total;
+      track.style.transform = 'translateX(-' + index * 100 + '%)';
+      dots.forEach(function (dot, i) { dot.setAttribute('aria-current', i === index ? 'true' : 'false'); });
+    }
+
+    function play() {
+      stop();
+      timer = setInterval(function () { goTo(index + 1); }, 6000);
+    }
+
+    function stop() {
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        stop();
+        goTo(parseInt(dot.dataset.index, 10));
+        play();
+      });
+    });
+
+    var prevButton = root.querySelector('[data-hero-prev]');
+    var nextButton = root.querySelector('[data-hero-next]');
+    if (prevButton) prevButton.addEventListener('click', function () { stop(); goTo(index - 1); play(); });
+    if (nextButton) nextButton.addEventListener('click', function () { stop(); goTo(index + 1); play(); });
+
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', play);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', play);
+
+    var touchStartX = null;
+    root.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; stop(); }, { passive: true });
+    root.addEventListener('touchend', function (e) {
+      if (touchStartX === null) return;
+      var delta = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(delta) > 45) goTo(delta < 0 ? index + 1 : index - 1);
+      touchStartX = null;
+      play();
+    }, { passive: true });
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) play();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Hero slideshow",
+  "tag": "section",
+  "max_blocks": 5,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "paragraph", "content": "Deixe os campos de texto vazios se a imagem já tiver o texto embutido: o slide inteiro vira um link clicável." },
+        { "type": "image_picker", "id": "image", "label": "Desktop image" },
+        { "type": "image_picker", "id": "image_mobile", "label": "Mobile image" },
+        { "type": "url", "id": "button_link", "label": "Link" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "text", "id": "button_label", "label": "Button label" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero slideshow",
+      "blocks": [
+        { "type": "slide", "settings": { "eyebrow": "New arrivals", "heading": "Welcome to your store", "text": "Add your headline and shop link here.", "button_label": "Shop now" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

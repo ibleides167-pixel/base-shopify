@@ -1,19 +1,112 @@
 {
   "sections": {
     "hero": {
-      "type": "image-banner",
+      "type": "hero-slideshow",
       "blocks": {
-        "heading": { "type": "heading", "settings": { "heading": "Welcome to your store" } },
-        "text": { "type": "text", "settings": { "text": "<p>Add your headline and shop link here.</p>" } },
-        "button": { "type": "button", "settings": { "button_label": "Shop now" } }
+        "s1": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "New in",
+            "heading": "Discover the Power of Natural Beauty",
+            "text": "Dermatologist-loved, botanical formulas made for real results — no fluff, no filler.",
+            "button_label": "Shop now",
+            "button_link": "/collections/best-sellers-1"
+          }
+        }
       },
-      "block_order": ["heading", "text", "button"],
-      "settings": { "height": "medium", "text_alignment": "center" }
+      "block_order": ["s1"],
+      "settings": {}
+    },
+    "promo": {
+      "type": "promo-blocks",
+      "blocks": {
+        "a": { "type": "block", "settings": { "background": "#e8a24f", "heading": "Buy one, get one free", "discount_text": "SELECTED BEST SELLERS", "button_label": "Shop the deal", "button_link": "/collections/bogo" } },
+        "b": { "type": "block", "settings": { "background": "#b9ab8f", "heading": "The Glow Duo", "discount_text": "CURATED SET, BETTER TOGETHER", "button_label": "Shop the set", "button_link": "/collections/the-glow-duo" } },
+        "c": { "type": "block", "settings": { "background": "#e1a3a0", "heading": "Fine lines & firmness", "discount_text": "UP TO 30% OFF", "button_label": "Shop the concern", "button_link": "/collections/fine-lines-firmness" } }
+      },
+      "block_order": ["a", "b", "c"],
+      "settings": {}
     },
     "featured": {
       "type": "featured-collection",
-      "settings": { "heading": "Featured collection", "products_to_show": 4, "columns_desktop": 4 }
+      "settings": {
+        "heading": "Most popular",
+        "collection": "best-sellers-1",
+        "products_to_show": 8,
+        "columns_desktop": 4
+      }
+    },
+    "categories": {
+      "type": "collection-list",
+      "blocks": {
+        "a": { "type": "featured_collection", "settings": { "collection": "face" } },
+        "b": { "type": "featured_collection", "settings": { "collection": "hair" } },
+        "c": { "type": "featured_collection", "settings": { "collection": "body" } },
+        "d": { "type": "featured_collection", "settings": { "collection": "wellness-accessories" } }
+      },
+      "block_order": ["a", "b", "c", "d"],
+      "settings": { "heading": "Shop by collection", "columns_desktop": 4 }
+    },
+    "lifestyle": {
+      "type": "shoppable-lifestyle",
+      "blocks": {
+        "p1": { "type": "product", "settings": { "product": "rechargeable-7-colour-led-facial-mask" } },
+        "p2": { "type": "product", "settings": { "product": "premium-rosemary-hair-oil" } },
+        "h1": { "type": "hotspot", "settings": { "product": "avocado-24k-gold-collagen-eye-masks-hydrating-under-eye-patches-for-dark-circles-puffiness-firm-skin", "position_x": 64, "position_y": 28 } },
+        "h2": { "type": "hotspot", "settings": { "product": "anlan-9-in-1-rf-ems-facial-beauty-device-24k-gold-skin-tightening-anti-ageing-massager", "position_x": 78, "position_y": 68 } }
+      },
+      "block_order": ["p1", "p2", "h1", "h2"],
+      "settings": { "eyebrow": "The routine", "heading": "Shop the look" }
+    },
+    "more_products": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "More product style",
+        "collection": "face",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "show_view_all": true
+      }
+    },
+    "about": {
+      "type": "rich-text",
+      "blocks": {
+        "text": { "type": "text", "settings": { "text": "<p>Velkrova brings together dermatologist-loved skincare, haircare and wellness tools — chosen for results you can actually feel, not just marketing copy.</p>" } }
+      },
+      "block_order": ["text"],
+      "settings": {}
+    },
+    "logos": {
+      "type": "logo-list",
+      "blocks": {
+        "a": { "type": "logo", "settings": {} },
+        "b": { "type": "logo", "settings": {} },
+        "c": { "type": "logo", "settings": {} },
+        "d": { "type": "logo", "settings": {} }
+      },
+      "block_order": ["a", "b", "c", "d"],
+      "settings": { "heading": "As featured in" }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "a": { "type": "testimonial", "settings": { "rating": 5, "quote": "Exceptional quality. Thanks for the feedback, we are always looking to improve.", "author": "Jordan", "role": "Verified customer" } },
+        "b": { "type": "testimonial", "settings": { "rating": 5, "quote": "Life-changing experience. This is now part of my daily routine.", "author": "Sam", "role": "Verified customer" } },
+        "c": { "type": "testimonial", "settings": { "rating": 4, "quote": "Great product and fast shipping. Would order again.", "author": "Casey", "role": "Verified customer" } }
+      },
+      "block_order": ["a", "b", "c"],
+      "settings": { "heading": "Testimonials" }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Subscribe to our emails",
+        "text": "Be the first to know about new collections and exclusive offers.",
+        "placeholder": "Enter your email",
+        "button_label": "Subscribe",
+        "success": "Thanks for subscribing!"
+      }
     }
   },
-  "order": ["hero", "featured"]
+  "order": ["hero", "promo", "featured", "categories", "lifestyle", "more_products", "about", "logos", "testimonials", "newsletter"]
 }

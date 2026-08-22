@@ -1,12 +1,14 @@
 {%- comment -%}
   ============================================================
-  FEATURED COLLECTION — vitrine de produtos de uma coleção
+  FEATURED COLLECTION — carrossel de produtos de uma coleção
   ============================================================
 
   O QUE FAZ:
-  Exibe um título + grade de produtos de UMA coleção escolhida, com
-  quantidade e número de colunas configuráveis. Mostra link "ver
-  tudo" quando a coleção tem mais produtos do que o limite exibido.
+  Título + subtítulo centralizados e um carrossel horizontal com os
+  produtos de UMA coleção escolhida (setas prev/next fazem scroll
+  suave; em telas de toque também dá pra arrastar com o dedo, é
+  scroll nativo). Mostra botão "ver tudo" centralizado abaixo quando
+  a coleção tem mais produtos do que o limite exibido.
 
   ONDE É USADA:
   Seção reutilizável (tem preset) — comum na home.
@@ -15,12 +17,17 @@
   - collection = collections[section.settings.collection]
   - render 'card-product': card de cada produto
   - Placeholders (product-1 + título fake) quando coleção vazia
-  - Settings: heading, collection, products_to_show, columns_desktop,
-    show_view_all
-  - Colunas via --grid-columns inline (style no wrapper)
+  - Settings: heading, subheading, collection, products_to_show,
+    columns_desktop (quantos cabem por vez na tela), show_view_all
+  - O comportamento do carrossel (setas prev/next, scrollBy, disable
+    nas pontas) é genérico e vive em assets/carousel.js — ele inicializa
+    sozinho todo [data-carousel-wrap] da página, sem script por seção.
 
   OBSERVAÇÕES:
   show_view_all só aparece se total_products > limit exibido.
+  Sem JS, o carrossel ainda funciona: é scroll horizontal nativo,
+  só as setas é que não aparecem funcionais (mas continuam clicáveis
+  como no-op, então não há nada quebrado).
 {%- endcomment -%}
 {%- liquid
   assign collection = collections[section.settings.collection]
@@ -28,43 +35,97 @@
   assign total_products = collection.all_products_count | plus: 0
 -%}
 <div class="featured-collection page-width" data-section-id="{{ section.id }}" style="--grid-columns: {{ section.settings.columns_desktop }};">
-  <div class="featured-collection__header">
+  <div class="section-head">
     {%- if section.settings.heading != blank -%}
-      <h2 class="featured-collection__heading">{{ section.settings.heading | escape }}</h2>
+      <h2>{{ section.settings.heading | escape }}</h2>
     {%- endif -%}
-    {%- if section.settings.show_view_all and total_products > limit -%}
-      <a href="{{ collection.url }}" class="featured-collection__view-all button button--secondary"
-         aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: collection.title }}">
-        {{ 'sections.featured_collection.view_all' | t }}
-      </a>
+    {%- if section.settings.subheading != blank -%}
+      <div class="rte">{{ section.settings.subheading }}</div>
     {%- endif -%}
   </div>
 
-  {%- if collection.products.size > 0 -%}
-    <ul class="product-grid" role="list">
-      {%- for product in collection.products limit: limit -%}
-        <li>{% render 'card-product', card_product: product %}</li>
-      {%- endfor -%}
+  <div class="featured-collection__carousel-wrap" data-carousel-wrap>
+    <button class="featured-collection__nav" data-dir="prev" type="button" aria-label="Previous products">{% render 'icon', name: 'chevron' %}</button>
+    <ul class="featured-collection__carousel" role="list" data-carousel>
+      {%- if collection.products.size > 0 -%}
+        {%- for product in collection.products limit: limit -%}
+          <li>{% render 'card-product', card_product: product %}</li>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..limit) -%}
+          <li>
+            <div class="card-product">
+              <div class="card-product__media">
+                {%- case forloop.index0 | modulo: 3 -%}
+                  {%- when 0 -%}{{ 'velkrova-product-serum.png' | asset_url | image_tag: loading: 'lazy', class: 'card-product__image' }}
+                  {%- when 1 -%}{{ 'velkrova-product-cream.png' | asset_url | image_tag: loading: 'lazy', class: 'card-product__image' }}
+                  {%- when 2 -%}{{ 'velkrova-product-pump.png' | asset_url | image_tag: loading: 'lazy', class: 'card-product__image' }}
+                {%- endcase -%}
+              </div>
+              <div class="card-product__info"><h3 class="card-product__title">{{ 'onboarding.product_title' | t }}</h3></div>
+            </div>
+          </li>
+        {%- endfor -%}
+      {%- endif -%}
     </ul>
-  {%- else -%}
-    <ul class="product-grid" role="list">
-      {%- for i in (1..limit) -%}
-        <li>
-          <div class="card-product">
-            <div class="card-product__media">{{ 'product-1' | placeholder_svg_tag: 'card-product__image placeholder-svg' }}</div>
-            <div class="card-product__info"><h3 class="card-product__title">{{ 'onboarding.product_title' | t }}</h3></div>
-          </div>
-        </li>
-      {%- endfor -%}
-    </ul>
+    <button class="featured-collection__nav" data-dir="next" type="button" aria-label="Next products">{% render 'icon', name: 'chevron' %}</button>
+  </div>
+
+  {%- if section.settings.show_view_all and total_products > limit -%}
+    <div class="featured-collection__view-all-wrap">
+      <a href="{{ collection.url }}" class="button button--secondary"
+         aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: collection.title }}">
+        {{ 'sections.featured_collection.view_all' | t }}
+      </a>
+    </div>
   {%- endif -%}
 </div>
 
 <style>
   .featured-collection { padding-top: var(--spacing-sections); padding-bottom: var(--spacing-sections); }
-  .featured-collection__header { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
-  .featured-collection__heading { font-size: var(--f6); }
-  .product-grid { --grid-columns: 4; }
+  .featured-collection__view-all-wrap { display: flex; justify-content: center; margin-top: 32px; }
+
+  .featured-collection__carousel-wrap { position: relative; display: flex; align-items: center; gap: 8px; }
+  .featured-collection__carousel {
+    --gap: 24px;
+    display: flex;
+    gap: var(--gap);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    list-style: none;
+    margin: 0;
+    padding: 4px 0 12px;
+    scrollbar-width: none;
+  }
+  .featured-collection__carousel::-webkit-scrollbar { display: none; }
+  .featured-collection__carousel > li {
+    flex: 0 0 calc((100% - (var(--grid-columns, 4) - 1) * var(--gap)) / var(--grid-columns, 4));
+    scroll-snap-align: start;
+  }
+
+  .featured-collection__nav {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+  .featured-collection__nav[data-dir="prev"] svg { transform: rotate(90deg); }
+  .featured-collection__nav[data-dir="next"] svg { transform: rotate(-90deg); }
+  .featured-collection__nav:disabled { opacity: 0.3; cursor: default; }
+
+  @media screen and (max-width: 1000px) {
+    .featured-collection__carousel { --gap: 12px; }
+    .featured-collection__carousel > li { flex-basis: calc((100% - var(--gap)) / 2); }
+    .featured-collection__nav { display: none; }
+  }
 </style>
 
 {% schema %}
@@ -73,6 +134,7 @@
   "tag": "section",
   "settings": [
     { "type": "text", "id": "heading", "default": "Featured collection", "label": "t:sections.featured_collection.settings.heading.label" },
+    { "type": "richtext", "id": "subheading", "label": "Subheading" },
     { "type": "collection", "id": "collection", "label": "t:sections.featured_collection.settings.collection.label" },
     { "type": "range", "id": "products_to_show", "min": 2, "max": 12, "step": 1, "default": 4, "label": "t:sections.featured_collection.settings.products_to_show.label" },
     { "type": "range", "id": "columns_desktop", "min": 2, "max": 5, "step": 1, "default": 4, "label": "t:sections.featured_collection.settings.columns_desktop.label" },

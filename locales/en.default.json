@@ -209,6 +209,9 @@
     "featured_collection": {
       "view_all": "View all",
       "view_all_label": "View all products in the {{ collection_name }} collection"
+    },
+    "offer_banner": {
+      "save": "Save {{ percent }}%"
     }
   },
   "customer": {

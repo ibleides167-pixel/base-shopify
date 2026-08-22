@@ -15,7 +15,7 @@
   - Open Graph / JSON-LD e demais tags via {% render 'meta-tags' %}.
   - CSS: index.css (ponto de entrada) + css-variables (variaveis
     do tema geradas pelas settings).
-  - Scripts: troca no-js -> js e carrega carrinho.js (defer).
+  - Scripts: troca no-js -> js, carrega carrinho.js e carousel.js (defer).
   - {{ content_for_header }}: scripts obrigatorios do Shopify.
 
   NO <body> temos:
@@ -57,6 +57,7 @@
 
     <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
     <script src="{{ 'carrinho.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'carousel.js' | asset_url }}" defer="defer"></script>
 
     {{ content_for_header }}
   </head>

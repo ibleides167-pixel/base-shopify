@@ -36,9 +36,7 @@
         alt: section.settings.image.alt | default: section.settings.heading | escape
     }}
   {%- else -%}
-    <div class="image-banner__image image-banner__placeholder">
-      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
-    </div>
+    {{ 'velkrova-hero.jpg' | asset_url | image_tag: loading: 'eager', fetchpriority: 'high', class: 'image-banner__image', alt: section.settings.heading | escape }}
   {%- endif -%}
 
   <div class="image-banner__content image-banner__content--{{ section.settings.text_alignment }}">
@@ -80,17 +78,38 @@
   .image-banner__content--center { text-align: center; }
   .image-banner__content--center .image-banner__box { margin: 0 auto; }
   .image-banner__content--right { text-align: right; }
-  .image-banner__box { max-width: 640px; padding: 40px 20px; }
+  .image-banner__box { max-width: 560px; padding: 40px 20px; }
   .image-banner__content--right .image-banner__box { margin-left: auto; }
-  .image-banner__heading { font-size: var(--f8); color: var(--color-background); margin-bottom: 16px; text-shadow: 0 2px 12px rgba(0,0,0,0.35); }
-  .image-banner__text { font-size: var(--f3); color: var(--color-background); margin-bottom: 24px; text-shadow: 0 2px 12px rgba(0,0,0,0.35); }
+  .image-banner__heading {
+    font-size: var(--f8);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--color-background, #fff);
+    margin-bottom: 20px;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.25);
+  }
+  .image-banner__text { font-size: var(--f3); color: var(--color-background, #fff); margin-bottom: 28px; text-shadow: 0 2px 12px rgba(0,0,0,0.25); }
   .image-banner__buttons { display: flex; gap: 12px; flex-wrap: wrap; }
   .image-banner__content--center .image-banner__buttons { justify-content: center; }
-  .image-banner::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.15); z-index: 1; }
+
+  .image-banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0) 70%);
+  }
+  .image-banner:has(.image-banner__content--right)::after {
+    background: linear-gradient(270deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0) 70%);
+  }
+  .image-banner:has(.image-banner__content--center)::after {
+    background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.35) 100%);
+  }
 
   @media screen and (max-width: 1000px) {
     .image-banner__heading { font-size: var(--f6); }
     .image-banner__content--right, .image-banner__content--left { text-align: center; }
+    .image-banner__box { max-width: 100%; }
   }
 </style>
 

@@ -1,0 +1,105 @@
+{%- comment -%}
+  ============================================================
+  NEWSLETTER — formulário de inscrição por email
+  ============================================================
+
+  O QUE FAZ:
+  Título e texto de um lado, campo de email + botão do outro, num
+  bloco com fundo destacado (cor de contraste do tema). Usa o form
+  nativo 'customer' do Shopify (cria/atualiza um customer com
+  accepts_marketing e a tag "newsletter" — não precisa de app nem
+  de backend próprio).
+
+  ONDE É USADA:
+  Seção reutilizável (tem preset) — comum no fim da home, antes do
+  footer.
+
+  PRINCIPAIS PARTES:
+  - {% form 'customer' %}: form nativo do Shopify
+  - contact[tags]=newsletter: tag usada pra segmentar esses contatos
+  - form.posted_successfully?: mostra a mensagem de sucesso
+
+  OBSERVAÇÕES:
+  Se o email já existir como customer, o Shopify só atualiza os
+  dados (accepts_marketing/tags) — não duplica nem dá erro visível.
+{%- endcomment -%}
+<section class="newsletter">
+  <div class="page-width">
+    <div class="newsletter__box">
+      <div class="newsletter__copy">
+        <h2>{{ section.settings.heading | escape }}</h2>
+        {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+      </div>
+
+      {% form 'customer', class: 'newsletter__form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <label for="NewsletterEmail-{{ section.id }}" class="visually-hidden">{{ section.settings.placeholder | escape }}</label>
+        <input
+          id="NewsletterEmail-{{ section.id }}"
+          class="field__input"
+          type="email"
+          name="contact[email]"
+          placeholder="{{ section.settings.placeholder | escape }}"
+          required
+          autocomplete="email"
+        >
+        <button type="submit" class="button">{{ section.settings.button_label | escape }}</button>
+        {%- if form.posted_successfully? -%}
+          <p class="newsletter__success">{{ section.settings.success | escape }}</p>
+        {%- elsif form.errors -%}
+          <p class="newsletter__error">{{ form.errors.messages['form'] | default: form.errors.messages['email'] }}</p>
+        {%- endif -%}
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .newsletter { padding-block: var(--spacing-sections); }
+  .newsletter__box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 48px;
+    background: var(--color-background-contrast);
+    border-radius: var(--media-radius);
+  }
+  .newsletter__copy { max-width: 420px; }
+  .newsletter__copy h2 { font-size: var(--f6); margin: 0 0 8px; }
+  .newsletter__copy p { margin: 0; opacity: 0.7; }
+
+  .newsletter__form { display: flex; flex: 0 1 420px; gap: 0; }
+  .newsletter__form .field__input { border-radius: var(--inputs-radius) 0 0 var(--inputs-radius); border-right: none; background: var(--color-background); }
+  .newsletter__form .button { border-radius: 0 var(--buttons-radius) var(--buttons-radius) 0; }
+  .newsletter__success,
+  .newsletter__error { flex-basis: 100%; margin: 14px 0 0; }
+  .newsletter__error { color: var(--color-sale); }
+
+  @media screen and (max-width: 900px) {
+    .newsletter__box { padding: 32px; }
+    .newsletter__copy { text-align: center; max-width: 100%; }
+    .newsletter__form { flex: 1 1 100%; }
+  }
+  @media screen and (max-width: 560px) {
+    .newsletter__form { flex-direction: column; }
+    .newsletter__form .field__input,
+    .newsletter__form .button { border-radius: var(--inputs-radius); border-right: 1px solid var(--color-border); }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Join our newsletter" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Sign up for early access to new arrivals and subscriber-only offers." },
+    { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "Your email address" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Sign up" },
+    { "type": "text", "id": "success", "label": "Success message", "default": "Thanks for subscribing!" }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

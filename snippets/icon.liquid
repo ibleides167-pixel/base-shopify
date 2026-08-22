@@ -14,7 +14,10 @@
   PARÂMETROS:
   - name: nome do ícone. Disponíveis:
     search, account, cart, close, chevron, trash,
-    instagram, facebook, linkedin.
+    instagram, facebook, linkedin,
+    truck, return, pin, shield (usados no marquee de benefícios),
+    check, cross (usados na tabela de comparação),
+    plus (usado no botão de quick-add do card de produto).
 
   OBSERVAÇÕES:
   Nome inexistente não renderiza nada (case sem when correspondente).
@@ -39,4 +42,18 @@
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M14 8h2V5h-2c-2 0-3 1.5-3 3.5V11H9v3h2v6h3v-6h2l.5-3H14V8.5c0-.3.2-.5.5-.5Z" fill="currentColor"/></svg>
   {%- when 'linkedin' -%}
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M7 10v6M7 7v.01M11 16v-3.5a1.5 1.5 0 0 1 3 0V16m-3-3.5V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  {%- when 'truck' -%}
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 5.5h11v10h-11z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12.5 9h3.6l3.4 3.4v3.1h-7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="5.5" cy="17.8" r="1.9" stroke="currentColor" stroke-width="1.5"/><circle cx="16.6" cy="17.8" r="1.9" stroke="currentColor" stroke-width="1.5"/></svg>
+  {%- when 'return' -%}
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M3.5 9.5a9 9 0 1 1-.6 5.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M3 3.5v6h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  {%- when 'pin' -%}
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 21.5s7-6.3 7-11.4a7 7 0 1 0-14 0c0 5.1 7 11.4 7 11.4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="1.5"/></svg>
+  {%- when 'shield' -%}
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2.8l7.5 3.1v5.3c0 4.7-3.1 8.4-7.5 10.5-4.4-2.1-7.5-5.8-7.5-10.5V5.9z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12l2.2 2.2L15.2 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  {%- when 'check' -%}
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.2" stroke="currentColor" stroke-width="2"/><path d="M7.8 12.3l2.9 2.9 5.5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  {%- when 'cross' -%}
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.2" stroke="currentColor" stroke-width="2"/><path d="M9 9l6 6M15 9l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  {%- when 'plus' -%}
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
 {%- endcase -%}
