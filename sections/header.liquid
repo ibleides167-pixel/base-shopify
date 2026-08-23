@@ -1,0 +1,159 @@
+<style>
+@media(max-width:900px){
+  .site-header .header-inner{display:flex;align-items:center;justify-content:space-between;gap:10px;height:68px}
+  .site-header .menu-toggle{order:-1;display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;flex:none}
+  .site-header .site-logo{flex:1 1 auto;justify-content:center}
+  .site-header .site-logo img{max-height:30px}
+  .site-header .header-icons{gap:0;flex:none}
+  .site-header .icon-btn{width:40px;height:40px}
+  .site-header .nav{display:none}
+}
+
+/* Dropdown navigation */
+.nav-item{position:relative}
+.nav-item>a{display:inline-flex;align-items:center;gap:5px}
+.nav-item>a svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .18s ease}
+.nav-item:hover>a svg{transform:rotate(180deg)}
+.nav-drop{
+  position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(6px);
+  min-width:230px;background:#fff;border:1px solid var(--line,#e8e3dc);
+  border-radius:3px;box-shadow:0 16px 40px rgba(15,48,45,.10);
+  padding:8px 0;opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .16s ease,transform .16s ease;z-index:40;
+}
+.nav-item:hover .nav-drop,.nav-item:focus-within .nav-drop{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.nav-drop a{display:block;padding:10px 20px;font-size:13px;letter-spacing:.02em;white-space:nowrap;text-transform:none}
+.nav-drop a:hover{background:#f6faf9;color:var(--green,#073f3a)}
+@media(max-width:900px){
+  .nav-drop{position:static;transform:none;opacity:1;visibility:visible;pointer-events:auto;box-shadow:none;border:0;padding:0 0 8px 14px;min-width:0}
+  .nav-item>a svg{display:none}
+  .nav-drop a{padding:12px 0;border-bottom:1px solid var(--line,#e8e3dc);font-size:14px}
+}
+
+/* ---------- Inline search ---------- */
+.vk-search{
+  display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows .28s ease;
+  background:#fff;border-bottom:1px solid transparent;
+}
+.vk-search.is-open{grid-template-rows:1fr;border-bottom-color:var(--line,#e8e3dc)}
+.vk-search__inner{overflow:hidden}
+.vk-search__form{
+  display:flex;align-items:center;gap:10px;
+  padding:0 0 16px;
+}
+.vk-search.is-open .vk-search__form{padding-top:4px}
+.vk-search__field{
+  flex:1 1 auto;display:flex;align-items:center;gap:10px;
+  border:1px solid var(--line,#e8e3dc);border-radius:999px;
+  padding:0 18px;height:48px;background:#fff;
+}
+.vk-search__field svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--muted,#7d7a74);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.vk-search__field input{
+  flex:1 1 auto;border:0;outline:none;background:none;
+  font-size:15px;font-family:inherit;color:var(--ink,#0f302d);height:100%;
+}
+.vk-search__field input::placeholder{color:var(--muted,#7d7a74)}
+.vk-search__close{
+  border:0;background:none;cursor:pointer;font-size:13px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--muted,#7d7a74);
+  padding:0 6px;
+}
+.vk-search__close:hover{color:var(--ink,#0f302d)}
+.icon-btn.is-active svg{stroke:var(--green,#073f3a)}
+@media(max-width:560px){
+  .vk-search__close{display:none}
+  .vk-search__field{height:44px;padding:0 15px}
+}
+</style>
+
+<header class="site-header">
+  <div class="page-width header-inner">
+    <a href="{{ routes.root_url }}" class="site-logo" aria-label="{{ shop.name }}">
+      {%- if section.settings.logo != blank -%}
+        {%- assign header_logo_h = section.settings.logo_width | divided_by: section.settings.logo.aspect_ratio | round -%}
+        <img src="{{ section.settings.logo | image_url: width: 600 }}" alt="{{ shop.name | escape }}" width="{{ section.settings.logo_width }}" height="{{ header_logo_h }}">
+      {%- elsif section.settings.logo_url != blank -%}
+        <img src="{{ section.settings.logo_url }}" alt="{{ shop.name | escape }}" width="{{ section.settings.logo_width }}" height="{{ section.settings.logo_width }}">
+      {%- else -%}
+        <span class="wordmark">{{ shop.name | strip }}</span>
+      {%- endif -%}
+    </a>
+
+    <button class="menu-toggle" data-menu-toggle aria-label="Menu" type="button">&#9776;</button>
+
+    <nav class="nav" aria-label="Primary">
+      {%- for link in section.settings.menu.links -%}
+        {%- if link.links.size > 0 -%}
+          <div class="nav-item">
+            <a href="{{ link.url }}">{{ link.title }}<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5"/></svg></a>
+            <div class="nav-drop">
+              {%- for child in link.links -%}<a href="{{ child.url }}">{{ child.title }}</a>{%- endfor -%}
+            </div>
+          </div>
+        {%- else -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endif -%}
+      {%- else -%}
+        <a href="/collections/best-sellers-1">Best sellers</a>
+        <a href="/collections/face">Face</a>
+        <a href="/collections/hair">Hair</a>
+        <a href="/collections/body">Body</a>
+      {%- endfor -%}
+    </nav>
+
+    <div class="header-icons">
+      <button class="icon-btn" type="button" data-search-toggle aria-expanded="false" aria-controls="vk-search" aria-label="Search">{% render 'icon', name: 'search' %}</button>
+      <a class="icon-btn" href="{{ routes.account_url }}" aria-label="Account">{% render 'icon', name: 'user' %}</a>
+      <a class="icon-btn" href="{{ routes.cart_url }}" data-cart-open aria-label="Cart, {{ cart.item_count }} items">{% render 'icon', name: 'bag' %}<span class="cart-count"{% unless cart.item_count > 0 %} style="display:none"{% endunless %}>{{ cart.item_count }}</span></a>
+    </div>
+  </div>
+
+  <div class="vk-search" id="vk-search" data-search-panel>
+    <div class="vk-search__inner">
+      <div class="page-width">
+        <form class="vk-search__form" action="{{ routes.search_url }}" method="get" role="search">
+          <input type="hidden" name="type" value="product">
+          <label class="vk-search__field">
+            <span class="visually-hidden skip-link">Search</span>
+            {% render 'icon', name: 'search' %}
+            <input type="search" name="q" placeholder="Search for a device, a concern, a routine" autocomplete="off" data-search-input>
+          </label>
+          <button class="vk-search__close" type="button" data-search-close>Close</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+(function(){
+  var toggle = document.querySelector('[data-search-toggle]');
+  var panel = document.querySelector('[data-search-panel]');
+  if (!toggle || !panel) return;
+  var input = panel.querySelector('[data-search-input]');
+  var closeBtn = panel.querySelector('[data-search-close]');
+
+  function open(){
+    panel.classList.add('is-open');
+    toggle.classList.add('is-active');
+    toggle.setAttribute('aria-expanded','true');
+    window.setTimeout(function(){ if (input) input.focus(); }, 180);
+  }
+  function close(){
+    panel.classList.remove('is-open');
+    toggle.classList.remove('is-active');
+    toggle.setAttribute('aria-expanded','false');
+  }
+
+  toggle.addEventListener('click', function(){
+    if (panel.classList.contains('is-open')) { close(); } else { open(); }
+  });
+  if (closeBtn) closeBtn.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && panel.classList.contains('is-open')) close();
+  });
+})();
+</script>
+
+{% schema %}{"name":"Header","settings":[{"type":"image_picker","id":"logo","label":"Logo"},{"type":"text","id":"logo_url","label":"Logo URL (fallback)"},{"type":"range","id":"logo_width","label":"Logo width (px)","min":80,"max":320,"step":10,"default":180},{"type":"link_list","id":"menu","label":"Menu","default":"main-menu"}]}{% endschema %}

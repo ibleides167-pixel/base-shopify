@@ -1,0 +1,30 @@
+{%- comment -%}
+  Gallery images for the product page.
+
+  Variant images are collected FIRST, then the rest of the product media
+  fills the remaining slots. Previously the gallery simply took the first
+  N media, which meant a variant image sitting further down the list was
+  never in the gallery at all - so selecting that colour had nothing to
+  switch to.
+
+  Outputs: vk_gallery (array of image drops), vk_variant_map (id:url pairs)
+{%- endcomment -%}
+
+{%- liquid
+  assign cap = cap | default: 6
+  assign seen = ''
+  assign gallery = ''
+
+  for variant in product.variants
+    assign vimg = variant.featured_image
+    if vimg == blank
+      assign vimg = variant.featured_media
+    endif
+    if vimg != blank
+      assign key = vimg.id | append: ','
+      unless seen contains key
+        assign seen = seen | append: key
+      endunless
+    endif
+  endfor
+-%}

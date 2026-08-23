@@ -1,0 +1,92 @@
+{%- comment -%}
+  Velkrova PDP editorial: "How it works" plus mobile gallery sync.
+  The comparison table lives on the home page, not here.
+{%- endcomment -%}
+
+{%- liquid
+  assign steps = product.metafields.custom.how_to_use.value
+
+  assign max_steps = 3
+  if product.tags contains 'best-seller' or product.tags contains 'bundle'
+    assign max_steps = 4
+  endif
+
+  assign step_count = 0
+  if steps
+    assign step_count = steps.size
+    if step_count > max_steps
+      assign step_count = max_steps
+    endif
+  endif
+
+  case step_count
+    when 2
+      assign step_word = 'Two steps'
+    when 3
+      assign step_word = 'Three steps'
+    when 4
+      assign step_word = 'Four steps'
+    else
+      assign step_word = 'A few steps'
+  endcase
+-%}
+
+{%- if step_count > 0 -%}
+  <section class="vk-how">
+    <div class="page-width">
+      <div class="vk-how__head">
+        <span class="vk-how__eyebrow">HOW IT WORKS</span>
+        <h2>{{ step_word }}, ten minutes</h2>
+      </div>
+      <ol class="vk-how__grid">
+        {%- for step in steps limit: step_count -%}
+          <li class="vk-how__step">
+            <span class="vk-how__num">{{ forloop.index }}</span>
+            <p>{{ step }}</p>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </section>
+{%- endif -%}
+
+<script>
+(function(){
+  var strip = document.querySelector('[data-vk-mgallery]');
+  var choices = document.querySelectorAll('input[name="variant-choice"]');
+  if (!strip || !choices.length) return;
+  function baseOf(url){
+    if (!url) return '';
+    return url.split('?')[0].replace(/_\d+x\d*(\.[a-z]+)$/i, '$1').split('/').pop();
+  }
+  Array.prototype.forEach.call(choices, function (input) {
+    input.addEventListener('change', function () {
+      var wanted = baseOf(input.dataset.mediaSrc);
+      if (!wanted) return;
+      var images = strip.querySelectorAll('img');
+      for (var i = 0; i < images.length; i++) {
+        if (baseOf(images[i].currentSrc || images[i].src) === wanted) {
+          strip.scrollTo({ left: images[i].offsetLeft - strip.offsetLeft, behavior: 'smooth' });
+          return;
+        }
+      }
+    });
+  });
+})();
+</script>
+
+<style>
+  .vk-how{padding:clamp(32px,3.8vw,56px) 0 clamp(30px,3.4vw,48px)}
+  .vk-how__head{text-align:center;margin-bottom:clamp(22px,2.6vw,32px)}
+  .vk-how__eyebrow{display:inline-block;margin-bottom:10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted,#7d7a74)}
+  .vk-how__head h2{margin:0;font-family:var(--font-heading,'Marcellus',Georgia,serif);font-weight:400;font-size:clamp(22px,2.4vw,30px);letter-spacing:-.015em}
+  .vk-how__grid{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(18px,2.4vw,30px)}
+  .vk-how__step{flex:1 1 200px;max-width:260px;display:flex;flex-direction:column;gap:12px;text-align:center;align-items:center}
+  .vk-how__num{width:38px;height:38px;border-radius:50%;background:var(--cream,#f5f1eb);color:var(--green,#073f3a);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600}
+  .vk-how__step p{margin:0;font-size:14px;line-height:1.55}
+  .vk-how + .vk-details{border-top:1px solid var(--line,#e8e3dc)}
+  @media(max-width:560px){
+    .vk-how__step{flex:1 1 100%;max-width:none;flex-direction:row;text-align:left;align-items:flex-start;gap:14px}
+    .vk-how__num{flex:none;width:34px;height:34px;font-size:14px}
+  }
+</style>

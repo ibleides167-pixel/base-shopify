@@ -1,0 +1,179 @@
+{%- assign upsell = section.settings.upsell_collection -%}
+<style>
+.cd-overlay{position:fixed;inset:0;background:rgba(15,48,45,.42);z-index:60;opacity:0;transition:opacity .3s ease}
+.cd-overlay.is-on{opacity:1}
+.cd{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:#fff;z-index:61;display:flex;flex-direction:column;transform:translateX(102%);transition:transform .34s cubic-bezier(.4,0,.2,1);box-shadow:-8px 0 40px rgba(15,48,45,.12)}
+.cd.is-open{transform:none}
+body.cd-lock{overflow:hidden}
+.cd-head{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;border-bottom:1px solid var(--line);flex:none}
+.cd-head h2{margin:0;font-family:var(--font-heading);font-size:21px;font-weight:400}
+.cd-close{background:none;border:0;font-size:26px;line-height:1;cursor:pointer;color:var(--ink);padding:0 4px}
+.cd-progress{padding:16px 22px;border-bottom:1px solid var(--line);flex:none}
+.cd-progress p{margin:0 0 10px;font-size:13px;text-align:center}
+.cd-bar{height:9px;border-radius:999px;background:var(--sand);overflow:hidden}
+.cd-bar span{display:block;height:100%;background:var(--green);border-radius:999px;transition:width .4s ease;width:0}
+.cd-items{flex:1 1 auto;overflow-y:auto;padding:6px 22px}
+.cd-item{display:grid;grid-template-columns:76px 1fr auto;gap:14px;padding:18px 0;border-bottom:1px solid var(--line);align-items:start}
+.cd-item-img{width:76px;aspect-ratio:1/1;border-radius:8px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.cd-item-img img{width:100%;height:100%;object-fit:cover;display:block}
+.cd-item-title{font-size:14px;font-weight:500;line-height:1.35;margin:0 0 3px;display:block}
+.cd-item-opt{font-size:12px;color:var(--muted);display:block;margin-bottom:9px}
+.cd-item-price{font-size:14px;font-weight:600}
+.cd-qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;margin-top:10px}
+.cd-qty button{background:none;border:0;width:30px;height:30px;cursor:pointer;font-size:16px;line-height:1;color:var(--ink)}
+.cd-qty span{min-width:26px;text-align:center;font-size:14px}
+.cd-remove{background:none;border:0;cursor:pointer;padding:5px;border-radius:6px;display:inline-flex;transition:background .15s ease}
+.cd-remove svg{width:19px;height:19px;stroke:#c0392b;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.cd-remove:hover{background:#fdecea}
+.cd-remove:hover svg{stroke:#a5281a}
+.cd-empty{text-align:center;padding:56px 10px;color:var(--muted)}
+.cd-upsell{border-top:1px solid var(--line);padding:18px 22px;flex:none;max-height:38vh;overflow-y:auto}
+.cd-upsell h3{margin:0 0 12px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+.cd-up{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;padding:9px;border:1px solid var(--line);border-radius:10px;margin-bottom:9px}
+.cd-up-img{width:56px;aspect-ratio:1/1;border-radius:7px;overflow:hidden;background:#fff}
+.cd-up-img img{width:100%;height:100%;object-fit:cover;display:block}
+.cd-up-title{display:block;font-size:13px;line-height:1.3}
+.cd-up-price{font-size:13px;font-weight:600}
+.cd-add{background:var(--green);color:#fff;border:0;border-radius:999px;padding:9px 17px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;cursor:pointer;font-family:var(--font-body);font-weight:500}
+.cd-add:disabled{opacity:.5;cursor:default}
+.cd-foot{border-top:1px solid var(--line);padding:18px 22px 22px;flex:none}
+.cd-sub{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;font-size:15px}
+.cd-sub strong{font-size:19px}
+.cd-checkout{width:100%}
+.cd-note{text-align:center;font-size:11px;color:var(--muted);margin:10px 0 0}
+</style>
+<div class="cd-overlay" data-cart-overlay hidden></div>
+<aside class="cd" data-cart-drawer aria-hidden="true" aria-label="Shopping cart"
+  data-threshold="{{ section.settings.threshold | times: 100 }}"
+  data-reward="{{ section.settings.reward | escape }}"
+  data-progress="{% if section.settings.progress_enabled %}1{% else %}0{% endif %}">
+  <div class="cd-head">
+    <h2>Your cart (<span data-cd-count>0</span>)</h2>
+    <button class="cd-close" type="button" data-cart-close aria-label="Close cart">&times;</button>
+  </div>
+  <div class="cd-progress" data-cd-progress hidden>
+    <p data-cd-progress-text></p>
+    <div class="cd-bar"><span data-cd-bar></span></div>
+  </div>
+  <div class="cd-items" data-cd-items><div class="cd-empty">Your cart is empty.</div></div>
+  {%- if upsell != blank -%}
+    <div class="cd-upsell">
+      <h3>{{ section.settings.upsell_heading }}</h3>
+      {%- for p in upsell.products limit: 6 -%}
+        {%- assign uv = p.selected_or_first_available_variant -%}
+        {%- if uv.available -%}
+          <div class="cd-up" data-up-id="{{ uv.id }}">
+            <div class="cd-up-img">{%- if p.featured_image != blank -%}{{ p.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: p.title }}{%- endif -%}</div>
+            <div><span class="cd-up-title">{{ p.title | split: ' - ' | first | truncate: 42 }}</span><span class="cd-up-price">{{ uv.price | money }}</span></div>
+            <button class="cd-add" type="button" data-cd-add="{{ uv.id }}">Add</button>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+  <div class="cd-foot">
+    <div class="cd-sub"><span>Subtotal</span><strong data-cd-subtotal>&pound;0.00</strong></div>
+    <a class="btn cd-checkout" href="{{ routes.cart_url }}/checkout">Checkout securely</a>
+    <p class="cd-note">Taxes and shipping calculated at checkout</p>
+  </div>
+</aside>
+<script>
+(function(){
+  var drawer=document.querySelector('[data-cart-drawer]');
+  var overlay=document.querySelector('[data-cart-overlay]');
+  if(!drawer||!overlay) return;
+  var itemsEl=drawer.querySelector('[data-cd-items]');
+  var countEl=drawer.querySelector('[data-cd-count]');
+  var subEl=drawer.querySelector('[data-cd-subtotal]');
+  var progEl=drawer.querySelector('[data-cd-progress]');
+  var progText=drawer.querySelector('[data-cd-progress-text]');
+  var progBar=drawer.querySelector('[data-cd-bar]');
+  var threshold=parseInt(drawer.dataset.threshold||'0',10);
+  var reward=drawer.dataset.reward||'';
+  var useProg=drawer.dataset.progress==='1'&&threshold>0;
+
+  function money(c){return '\u00A3'+(c/100).toFixed(2)}
+  function esc(s){var d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML}
+
+  function open(){drawer.classList.add('is-open');overlay.hidden=false;requestAnimationFrame(function(){overlay.classList.add('is-on')});drawer.setAttribute('aria-hidden','false');document.body.classList.add('cd-lock')}
+  function close(){drawer.classList.remove('is-open');overlay.classList.remove('is-on');drawer.setAttribute('aria-hidden','true');document.body.classList.remove('cd-lock');setTimeout(function(){overlay.hidden=true},320)}
+
+  var TRASH='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"/><path d="M9.5 7V5.2a1.2 1.2 0 0 1 1.2-1.2h2.6a1.2 1.2 0 0 1 1.2 1.2V7"/><path d="M6.4 7l.9 12.1a1.3 1.3 0 0 0 1.3 1.2h6.8a1.3 1.3 0 0 0 1.3-1.2L17.6 7"/><path d="M10.3 11v5.6M13.7 11v5.6"/></svg>';
+
+  function render(cart){
+    countEl.textContent=cart.item_count;
+    subEl.textContent=money(cart.items_subtotal_price);
+    document.querySelectorAll('.cart-count').forEach(function(b){b.textContent=cart.item_count;b.style.display=cart.item_count?'':'none'});
+    if(!cart.items.length){
+      itemsEl.innerHTML='<div class="cd-empty">Your cart is empty.</div>';
+    } else {
+      itemsEl.innerHTML=cart.items.map(function(it,i){
+        var opt=(it.variant_title&&it.variant_title!=='Default Title')?'<span class="cd-item-opt">'+esc(it.variant_title)+'</span>':'';
+        var img=it.image?'<img src="'+it.image.replace(/(\.[a-z]+)(\?|$)/i,'_160x$1$2')+'" alt="">':'';
+        return '<div class="cd-item" data-line="'+(i+1)+'">'+
+          '<div class="cd-item-img">'+img+'</div>'+
+          '<div><span class="cd-item-title">'+esc(it.product_title)+'</span>'+opt+
+          '<span class="cd-item-price">'+money(it.final_line_price)+'</span>'+
+          '<div class="cd-qty"><button type="button" data-step="-1" aria-label="Decrease">&minus;</button><span>'+it.quantity+'</span><button type="button" data-step="1" aria-label="Increase">+</button></div></div>'+
+          '<button class="cd-remove" type="button" data-remove aria-label="Remove '+esc(it.product_title)+'">'+TRASH+'</button>'+
+        '</div>';
+      }).join('');
+    }
+    if(useProg){
+      progEl.hidden=false;
+      var left=threshold-cart.items_subtotal_price;
+      var pct=Math.min(100,Math.round(cart.items_subtotal_price/threshold*100));
+      progText.innerHTML= left>0 ? 'Spend <strong>'+money(left)+'</strong> more to unlock '+esc(reward) : '\uD83C\uDF89 You have unlocked '+esc(reward);
+      progBar.style.width=pct+'%';
+    }
+    var ids=cart.items.map(function(i){return String(i.variant_id)});
+    drawer.querySelectorAll('[data-up-id]').forEach(function(el){
+      el.style.display=ids.indexOf(el.dataset.upId)>-1?'none':'';
+    });
+  }
+
+  function load(){return fetch(window.Shopify&&Shopify.routes?Shopify.routes.root+'cart.js':'/cart.js',{headers:{'Accept':'application/json'}}).then(function(r){return r.json()}).then(render).catch(function(){})}
+  function change(line,qty){return fetch('/cart/change.js',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({line:line,quantity:qty})}).then(function(r){return r.json()}).then(render)}
+  function add(id,qty){return fetch('/cart/add.js',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({items:[{id:Number(id),quantity:qty||1}]})}).then(function(r){return r.json()}).then(load)}
+
+  itemsEl.addEventListener('click',function(e){
+    var row=e.target.closest('[data-line]'); if(!row) return;
+    var line=Number(row.dataset.line);
+    if(e.target.closest('[data-remove]')){ change(line,0); return }
+    var step=e.target.closest('[data-step]');
+    if(step){
+      var cur=Number(row.querySelector('.cd-qty span').textContent);
+      change(line,Math.max(0,cur+Number(step.dataset.step)));
+    }
+  });
+
+  drawer.addEventListener('click',function(e){
+    var b=e.target.closest('[data-cd-add]'); if(!b) return;
+    b.disabled=true; b.textContent='Added';
+    add(b.dataset.cdAdd,1).then(function(){setTimeout(function(){b.disabled=false;b.textContent='Add'},900)});
+  });
+
+  document.addEventListener('click',function(e){
+    if(e.target.closest('[data-cart-open]')){e.preventDefault();open();load()}
+    if(e.target.closest('[data-cart-close]')||e.target.closest('[data-cart-overlay]')) close();
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&drawer.classList.contains('is-open'))close()});
+
+  document.addEventListener('submit',function(e){
+    var f=e.target;
+    if(!f.action||f.action.indexOf('/cart/add')===-1) return;
+    e.preventDefault();
+    var btn=f.querySelector('button[type=submit]'); var label=btn?btn.textContent:'';
+    if(btn){btn.disabled=true;btn.textContent='Adding...'}
+    fetch('/cart/add.js',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
+      .then(function(r){return r.json()})
+      .then(function(){return load()})
+      .then(function(){open()})
+      .catch(function(){f.submit()})
+      .finally(function(){if(btn){btn.disabled=false;btn.textContent=label}});
+  });
+
+  load();
+})();
+</script>
+{% schema %}{"name":"Cart drawer","settings":[{"type":"header","content":"Progress bar"},{"type":"paragraph","content":"Only switch this on once a matching automatic discount exists in Discounts. Promising a reward the checkout will not apply is a false claim."},{"type":"checkbox","id":"progress_enabled","label":"Show progress bar","default":false},{"type":"number","id":"threshold","label":"Spend threshold (GBP)","default":80},{"type":"text","id":"reward","label":"Reward wording","default":"10% off your order"},{"type":"header","content":"Upsells"},{"type":"text","id":"upsell_heading","label":"Heading","default":"Complete your routine"},{"type":"collection","id":"upsell_collection","label":"Collection"}]}{% endschema %}

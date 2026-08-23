@@ -1,0 +1,50 @@
+{%- assign collection = section.settings.collection -%}
+<section class="section">
+  <div class="page-width">
+    <div class="section-head">
+      <h2 class="section-title">{{ section.settings.heading }}</h2>
+      {%- if section.settings.subheading != blank -%}<p class="section-subtitle">{{ section.settings.subheading }}</p>{%- endif -%}
+    </div>
+    <div class="carousel-wrap">
+      <button class="carousel-btn" data-dir="prev" type="button" aria-label="Previous products">&#8249;</button>
+      <div class="carousel" data-carousel>
+        {%- if collection != blank -%}
+          {%- for product in collection.products limit: section.settings.limit -%}
+            {% render 'product-card', product: product %}
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..4) -%}
+            <article class="product-card"><div class="card-media"><div class="placeholder">Select a collection</div></div><div class="card-content"><h3>Premium beauty product</h3><span class="price">&pound;00.00</span></div></article>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+      <button class="carousel-btn" data-dir="next" type="button" aria-label="Next products">&#8250;</button>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var sec=document.currentScript.previousElementSibling;
+  if(!sec) return;
+  var wrap=sec.querySelector('.carousel-wrap');
+  var track=wrap && wrap.querySelector('[data-carousel]');
+  if(!track) return;
+  var btns=Array.prototype.slice.call(wrap.querySelectorAll('.carousel-btn'));
+  function step(){var c=track.firstElementChild;return c?c.getBoundingClientRect().width+22:300}
+  function sync(){
+    var max=track.scrollWidth-track.clientWidth-2;
+    btns.forEach(function(b){
+      b.disabled = b.dataset.dir==='prev' ? track.scrollLeft<=2 : track.scrollLeft>=max;
+    });
+  }
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){
+      track.scrollBy({left:(b.dataset.dir==='next'?1:-1)*step()*2,behavior:'smooth'});
+    });
+  });
+  track.addEventListener('scroll',sync,{passive:true});
+  window.addEventListener('resize',sync);
+  sync();
+})();
+</script>
+{% schema %}{"name":"Featured collection","settings":[{"type":"text","id":"heading","label":"Heading","default":"Best sellers"},{"type":"text","id":"subheading","label":"Subheading","default":"Our most-loved beauty essentials"},{"type":"collection","id":"collection","label":"Collection"},{"type":"range","id":"limit","label":"Products","min":4,"max":12,"step":1,"default":12}],"presets":[{"name":"Featured collection"}]}{% endschema %}

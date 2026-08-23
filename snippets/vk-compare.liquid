@@ -1,0 +1,61 @@
+{%- comment -%}
+  Velkrova comparison table.
+
+  Rows are deliberately concrete store commitments (delivery, returns,
+  tracking, honest timeframes) rather than subjective claims like
+  "premium quality" or "real results". Under the UK CAP Code a comparison
+  against unnamed competitors has to be verifiable, and a policy either is
+  or is not published on a site. Vague quality claims are the ones that
+  get challenged, so they are kept out.
+{%- endcomment -%}
+
+<section class="vk-compare">
+  <div class="page-width">
+    <div class="vk-compare__grid">
+      <div class="vk-compare__copy">
+        <span class="vk-compare__eyebrow">THE VELKROVA DIFFERENCE</span>
+        <h2>Made for the ten minutes <em>you actually have</em></h2>
+        <p>Salon-grade devices chosen for routines that fit into a normal evening, backed by delivery and returns terms we put in writing. No thresholds to reach, no fine print at checkout, and honest timeframes for how long results really take.</p>
+      </div>
+
+      <div class="vk-compare__wrap">
+        <table class="vk-compare__table">
+          <thead>
+            <tr>
+              <th scope="col"><span class="visually-hidden skip-link">Feature</span></th>
+              <th scope="col" class="is-us">Velkrova</th>
+              <th scope="col">Others</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Free UK delivery, no minimum spend</th>
+              <td class="is-us">{% render 'vk-tick' %}</td>
+              <td>{% render 'vk-cross' %}</td>
+            </tr>
+            <tr>
+              <th scope="row">30-day returns, not the legal 14</th>
+              <td class="is-us">{% render 'vk-tick' %}</td>
+              <td>{% render 'vk-cross' %}</td>
+            </tr>
+            <tr>
+              <th scope="row">Tracked on every single order</th>
+              <td class="is-us">{% render 'vk-tick' %}</td>
+              <td>{% render 'vk-cross' %}</td>
+            </tr>
+            <tr>
+              <th scope="row">Honest timeframes for results</th>
+              <td class="is-us">{% render 'vk-tick' %}</td>
+              <td>{% render 'vk-cross' %}</td>
+            </tr>
+            <tr>
+              <th scope="row">Routines built for ten minutes</th>
+              <td class="is-us">{% render 'vk-tick' %}</td>
+              <td>{% render 'vk-cross' %}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

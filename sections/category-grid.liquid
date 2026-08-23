@@ -1,0 +1,52 @@
+{%- comment -%}
+  Shop by category.
+
+  The label and "Shop now" line are gone from the markup: the collection
+  artwork already carries the category name, so repeating it underneath
+  said the same word twice.
+
+  The label is kept as the image alt text and the link's accessible name,
+  so screen readers and search engines still know what each card is.
+{%- endcomment -%}
+
+<section class="section"><div class="page-width">
+  {%- if section.settings.heading != blank -%}
+    <div class="section-head">
+      <h2 class="section-title">{{ section.settings.heading }}</h2>
+    </div>
+  {%- endif -%}
+  <div class="grid categories">
+    {%- for block in section.blocks -%}
+      {%- assign col = collections[block.settings.collection] -%}
+      {%- assign target = block.settings.link -%}
+      {%- if target == blank and col != blank -%}{%- assign target = col.url -%}{%- endif -%}
+      {%- assign label = block.settings.heading | default: col.title -%}
+      {%- assign banner = col.metafields.custom.banner_image -%}
+
+      <a class="category-card" href="{{ target | default: '/collections/all' }}" aria-label="{{ label | escape }}" {{ block.shopify_attributes }}>
+        <div class="card-media">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: label }}
+          {%- elsif col.featured_image != blank -%}
+            {{ col.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: label }}
+          {%- elsif banner != blank -%}
+            {%- if banner.type == 'file_reference' -%}
+              <img src="{{ banner.value | image_url: width: 800 }}" alt="{{ label | escape }}" loading="lazy" width="800" height="800">
+            {%- else -%}
+              <img src="{{ banner }}" alt="{{ label | escape }}" loading="lazy" width="800" height="800">
+            {%- endif -%}
+          {%- elsif col.products.first.featured_image != blank -%}
+            {{ col.products.first.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: label }}
+          {%- endif -%}
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</div></section>
+
+<style>
+  /* No caption block any more, so the card is just the image */
+  .category-card .card-content{display:none}
+  .grid.categories .category-card{padding-bottom:0}
+</style>
+{% schema %}{"name":"Category grid","settings":[{"type":"text","id":"heading","label":"Heading","default":"Shop by category"}],"blocks":[{"type":"category","name":"Category","settings":[{"type":"text","id":"heading","label":"Label (used for accessibility)","default":"Face"},{"type":"collection","id":"collection","label":"Collection"},{"type":"image_picker","id":"image","label":"Image override"},{"type":"url","id":"link","label":"Link override"}]}],"presets":[{"name":"Category grid","blocks":[{"type":"category"},{"type":"category"},{"type":"category"},{"type":"category"}]}]}{% endschema %}

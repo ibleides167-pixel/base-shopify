@@ -1,121 +1,62 @@
-{%- comment -%}
-  ============================================================
-  OFFER BANNER — banner de oferta com um produto em destaque
-  ============================================================
-
-  O QUE FAZ:
-  Bloco de duas colunas: texto (eyebrow, título, texto, preço com
-  desconto se houver, botão) de um lado e a imagem do produto do
-  outro. Pensado para destacar um bundle, lançamento ou promoção
-  específica na home.
-
-  ONDE É USADA:
-  Seção reutilizável (tem preset) — comum na home, entre a vitrine
-  de produtos e outras seções de conteúdo.
-
-  PRINCIPAIS PARTES:
-  - product = section.settings.product (opcional)
-  - Se um produto for escolhido, preço/comparação vêm da variante
-    selecionada/primeira disponível e o botão linka pro produto
-  - Sem produto, usa button_link/button_label manuais e image
-    (override) ou mostra um placeholder
-  - Settings: eyebrow, heading, text, product, image, button_label,
-    button_link
-
-  OBSERVAÇÕES:
-  image (override) tem prioridade sobre a imagem do produto — útil
-  pra usar uma foto de bundle diferente da foto do produto sozinho.
-{%- endcomment -%}
-{%- liquid
-  assign p = section.settings.product
-  assign discount_pct = 0
-  if p != blank
-    assign v = p.selected_or_first_available_variant
-    if v.compare_at_price > v.price
-      assign discount_pct = v.compare_at_price | minus: v.price | times: 100 | divided_by: v.compare_at_price
-    endif
-  endif
--%}
-<section class="offer-banner">
-  <div class="page-width">
-    <div class="offer-banner__grid">
-      <div class="offer-banner__copy">
-        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
-        <h2>{{ section.settings.heading | escape }}</h2>
-        {%- if section.settings.text != blank -%}<p class="offer-banner__text">{{ section.settings.text }}</p>{%- endif -%}
-
-        {%- if p != blank -%}
-          <div class="offer-banner__price">
-            <span class="offer-banner__now">{{ v.price | money }}</span>
-            {%- if discount_pct > 0 -%}
-              <span class="offer-banner__was">{{ v.compare_at_price | money }}</span>
-              <span class="offer-banner__save">{{ 'sections.offer_banner.save' | t: percent: discount_pct }}</span>
-            {%- endif -%}
-          </div>
-          <a class="button" href="{{ p.url }}">{{ section.settings.button_label | escape }}</a>
-        {%- else -%}
-          <a class="button" href="{{ section.settings.button_link | default: '#' }}">{{ section.settings.button_label | escape }}</a>
+{%- assign p = section.settings.product -%}
+<section class="offer"><div class="page-width"><div class="offer-grid">
+  <div class="offer-copy">
+    {%- if section.settings.eyebrow != blank -%}<div class="eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
+    <h2>{{ section.settings.heading }}</h2>
+    {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+    {%- if p != blank -%}
+      {%- assign v = p.selected_or_first_available_variant -%}
+      <div class="offer-price">
+        <span class="now">{{ v.price | money }}</span>
+        {%- if v.compare_at_price > v.price -%}
+          <span class="was">{{ v.compare_at_price | money }}</span>
+          {%- assign pct = v.compare_at_price | minus: v.price | times: 100 | divided_by: v.compare_at_price -%}
+          <span class="offer-save">Save {{ pct }}%</span>
         {%- endif -%}
       </div>
-
-      <a class="offer-banner__media" href="{% if p != blank %}{{ p.url }}{% else %}{{ section.settings.button_link | default: '#' }}{% endif %}">
-        {%- if section.settings.image != blank -%}
-          {{
-            section.settings.image
-            | image_url: width: 1000
-            | image_tag: loading: 'lazy', widths: '500, 750, 1000', sizes: '(max-width: 900px) 90vw, 42vw', alt: section.settings.heading | escape
-          }}
-        {%- elsif p.featured_image != blank -%}
-          {{
-            p.featured_image
-            | image_url: width: 1000
-            | image_tag: loading: 'lazy', widths: '500, 750, 1000', sizes: '(max-width: 900px) 90vw, 42vw', alt: p.title | escape
-          }}
-        {%- else -%}
-          {{ 'velkrova-hero.jpg' | asset_url | image_tag: loading: 'lazy', alt: section.settings.heading | escape }}
-        {%- endif -%}
-      </a>
-    </div>
+      <a class="btn" href="{{ p.url }}">{{ section.settings.button_label }}</a>
+    {%- else -%}
+      <a class="btn" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
+    {%- endif -%}
   </div>
-</section>
+  <a class="offer-media" href="{% if p != blank %}{{ p.url }}{% else %}{{ section.settings.button_link }}{% endif %}">
+    {%- if section.settings.image != blank -%}
+      {%- assign offer_img_h = 900 | divided_by: section.settings.image.aspect_ratio | round -%}
+      <img src="{{ section.settings.image | image_url: width: 900 }}" srcset="{{ section.settings.image | image_url: width: 500 }} 500w, {{ section.settings.image | image_url: width: 900 }} 900w" sizes="(max-width: 900px) 90vw, 42vw" alt="{{ section.settings.heading | escape }}" loading="lazy" width="900" height="{{ offer_img_h }}">
+    {%- elsif p.featured_image != blank -%}
+      {%- assign offer_pimg_h = 900 | divided_by: p.featured_image.aspect_ratio | round -%}
+      <img src="{{ p.featured_image | image_url: width: 900 }}" srcset="{{ p.featured_image | image_url: width: 500 }} 500w, {{ p.featured_image | image_url: width: 900 }} 900w" sizes="(max-width: 900px) 90vw, 42vw" alt="{{ p.title | escape }}" loading="lazy" width="900" height="{{ offer_pimg_h }}">
+    {%- else -%}
+      <div class="placeholder">Offer image</div>
+    {%- endif -%}
+  </a>
+</div></div></section>
 
 <style>
-  .offer-banner { padding-block: var(--spacing-sections); background: var(--color-background-contrast); }
-  .offer-banner__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-  .offer-banner__copy h2 { font-size: var(--f7); line-height: 1.1; margin: 0 0 14px; }
-  .offer-banner__text { font-size: var(--f2); opacity: 0.75; max-width: 46ch; margin: 0 0 24px; }
-  .offer-banner__price { display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px; }
-  .offer-banner__now { font-size: var(--f5); font-weight: 600; }
-  .offer-banner__was { text-decoration: line-through; opacity: 0.5; }
-  .offer-banner__save {
-    font-size: var(--f0); letter-spacing: 0.06em; text-transform: uppercase;
-    background: var(--color-accent); color: var(--color-accent-text);
-    padding: 4px 9px; border-radius: var(--buttons-radius);
+  .offer{padding-block:clamp(34px,4.4vw,72px)}
+  .offer-media{
+    display:block;width:100%;aspect-ratio:5/4;
+    overflow:hidden;border-radius:12px;background:#fff;line-height:0;
   }
-  .offer-banner__media { display: block; width: 100%; aspect-ratio: 5 / 4; overflow: hidden; border-radius: var(--media-radius); background: var(--color-background); }
-  .offer-banner__media img,
-  .offer-banner__media svg { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-  .offer-banner__media:hover img { transform: scale(1.03); }
+  .offer-media img{
+    width:100%;height:100%;object-fit:cover;object-position:center;
+    display:block;border-radius:12px;transition:transform .4s ease;
+  }
+  .offer-media:hover img{transform:scale(1.03)}
+  .offer-media .placeholder{display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:#f7f5f2;font-size:13px}
+  .offer-save{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.16);color:#fff;padding:5px 10px;border-radius:999px}
 
-  @media screen and (max-width: 900px) {
-    .offer-banner__grid { grid-template-columns: 1fr; gap: 24px; }
-    .offer-banner__media { aspect-ratio: 4 / 3; }
+  @media(max-width:900px){
+    /* No fixed frame on mobile: the container hugs the image, so nothing
+       is cropped and there is no letterboxing at any screen width. */
+    .offer{padding-block:30px}
+    .offer-grid{gap:20px}
+    .offer-media{aspect-ratio:auto;max-height:none;border-radius:10px;line-height:0}
+    .offer-media img{height:auto;object-fit:contain;border-radius:10px}
+    .offer-copy h2{margin-bottom:10px}
+    .offer-copy p{margin-bottom:16px;font-size:15px}
+    .offer-price{margin-bottom:18px}
+    .offer-price .now{font-size:28px}
   }
 </style>
-
-{% schema %}
-{
-  "name": "Offer banner",
-  "tag": "section",
-  "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "LIMITED OFFER" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Featured bundle" },
-    { "type": "textarea", "id": "text", "label": "Text" },
-    { "type": "product", "id": "product", "label": "Product" },
-    { "type": "image_picker", "id": "image", "label": "Image (overrides product image)" },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
-    { "type": "url", "id": "button_link", "label": "Button link (used when no product is selected)" }
-  ],
-  "presets": [{ "name": "Offer banner" }]
-}
-{% endschema %}
+{% schema %}{"name":"Offer banner","settings":[{"type":"text","id":"eyebrow","label":"Eyebrow","default":"BUNDLE OFFER"},{"type":"text","id":"heading","label":"Heading","default":"The Glow Duo"},{"type":"textarea","id":"text","label":"Text"},{"type":"product","id":"product","label":"Product"},{"type":"image_picker","id":"image","label":"Image override"},{"type":"text","id":"button_label","label":"Button label","default":"Shop the duo"},{"type":"url","id":"button_link","label":"Button link"}],"presets":[{"name":"Offer banner"}]}{% endschema %}

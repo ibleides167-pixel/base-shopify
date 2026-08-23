@@ -1,0 +1,92 @@
+{%- comment -%}
+  Recommendations come from the product's own subcategory metafield first,
+  then fill from the same category collection.
+
+  Layout note: this uses flex, not grid. The theme's .grid.products rule
+  declares explicit columns, and adding grid-auto-flow on top of that pushed
+  the first two cards into the explicit tracks, where they collapsed to almost
+  zero width. Flex has no explicit/implicit track split, so it cannot recur.
+{%- endcomment -%}
+<style>
+  .rec-grid{
+    display:flex!important;
+    grid-template-columns:none!important;
+    grid-auto-flow:row!important;
+    flex-wrap:wrap;
+    gap:22px;
+    align-items:stretch;
+  }
+  .rec-grid > *{
+    flex:0 0 calc((100% - 66px)/4);
+    max-width:calc((100% - 66px)/4);
+    min-width:0;
+  }
+  @media(max-width:900px){
+    .rec-grid{
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      scrollbar-width:none;
+      gap:12px;
+      padding-bottom:4px;
+    }
+    .rec-grid::-webkit-scrollbar{display:none}
+    .rec-grid > *{
+      flex:0 0 calc((100% - 24px)/2.15);
+      max-width:calc((100% - 24px)/2.15);
+      scroll-snap-align:start;
+    }
+  }
+  div:has(> section.product-main) + div section.section{padding-top:clamp(18px,2.4vw,30px)}
+  .description-content > *:last-child{margin-bottom:0}
+  .description-content p:empty{display:none}
+</style>
+{%- assign sub = product.metafields.custom.subcategory.value -%}
+{%- assign src = blank -%}
+{%- for c in product.collections -%}
+  {%- if c.handle == 'face' or c.handle == 'hair' or c.handle == 'body' or c.handle == 'wellness-accessories' -%}
+    {%- assign src = c -%}{%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if src == blank -%}{%- assign src = product.collections.first -%}{%- endif -%}
+{%- if src == blank -%}{%- assign src = collections['best-sellers-1'] -%}{%- endif -%}
+{%- assign pool = src.all_products_count | default: src.products_count -%}
+{%- if src != blank and pool > 1 -%}
+  {%- assign picked = '' -%}
+  {%- assign count = 0 -%}
+  <section class="section"><div class="page-width">
+    <div class="section-head"><h2 class="section-title">{{ section.settings.heading }}</h2></div>
+    <div class="rec-grid">
+      {%- if sub != blank -%}
+        {%- for p in src.products -%}
+          {%- if count < 4 and p.id != product.id and p.available and p.metafields.custom.subcategory.value == sub -%}
+            {% render 'product-card', product: p %}
+            {%- assign picked = picked | append: p.id | append: ',' -%}
+            {%- assign count = count | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+      {%- for p in src.products -%}
+        {%- assign key = p.id | append: ',' -%}
+        {%- unless picked contains key -%}
+          {%- if count < 4 and p.id != product.id and p.available -%}
+            {% render 'product-card', product: p %}
+            {%- assign picked = picked | append: key -%}
+            {%- assign count = count | plus: 1 -%}
+          {%- endif -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+  </div></section>
+{%- endif -%}
+<script>
+(function(){
+  var desc=document.querySelector('.description-content');
+  if(!desc) return;
+  Array.prototype.slice.call(desc.querySelectorAll('p')).forEach(function(p){
+    var t=(p.textContent||'').trim().toLowerCase();
+    if(t.length<70 && t.indexOf('free uk delivery')===0) p.parentNode.removeChild(p);
+  });
+})();
+</script>
+{% schema %}{"name":"Product recommendations","settings":[{"type":"text","id":"heading","label":"Heading","default":"You may also like"}]}{% endschema %}

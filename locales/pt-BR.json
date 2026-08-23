@@ -10,18 +10,18 @@
 {
   "general": {
     "accessibility": {
-      "skip_to_content": "Skip to content"
+      "skip_to_content": "Pular para o conteúdo"
     }
   },
   "products": {
     "product": {
-      "add_to_cart": "Add to cart",
-      "sold_out": "Sold out"
+      "add_to_cart": "Adicionar ao carrinho",
+      "sold_out": "Esgotado"
     }
   },
   "cart": {
     "general": {
-      "title": "Your cart"
+      "title": "Seu carrinho"
     }
   }
 }

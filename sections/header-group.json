@@ -1,19 +1,51 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
+  "name": "Header group",
   "type": "header",
-  "name": "t:section_groups.header.name",
   "sections": {
     "announcement": {
       "type": "announcement-bar",
       "blocks": {
-        "a": { "type": "message", "settings": { "text": "HURRY UP! UP TO 30% OFF BEST SELLERS" } },
-        "b": { "type": "message", "settings": { "text": "Clean, botanical skincare — made to last" } }
+        "m1": {
+          "type": "message",
+          "settings": {
+            "text": "20% OFF THE GLOW DUO - LED FACE MASK + 24K GOLD EYE MASKS",
+            "link": "/products/the-glow-duo-led-light-therapy-mask-24k-gold-eye-masks"
+          }
+        },
+        "m2": {
+          "type": "message",
+          "settings": {
+            "text": "UP TO 37% OFF OUR 12 BEST SELLERS",
+            "link": "/collections/best-sellers-1"
+          }
+        },
+        "m3": {
+          "type": "message",
+          "settings": {
+            "text": "NEW IN - EXPLORE THE FULL BEAUTY TECH RANGE",
+            "link": "/collections/all"
+          }
+        }
       },
-      "block_order": ["a", "b"],
+      "block_order": ["m1", "m2", "m3"],
       "settings": {}
     },
-    "nav": {
-      "type": "nav"
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_url": "https://cdn.shopify.com/s/files/1/0748/0429/7797/files/ChatGPT_Image_26_de_jul._de_2026_17_29_30.png?v=1785103280",
+        "logo_width": 180
+      }
     }
   },
-  "order": ["announcement", "nav"]
+  "order": ["announcement", "header"]
 }

@@ -1,180 +1,295 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
-      "type": "hero-slideshow",
+      "type": "hero-premium",
       "blocks": {
         "s1": {
           "type": "slide",
           "settings": {
-            "eyebrow": "Health & beauty, done right",
-            "heading": "Discover the Power of Natural Beauty",
-            "text": "Dermatologist-loved skincare, haircare and beauty tech — chosen for results you can feel, not marketing you can't.",
-            "button_label": "Shop best sellers",
-            "button_link": "/collections/best-sellers-1"
-          }
-        },
-        "s2": {
-          "type": "slide",
-          "settings": {
-            "eyebrow": "The glow, on repeat",
-            "heading": "Your Daily Ritual, Elevated",
-            "text": "Clean formulas and salon-grade devices that make an at-home routine feel like a treatment.",
-            "button_label": "Shop the routine",
-            "button_link": "/collections/face"
+            "image": "shopify://shop_images/ChatGPT_Image_7_de_ago._de_2026_12_50_25.webp",
+            "image_mobile": "shopify://shop_images/ChatGPT_Image_6_de_ago._de_2026_14_44_05.webp",
+            "image_url": "",
+            "image_url_mobile": "",
+            "alt": "Lift, brighten and glow - LED light therapy and 24K gold under-eye care",
+            "button_link": "shopify://products/the-glow-duo-led-light-therapy-mask-24k-gold-eye-masks",
+            "eyebrow": "",
+            "heading": "",
+            "text": "",
+            "button_label": ""
           }
         }
       },
-      "block_order": ["s1", "s2"],
+      "block_order": ["s1"],
       "settings": {}
     },
-    "benefits": {
+    "marquee": {
       "type": "marquee",
       "blocks": {
-        "b1": { "type": "item", "settings": { "text": "Free UK shipping over £40", "icon": "truck" } },
-        "b2": { "type": "item", "settings": { "text": "30-day easy returns", "icon": "return" } },
-        "b3": { "type": "item", "settings": { "text": "Tracked worldwide delivery", "icon": "pin" } },
-        "b4": { "type": "item", "settings": { "text": "Secure checkout", "icon": "shield" } },
-        "b5": { "type": "item", "settings": { "text": "Dermatologist-loved formulas", "icon": "shield" } }
+        "a": { "type": "item", "settings": { "text": "Free UK delivery on every order", "icon": "truck" } },
+        "b": { "type": "item", "settings": { "text": "30-day returns", "icon": "return" } },
+        "c": { "type": "item", "settings": { "text": "Tracked shipping", "icon": "pin" } },
+        "d": { "type": "item", "settings": { "text": "Secure checkout", "icon": "shield" } }
       },
-      "block_order": ["b1", "b2", "b3", "b4", "b5"],
+      "block_order": ["a", "b", "c", "d"],
       "settings": { "label": "Store benefits", "brand": true }
     },
     "promo": {
-      "type": "promo-blocks",
+      "type": "vk-promo-tiles",
       "blocks": {
-        "a": { "type": "block", "settings": { "background": "#e8a24f", "heading": "Buy one, get one free", "discount_text": "SELECTED BEST SELLERS", "button_label": "Shop the deal", "button_link": "/collections/bogo" } },
-        "b": { "type": "block", "settings": { "background": "#b9ab8f", "heading": "The Glow Duo", "discount_text": "CURATED SET, BETTER TOGETHER", "button_label": "Shop the set", "button_link": "/collections/the-glow-duo" } },
-        "c": { "type": "block", "settings": { "background": "#e1a3a0", "heading": "Fine lines & firmness", "discount_text": "UP TO 30% OFF", "button_label": "Shop the concern", "button_link": "/collections/fine-lines-firmness" } }
+        "t1": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/velkrova-promo-tile-orange.jpg",
+            "heading": "Unleash your inner strength",
+            "discount": "UP TO 40% OFF",
+            "button_label": "Shop massage",
+            "collection": "body"
+          }
+        },
+        "t2": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/velkrova-promo-tile-tan.jpg",
+            "heading": "Embrace your everyday glow",
+            "discount": "UP TO 30% OFF",
+            "button_label": "Shop skincare",
+            "collection": "face"
+          }
+        },
+        "t3": {
+          "type": "tile",
+          "settings": {
+            "image": "shopify://shop_images/velkrova-promo-tile-coral.jpg",
+            "heading": "Reveal your natural beauty",
+            "discount": "UP TO 50% OFF",
+            "button_label": "Shop best sellers",
+            "collection": "best-sellers-1"
+          }
+        }
       },
-      "block_order": ["a", "b", "c"],
+      "block_order": ["t1", "t2", "t3"],
       "settings": {}
     },
-    "featured": {
-      "type": "featured-collection",
+    "concern": {
+      "type": "vk-concern",
+      "blocks": {
+        "c1": { "type": "concern", "settings": { "label": "Fine lines & firmness", "text": "Skin that has lost its bounce", "collection": "fine-lines-firmness" } },
+        "c2": { "type": "concern", "settings": { "label": "Breakouts & congestion", "text": "Clogged pores, uneven texture", "collection": "breakouts-congestion" } },
+        "c3": { "type": "concern", "settings": { "label": "Tired, puffy eyes", "text": "Mornings that need a shortcut", "collection": "tired-puffy-eyes" } },
+        "c4": { "type": "concern", "settings": { "label": "Muscle tension & recovery", "text": "Knots a foam roller can't reach", "collection": "body" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4"],
       "settings": {
-        "heading": "Most popular",
-        "collection": "best-sellers-1",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "show_view_all": true
+        "eyebrow": "WHAT ARE YOU WORKING ON?",
+        "heading": "Shop by concern",
+        "subheading": "Start with the thing that bothers you, not the shelf it sits on."
       }
     },
     "categories": {
-      "type": "collection-list",
+      "type": "category-grid",
       "blocks": {
-        "a": { "type": "featured_collection", "settings": { "collection": "face" } },
-        "b": { "type": "featured_collection", "settings": { "collection": "hair" } },
-        "c": { "type": "featured_collection", "settings": { "collection": "body" } },
-        "d": { "type": "featured_collection", "settings": { "collection": "wellness-accessories" } }
+        "a": { "type": "category", "settings": { "heading": "Face", "collection": "face", "link": "/collections/face" } },
+        "b": { "type": "category", "settings": { "heading": "Hair", "collection": "hair", "link": "/collections/hair" } },
+        "c": { "type": "category", "settings": { "heading": "Body", "collection": "body", "link": "/collections/body" } },
+        "d": { "type": "category", "settings": { "heading": "Wellness", "collection": "wellness-accessories", "link": "/collections/wellness-accessories" } }
       },
       "block_order": ["a", "b", "c", "d"],
-      "settings": { "heading": "Shop by collection", "columns_desktop": 4 }
+      "settings": { "heading": "Shop by category" }
     },
-    "usp_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "h": { "type": "heading", "settings": { "heading": "Beauty that works as hard as you do" } },
-        "t": { "type": "text", "settings": { "text": "<p>Every Velkrova pick is chosen for real, visible results — backed by a 30-day promise and thousands of five-star reviews.</p>" } },
-        "btn": { "type": "button", "settings": { "button_label": "Shop best sellers", "button_link": "/collections/best-sellers-1", "button_label_2": "Explore all", "button_link_2": "/collections/all" } }
-      },
-      "block_order": ["h", "t", "btn"],
-      "settings": { "height": "medium", "text_alignment": "center" }
+    "featured": {
+      "type": "featured-collection-premium",
+      "settings": {
+        "heading": "Best sellers",
+        "subheading": "The ones our customers keep coming back for",
+        "collection": "best-sellers-1",
+        "limit": 12
+      }
     },
     "lifestyle": {
-      "type": "shoppable-lifestyle",
+      "type": "vk-lifestyle",
       "blocks": {
-        "p1": { "type": "product", "settings": { "product": "rechargeable-7-colour-led-facial-mask" } },
-        "p2": { "type": "product", "settings": { "product": "premium-rosemary-hair-oil" } },
-        "h1": { "type": "hotspot", "settings": { "product": "avocado-24k-gold-collagen-eye-masks-hydrating-under-eye-patches-for-dark-circles-puffiness-firm-skin", "position_x": 64, "position_y": 28 } },
-        "h2": { "type": "hotspot", "settings": { "product": "anlan-9-in-1-rf-ems-facial-beauty-device-24k-gold-skin-tightening-anti-ageing-massager", "position_x": 78, "position_y": 68 } }
+        "p1": { "type": "point", "settings": { "text": "Hands-free while you read or wind down" } },
+        "p2": { "type": "point", "settings": { "text": "Cordless, so there is no cable pulling at the wrong moment" } },
+        "p3": { "type": "point", "settings": { "text": "Quiet enough for the room next door" } }
       },
-      "block_order": ["p1", "p2", "h1", "h2"],
-      "settings": { "eyebrow": "The routine", "heading": "Shop the lookbook" }
-    },
-    "comparison": {
-      "type": "comparison",
-      "blocks": {
-        "r1": { "type": "row", "settings": { "label": "Dermatologist-loved, results-first formulas" } },
-        "r2": { "type": "row", "settings": { "label": "Salon-grade beauty tech at home prices" } },
-        "r3": { "type": "row", "settings": { "label": "Free UK shipping over £40, tracked worldwide" } },
-        "r4": { "type": "row", "settings": { "label": "30-day returns, no questions asked" } },
-        "r5": { "type": "row", "settings": { "label": "Real five-star reviews, not paid placements" } }
-      },
-      "block_order": ["r1", "r2", "r3", "r4", "r5"],
+      "block_order": ["p1", "p2", "p3"],
       "settings": {
-        "eyebrow": "WHY VELKROVA",
-        "heading": "Built the way",
-        "heading_accent": "beauty should feel",
-        "text": "A few concrete things we do differently — spelled out, not left as a vague promise.",
-        "us_label": "Velkrova",
-        "them_label": "Others"
+        "image": "shopify://shop_images/velkrova-lifestyle-massage-sofa.jpg",
+        "image_url": "",
+        "reverse": false,
+        "eyebrow": "IN YOUR ROUTINE",
+        "heading": "Ten minutes, on the sofa",
+        "text": "Most beauty devices end up in a drawer because the routine asks for more time than anyone has. This one fits into the part of the evening you were spending anyway.",
+        "button_label": "Shop massage devices",
+        "button_link": "/collections/body"
       }
     },
-    "more_products": {
-      "type": "featured-collection",
+    "value": {
+      "type": "vk-value",
+      "blocks": {
+        "v1": {
+          "type": "item",
+          "settings": {
+            "treatment": "A deep-tissue back massage",
+            "salon_label": "Typical UK salon, per visit",
+            "salon_price": "£50-70",
+            "ours_label": "Yours to keep",
+            "ours_price": "£64.99",
+            "product": "smart-electric-cupping-massager-heated-vacuum-therapy-device-with-gua-sha-massage-adjustable-suction",
+            "note": "Pays for itself after roughly one appointment, then costs nothing.",
+            "cta": "Shop it"
+          }
+        },
+        "v2": {
+          "type": "item",
+          "settings": {
+            "treatment": "A sports massage after training",
+            "salon_label": "Typical UK sports massage",
+            "salon_price": "£45-65",
+            "ours_label": "Yours to keep",
+            "ours_price": "£99.99",
+            "product": "fodrk-30-speed-deep-tissue-massage-gun",
+            "note": "Pays for itself in one or two sessions, then it is free.",
+            "cta": "Shop it"
+          }
+        },
+        "v3": {
+          "type": "item",
+          "settings": {
+            "treatment": "A therapeutic neck & shoulder massage",
+            "salon_label": "Typical UK massage therapist",
+            "salon_price": "£55-75",
+            "ours_label": "Yours to keep",
+            "ours_price": "£119.99",
+            "product": "neck-massager-electric-microcurrent-multi-head-replaceable-wireless-knead-shiatsu-heating-vibration-cervical-shoulder-massager",
+            "note": "Two appointments in and it has already paid for itself.",
+            "cta": "Shop it"
+          }
+        }
+      },
+      "block_order": ["v1", "v2", "v3"],
       "settings": {
-        "heading": "More to love",
-        "collection": "face",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "show_view_all": true
+        "eyebrow": "WHAT IT REPLACES",
+        "heading": "Own it once, or pay every visit",
+        "subheading": "The device is not the expensive part. The appointments are.",
+        "disclaimer": "Salon prices are typical UK ranges and vary by area and provider."
       }
     },
-    "about": {
-      "type": "rich-text",
+    "demo": {
+      "type": "vk-demo",
       "blocks": {
-        "heading": { "type": "heading", "settings": { "heading": "Real results, nothing to hide" } },
-        "text": { "type": "text", "settings": { "text": "<p>Velkrova brings together dermatologist-loved skincare, haircare and wellness tools — chosen for results you can actually feel, not just marketing copy. No fluff, no filler, just formulas and devices that earn their place on your shelf.</p>" } }
+        "d1": {
+          "type": "demo",
+          "settings": {
+            "product": "smart-electric-cupping-massager-heated-vacuum-therapy-device-with-gua-sha-massage-adjustable-suction",
+            "number": "1",
+            "step": "Cupping & gua sha, warmed",
+            "text": "Heated suction on the spots a foam roller cannot reach, used for five minutes before or after a shower."
+          }
+        },
+        "d2": {
+          "type": "demo",
+          "settings": {
+            "product": "fodrk-30-speed-deep-tissue-massage-gun",
+            "number": "2",
+            "step": "Ten minutes, before or after training",
+            "text": "Warm up sore shoulders before a workout, or ease them out afterwards. 30 speeds, so it works for a light touch too."
+          }
+        },
+        "d3": {
+          "type": "demo",
+          "settings": {
+            "product": "neck-massager-electric-microcurrent-multi-head-replaceable-wireless-knead-shiatsu-heating-vibration-cervical-shoulder-massager",
+            "number": "3",
+            "step": "Four heads, one stiff neck",
+            "text": "Kneading, shiatsu, heat and vibration in one wireless unit, worn while you are doing something else entirely."
+          }
+        }
       },
-      "block_order": ["heading", "text"],
-      "settings": {}
-    },
-    "faq": {
-      "type": "home-faq",
-      "blocks": {
-        "q1": { "type": "question", "settings": { "question": "How long does shipping take?", "answer": "<p>UK orders arrive in 3–5 business days. International orders are tracked and typically arrive within 7–12 business days.</p>" } },
-        "q2": { "type": "question", "settings": { "question": "Are your products cruelty-free?", "answer": "<p>Yes. Our skincare and haircare formulas are cruelty-free and made without harsh unnecessary fillers.</p>" } },
-        "q3": { "type": "question", "settings": { "question": "What's your returns policy?", "answer": "<p>We offer 30-day returns on unopened items. If something isn't right, reach out and we'll make it easy.</p>" } },
-        "q4": { "type": "question", "settings": { "question": "Do the beauty devices come with a warranty?", "answer": "<p>All Velkrova beauty devices include a 12-month warranty against manufacturing defects.</p>" } }
-      },
-      "block_order": ["q1", "q2", "q3", "q4"],
+      "block_order": ["d1", "d2", "d3"],
       "settings": {
-        "eyebrow": "FAQ",
-        "heading": "Frequently asked questions",
-        "subheading": "Shipping, returns and everything else you might wonder about."
+        "eyebrow": "HOW IT WORKS",
+        "heading": "See it in action",
+        "subheading": "Three routines that fit into ten minutes at home."
+      }
+    },
+    "offer": {
+      "type": "offer-banner",
+      "settings": {
+        "eyebrow": "BUNDLE OFFER",
+        "heading": "The Glow Duo",
+        "text": "LED light therapy for the whole face, collagen patches for the one area that always shows tiredness first. Together, 20% less than buying them separately.",
+        "product": "the-glow-duo-led-light-therapy-mask-24k-gold-eye-masks",
+        "button_label": "Shop the duo",
+        "button_link": ""
       }
     },
     "testimonials": {
       "type": "testimonials",
       "blocks": {
-        "a": { "type": "testimonial", "settings": { "rating": 5, "quote": "My skin has never looked this healthy. The LED mask is now non-negotiable in my routine.", "author": "Jordan", "role": "Verified customer" } },
-        "b": { "type": "testimonial", "settings": { "rating": 5, "quote": "The rosemary hair oil actually made a visible difference in a few weeks. Obsessed.", "author": "Sam", "role": "Verified customer" } },
-        "c": { "type": "testimonial", "settings": { "rating": 5, "quote": "Fast shipping, beautiful packaging, and products that genuinely work. Will reorder.", "author": "Casey", "role": "Verified customer" } }
+        "t1": { "type": "testimonial", "settings": { "quote": "The neck massager has become part of my evening routine. I put it on while I'm making dinner and my shoulders actually thank me for it.", "author": "Verified customer, Manchester" } },
+        "t2": { "type": "testimonial", "settings": { "quote": "Ordered on a Tuesday, it was on my doorstep by Friday. The massage gun is genuinely as good as the one at my physio.", "author": "Verified customer, Leeds" } },
+        "t3": { "type": "testimonial", "settings": { "quote": "Wasn't sure a heated cupping device could replace an actual massage, but after a week of using it after work I'm converted.", "author": "Verified customer, Bristol" } }
       },
-      "block_order": ["a", "b", "c"],
-      "settings": { "heading": "Loved by thousands" }
+      "block_order": ["t1", "t2", "t3"],
+      "settings": { "heading": "Loved across the UK" }
     },
-    "logos": {
-      "type": "logo-list",
+    "compare": {
+      "type": "vk-compare",
       "blocks": {
-        "a": { "type": "logo", "settings": {} },
-        "b": { "type": "logo", "settings": {} },
-        "c": { "type": "logo", "settings": {} },
-        "d": { "type": "logo", "settings": {} }
+        "r1": { "type": "row", "settings": { "label": "Free UK delivery, no minimum spend" } },
+        "r2": { "type": "row", "settings": { "label": "30-day returns, not the legal 14" } },
+        "r3": { "type": "row", "settings": { "label": "Tracked on every single order" } },
+        "r4": { "type": "row", "settings": { "label": "Honest timeframes for results" } },
+        "r5": { "type": "row", "settings": { "label": "Routines built for ten minutes" } }
       },
-      "block_order": ["a", "b", "c", "d"],
-      "settings": { "heading": "As featured in" }
+      "block_order": ["r1", "r2", "r3", "r4", "r5"],
+      "settings": {
+        "eyebrow": "THE VELKROVA DIFFERENCE",
+        "heading": "Made for the ten minutes",
+        "heading_accent": "you actually have",
+        "text": "Salon-grade devices chosen for routines that fit into a normal evening, backed by delivery and returns terms we put in writing. No thresholds to reach, no fine print at checkout, and honest timeframes for how long results really take.",
+        "us_label": "Velkrova",
+        "them_label": "Others",
+        "background": "#FFFFFF"
+      }
+    },
+    "homefaq": {
+      "type": "vk-home-faq",
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "How long will my order take?", "answer": "<p>Orders are typically delivered within <strong>5 to 9 business days</strong>, with free tracked delivery anywhere in the UK and no minimum spend. You will get a tracking link by email as soon as your parcel leaves the warehouse.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "Is delivery really free?", "answer": "<p>Yes, on every order and with no minimum spend. There is no threshold to reach and nothing added at checkout.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "What if it is not right for me?", "answer": "<p>You have <strong>30 days from delivery</strong> to return it, which is longer than the 14 days you are entitled to by law. If an item arrives faulty, we cover the postage both ways.</p>" } },
+        "q4": { "type": "question", "settings": { "question": "How quickly will I see results?", "answer": "<p>It depends on the device, and we would rather tell you honestly than promise three days. Massage and depuffing are immediate. Skin tone and firmness usually take six to eight weeks of regular use, and anything to do with hair takes eight to twelve. Every product page says which applies.</p>" } },
+        "q5": { "type": "question", "settings": { "question": "Do the devices come with a UK plug?", "answer": "<p>Where a product has plug options, choose UK at checkout. Most of our devices are USB rechargeable, so they work with any charger you already own.</p>" } },
+        "q6": { "type": "question", "settings": { "question": "Is it safe to buy from you?", "answer": "<p>Payments run through Shopify's encrypted checkout, so we never see or store your card details. Every order is tracked, and if anything goes wrong you can reach a real person by email.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"],
+      "settings": {
+        "eyebrow": "FAQ",
+        "heading": "Frequently asked questions",
+        "subheading": "Delivery, returns and how long results actually take."
+      }
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "heading": "Subscribe to our emails",
-        "text": "Be the first to know about new collections and exclusive offers — plus 10% off your first order.",
-        "placeholder": "Enter your email",
-        "button_label": "Subscribe",
-        "success": "Thanks for subscribing!"
+        "heading": "Ten percent off your first order",
+        "text": "Join the list for early access to new devices and subscriber-only offers.",
+        "placeholder": "Your email address",
+        "button_label": "Sign up",
+        "success": "Thanks - check your inbox for your code."
       }
     }
   },
-  "order": ["hero", "benefits", "promo", "featured", "categories", "usp_banner", "lifestyle", "comparison", "more_products", "about", "faq", "testimonials", "logos", "newsletter"]
+  "order": ["hero", "marquee", "promo", "concern", "categories", "featured", "lifestyle", "value", "demo", "offer", "testimonials", "compare", "homefaq", "newsletter"]
 }

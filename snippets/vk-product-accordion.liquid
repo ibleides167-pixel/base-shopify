@@ -1,0 +1,84 @@
+{%- comment -%}
+  Velkrova product accordion - reference detail only.
+  How to use has its own section, so it is deliberately not repeated here.
+
+  Delivery window is stated in one place: keep it identical to the shipping
+  policy and the rate description at checkout. A mismatch between the three
+  is what a card issuer reads in a dispute.
+{%- endcomment -%}
+
+{%- liquid
+  assign box = product.metafields.custom.whats_in_box.value
+  assign specs = product.metafields.custom.specifications.value
+  assign care = product.metafields.custom.precautions.value
+  assign warranty = product.metafields.custom.warranty_returns.value
+  assign faqs = product.metafields.custom.faq.value
+-%}
+
+<div class="vk-acc">
+  {%- if faqs and faqs.size > 0 -%}
+    {%- for item in faqs -%}
+      <details class="vk-acc__item"{% if forloop.first %} open{% endif %}>
+        <summary><span>{{ item.q }}</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg></summary>
+        <div class="vk-acc__body"><p>{{ item.a }}</p></div>
+      </details>
+    {%- endfor -%}
+  {%- endif -%}
+
+  {%- if box != blank -%}
+    <details class="vk-acc__item">
+      <summary><span>What's in the box</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg></summary>
+      <div class="vk-acc__body">
+        <ul class="vk-acc__list">
+          {%- assign box_lines = box | newline_to_br | split: '<br />' -%}
+          {%- for line in box_lines -%}{%- assign l = line | strip -%}{%- if l != blank -%}<li>{{ l }}</li>{%- endif -%}{%- endfor -%}
+        </ul>
+      </div>
+    </details>
+  {%- endif -%}
+
+  {%- if specs != blank -%}
+    <details class="vk-acc__item">
+      <summary><span>Specifications</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg></summary>
+      <div class="vk-acc__body">
+        <dl class="vk-acc__specs">
+          {%- assign spec_lines = specs | newline_to_br | split: '<br />' -%}
+          {%- for line in spec_lines -%}
+            {%- assign l = line | strip -%}
+            {%- if l != blank -%}
+              {%- if l contains ':' -%}
+                <dt>{{ l | split: ':' | first | strip }}</dt><dd>{{ l | split: ':' | last | strip }}</dd>
+              {%- else -%}
+                <dt>{{ l }}</dt><dd></dd>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </dl>
+      </div>
+    </details>
+  {%- endif -%}
+
+  {%- if care != blank -%}
+    <details class="vk-acc__item">
+      <summary><span>Safety &amp; precautions</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg></summary>
+      <div class="vk-acc__body">
+        <ul class="vk-acc__list">
+          {%- assign care_lines = care | newline_to_br | split: '<br />' -%}
+          {%- for line in care_lines -%}{%- assign l = line | strip -%}{%- if l != blank -%}<li>{{ l }}</li>{%- endif -%}{%- endfor -%}
+        </ul>
+      </div>
+    </details>
+  {%- endif -%}
+
+  <details class="vk-acc__item">
+    <summary><span>Delivery &amp; returns</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg></summary>
+    <div class="vk-acc__body">
+      <p>Free tracked delivery anywhere in the UK, with no minimum spend. Orders are typically delivered within <strong>5 to 9 business days</strong>, and you will get a tracking link by email as soon as your parcel leaves the warehouse.</p>
+      {%- if warranty != blank -%}
+        <p style="margin-top:10px">{{ warranty }}</p>
+      {%- else -%}
+        <p style="margin-top:10px">You have 30 days from delivery to return it. If an item arrives faulty, we cover the postage both ways.</p>
+      {%- endif -%}
+    </div>
+  </details>
+</div>
