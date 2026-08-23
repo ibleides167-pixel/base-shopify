@@ -15,16 +15,16 @@
         "s1": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/velkrova-hero-glowduo-v2.jpg",
-            "image_mobile": "shopify://shop_images/velkrova-hero-glowduo-mobile.jpg",
+            "image": "shopify://shop_images/velkrova-hero-promo-desktop.jpg",
+            "image_mobile": "shopify://shop_images/velkrova-hero-promo-mobile.jpg",
             "image_url": "",
             "image_url_mobile": "",
-            "alt": "Lift, brighten and glow - LED light therapy and 24K gold under-eye care",
-            "button_link": "shopify://products/the-glow-duo-led-light-therapy-mask-24k-gold-eye-masks",
-            "eyebrow": "THE GLOW DUO",
-            "heading": "Lift, brighten and glow. From your own sofa.",
-            "text": "LED light therapy for the whole face, 24K gold patches for the eyes that always show tiredness first. Ten minutes, three times a week - no appointment needed.",
-            "button_label": "Shop the Glow Duo"
+            "alt": "Woman happily opening a shopping bag of Velkrova products",
+            "button_link": "/collections/best-sellers-1",
+            "eyebrow": "AUTOMATIC DISCOUNT",
+            "heading": "Spend £80, get 10% off. Automatically.",
+            "text": "No code needed. Once your basket reaches £80, the discount applies itself at checkout - on this order and every one after.",
+            "button_label": "Shop now"
           }
         }
       },
