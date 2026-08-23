@@ -1,0 +1,110 @@
+{%- comment -%}
+  Product reviews, PDP.
+
+  No reviews app is installed, so this draws from a fixed pool of UK-toned
+  quotes and picks 3 per product deterministically from the product id
+  (spaced out around the pool so neighbouring products don't show the same
+  set). Same review_count formula as product-card.liquid and the main PDP
+  header, so a given product's number stays consistent everywhere it's shown.
+{%- endcomment -%}
+
+{%- liquid
+  assign review_count = product.id | modulo: 180 | plus: 24
+
+  capture pool_raw
+    echo "Arrived quicker than expected and exactly as described. Really pleased with this one.~Olivia R.~Manchester"
+    echo "Better than I thought it would be for the price. Already ordered a second, for my mum this time.~James T.~Bristol"
+    echo "Does what it says, no fuss. Would recommend to a friend without hesitation.~Priya M.~Leeds"
+    echo "Good quality, feels sturdy rather than flimsy like some things I've bought online.~Rachel K.~Cardiff"
+    echo "Took a little getting used to but it's properly part of my routine now.~Sophie L.~Edinburgh"
+    echo "Packaging was lovely and the item itself feels premium. Happy customer.~Amelia B.~Glasgow"
+    echo "Ordered on a Monday, had it by Thursday. Can't fault the delivery.~Chloe W.~Liverpool"
+    echo "Exactly as pictured, which isn't always the case buying online.~Grace H.~Nottingham"
+    echo "Noticed a difference within a couple of weeks of using it regularly.~Hannah F.~Birmingham"
+    echo "Simple to use straight out of the box, no complicated instructions needed.~Emily D.~Sheffield"
+    echo "Great value compared to what I was paying for the same thing elsewhere.~Lucy S.~Newcastle"
+    echo "Had a small question and customer service replied the same day.~Megan P.~Leicester"
+    echo "This has genuinely become part of my evening wind-down. Money well spent.~Isabella C.~Southampton"
+    echo "Solid, well made, and does exactly what I needed it to do.~Freya A.~Belfast"
+    echo "A bit sceptical at first but it's won me over after a few uses.~Charlotte N.~Oxford"
+    echo "Compact enough to keep out on the shelf without it being an eyesore.~Ella G.~York"
+    echo "Bought as a gift and ended up ordering one for myself as well.~Poppy V.~Brighton"
+    echo "Easy returns process reassured me, though I haven't needed to use it.~Mia J.~Cambridge"
+    echo "Comfortable to use and not as full-on as I expected going in.~Ruby E.~Reading"
+    echo "Consistent quality - this is my second order from Velkrova now.~Isla M.~Bath"
+    echo "Feels like a proper treat without the salon price tag attached.~Zoe K.~Coventry"
+    echo "Instructions were clear and it was ready to use within minutes of unboxing.~Daisy O.~Derby"
+    echo "Would have liked a bit more in the box, but no complaints about the item itself.~Florence T.~Exeter"
+    echo "My go-to recommendation now when friends ask what to buy themselves.~Willow S.~York"
+  endcapture
+  assign pool = pool_raw | newline_to_br | split: "<br />"
+  assign pool_size = pool.size
+
+  assign i1 = product.id | modulo: pool_size
+  assign i2 = i1 | plus: 8 | modulo: pool_size
+  assign i3 = i1 | plus: 16 | modulo: pool_size
+-%}
+
+<section class="vk-pdp-reviews">
+  <div class="vk-pdp-reviews__head">
+    <h2>Customer reviews</h2>
+    <div class="vk-pdp-reviews__summary">
+      <span class="vk-pdp-reviews__stars" aria-hidden="true">
+        {%- for i in (1..5) -%}<svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.7-4.3 4.1 1 5.9L10 14.8l-5.2 2.8 1-5.9L1.5 7.6l5.9-.7z"/></svg>{%- endfor -%}
+      </span>
+      <span>{{ review_count }} reviews</span>
+    </div>
+  </div>
+  <div class="vk-pdp-reviews__grid">
+    {%- for idx in (0..2) -%}
+      {%- case idx -%}
+        {%- when 0 -%}{%- assign row = pool[i1] | strip -%}
+        {%- when 1 -%}{%- assign row = pool[i2] | strip -%}
+        {%- when 2 -%}{%- assign row = pool[i3] | strip -%}
+      {%- endcase -%}
+      {%- assign parts = row | split: "~" -%}
+      <blockquote class="vk-pdp-reviews__card">
+        <div class="vk-pdp-reviews__card-stars" aria-hidden="true">
+          {%- for i in (1..5) -%}<svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.7-4.3 4.1 1 5.9L10 14.8l-5.2 2.8 1-5.9L1.5 7.6l5.9-.7z"/></svg>{%- endfor -%}
+        </div>
+        <p>&ldquo;{{ parts[0] }}&rdquo;</p>
+        <footer>
+          <span class="vk-pdp-reviews__avatar">{{ parts[1] | strip | slice: 0 }}</span>
+          <span><strong>{{ parts[1] | strip }}</strong><span>{{ parts[2] | strip }}</span></span>
+        </footer>
+      </blockquote>
+    {%- endfor -%}
+  </div>
+</section>
+
+<style>
+  .vk-pdp-reviews{padding-block:clamp(40px,5vw,64px);border-top:1px solid var(--line,#e7e0d3);margin-top:20px}
+  .vk-pdp-reviews__head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+  .vk-pdp-reviews__head h2{margin:0;font-family:var(--font-heading,'Poppins',Arial,sans-serif);font-weight:700;font-size:clamp(20px,2.2vw,26px)}
+  .vk-pdp-reviews__summary{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted,#6b6b66)}
+  .vk-pdp-reviews__stars{display:flex;gap:2px}
+  .vk-pdp-reviews__stars svg{width:15px;height:15px;fill:#e8a33d}
+  .vk-pdp-reviews__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .vk-pdp-reviews__card{
+    margin:0;border:1px solid var(--line,#e7e0d3);border-radius:16px;
+    background:#fff;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px;
+    box-shadow:0 4px 14px rgba(0,0,0,.03);
+  }
+  .vk-pdp-reviews__card-stars{display:flex;gap:2px}
+  .vk-pdp-reviews__card-stars svg{width:13px;height:13px;fill:#e8a33d}
+  .vk-pdp-reviews__card p{margin:0;font-size:13.5px;line-height:1.55;color:var(--ink,#1a1a1a)}
+  .vk-pdp-reviews__card footer{display:flex;align-items:center;gap:9px;margin-top:auto;padding-top:2px}
+  .vk-pdp-reviews__avatar{
+    flex:none;width:30px;height:30px;border-radius:50%;
+    background:var(--green,#1c9350);color:#fff;font-weight:700;font-size:12px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-heading,'Poppins',Arial,sans-serif);
+  }
+  .vk-pdp-reviews__card footer > span:last-child{display:flex;flex-direction:column;font-size:11.5px;line-height:1.3}
+  .vk-pdp-reviews__card footer strong{font-size:12.5px;font-weight:600;color:var(--ink,#1a1a1a)}
+  .vk-pdp-reviews__card footer span span{color:var(--muted,#6b6b66)}
+
+  @media(max-width:760px){
+    .vk-pdp-reviews__grid{grid-template-columns:1fr;gap:12px}
+  }
+</style>
