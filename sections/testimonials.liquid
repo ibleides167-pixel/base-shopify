@@ -103,9 +103,12 @@
   .vk-testi__btn:disabled{opacity:.25;cursor:default}
 
   @media(max-width:640px){
-    .vk-testi__wrap{gap:6px}
-    .vk-testi__card{width:82vw}
-    .vk-testi__btn{width:36px;height:36px;font-size:17px}
+    .vk-testi__wrap{gap:0}
+    .vk-testi__card{width:85vw}
+    /* Arrows need room the card can't spare at phone widths; touch
+       scroll already works natively here, same as the other carousel
+       sitewide, so the buttons step aside below this width. */
+    .vk-testi__btn{display:none}
   }
 </style>
 
