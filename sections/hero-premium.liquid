@@ -4,7 +4,7 @@
       {%- assign has_copy = false -%}
       {%- if block.settings.heading != blank or block.settings.text != blank or block.settings.button_label != blank or block.settings.eyebrow != blank -%}{%- assign has_copy = true -%}{%- endif -%}
       <div class="hero-slide" {{ block.shopify_attributes }}>
-        <div class="hero-media-wrap">
+        <div class="hero-media-wrap{% unless has_copy %} hero-media-wrap--contain{% endunless %}">
           {%- unless has_copy -%}{%- if block.settings.button_link != blank -%}<a href="{{ block.settings.button_link }}" class="hero-link" aria-label="{{ block.settings.link_label | default: 'Shop now' }}">{%- endif -%}{%- endunless -%}
           <picture>
             {%- if block.settings.image_mobile != blank -%}<source media="(max-width:760px)" srcset="{{ block.settings.image_mobile | image_url: width: 1100 }}">

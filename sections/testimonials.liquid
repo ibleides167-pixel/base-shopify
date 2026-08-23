@@ -5,33 +5,70 @@
       <h2 class="section-title">{{ section.settings.heading }}</h2>
       {%- if section.settings.subheading != blank -%}<p class="vk-testi__sub">{{ section.settings.subheading }}</p>{%- endif -%}
     </div>
-    <div class="vk-testi__grid">
-      {%- for block in section.blocks -%}
-        <blockquote class="vk-testi__card" {{ block.shopify_attributes }}>
-          <div class="vk-testi__stars" aria-hidden="true">
-            {%- for i in (1..5) -%}<svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.7-4.3 4.1 1 5.9L10 14.8l-5.2 2.8 1-5.9L1.5 7.6l5.9-.7z"/></svg>{%- endfor -%}
-          </div>
-          <p class="vk-testi__quote">&ldquo;{{ block.settings.quote }}&rdquo;</p>
-          <footer class="vk-testi__footer">
-            <span class="vk-testi__avatar">{{ block.settings.author | slice: 0 }}</span>
-            <span class="vk-testi__author">
-              <strong>{{ block.settings.author }}</strong>
-              {%- if block.settings.detail != blank -%}<span>{{ block.settings.detail }}</span>{%- endif -%}
-            </span>
-          </footer>
-        </blockquote>
-      {%- endfor -%}
+    <div class="vk-testi__wrap">
+      <button class="vk-testi__btn" data-dir="prev" type="button" aria-label="Previous reviews">&#8249;</button>
+      <div class="vk-testi__grid" data-carousel>
+        {%- for block in section.blocks -%}
+          <blockquote class="vk-testi__card" {{ block.shopify_attributes }}>
+            <div class="vk-testi__stars" aria-hidden="true">
+              {%- for i in (1..5) -%}<svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.7-4.3 4.1 1 5.9L10 14.8l-5.2 2.8 1-5.9L1.5 7.6l5.9-.7z"/></svg>{%- endfor -%}
+            </div>
+            <p class="vk-testi__quote">&ldquo;{{ block.settings.quote }}&rdquo;</p>
+            <footer class="vk-testi__footer">
+              <span class="vk-testi__avatar">{{ block.settings.author | slice: 0 }}</span>
+              <span class="vk-testi__author">
+                <strong>{{ block.settings.author }}</strong>
+                {%- if block.settings.detail != blank -%}<span>{{ block.settings.detail }}</span>{%- endif -%}
+              </span>
+            </footer>
+          </blockquote>
+        {%- endfor -%}
+      </div>
+      <button class="vk-testi__btn" data-dir="next" type="button" aria-label="Next reviews">&#8250;</button>
     </div>
   </div>
 </section>
+
+<script>
+(function(){
+  var sec = document.currentScript.previousElementSibling;
+  if (!sec) return;
+  var wrap = sec.querySelector('.vk-testi__wrap');
+  var track = wrap && wrap.querySelector('[data-carousel]');
+  if (!track) return;
+  var btns = Array.prototype.slice.call(wrap.querySelectorAll('button.vk-testi__btn'));
+  function step(){ var c = track.firstElementChild; return c ? c.getBoundingClientRect().width + 18 : 320; }
+  function sync(){
+    var max = track.scrollWidth - track.clientWidth - 2;
+    btns.forEach(function(b){
+      b.disabled = b.dataset.dir === 'prev' ? track.scrollLeft <= 2 : track.scrollLeft >= max;
+    });
+  }
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      track.scrollBy({ left: (b.dataset.dir === 'next' ? 1 : -1) * step(), behavior: 'smooth' });
+    });
+  });
+  track.addEventListener('scroll', sync, { passive: true });
+  window.addEventListener('resize', sync);
+  sync();
+})();
+</script>
 
 <style>
   .vk-testi{padding-block:clamp(36px,4.6vw,64px)}
   .vk-testi__eyebrow{display:inline-block;margin-bottom:10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted,#7d7a74);font-weight:500}
   .vk-testi__sub{margin:12px auto 0;max-width:52ch;font-size:15px;line-height:1.6;color:var(--muted,#7d7a74);text-align:center}
-  .vk-testi__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:clamp(22px,3vw,34px)}
+
+  .vk-testi__wrap{position:relative;margin-top:clamp(22px,3vw,34px);display:flex;align-items:center;gap:10px}
+  .vk-testi__grid{
+    display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px;
+  }
+  .vk-testi__grid::-webkit-scrollbar{display:none}
   .vk-testi__card{
-    margin:0;border:1px solid var(--line,#e6ddd0);border-radius:16px;
+    margin:0;flex:0 0 auto;width:min(320px,80vw);scroll-snap-align:start;
+    border:1px solid var(--line,#e6ddd0);border-radius:16px;
     background:#fff;padding:22px 22px 20px;display:flex;flex-direction:column;gap:12px;
     box-shadow:0 4px 16px rgba(0,0,0,.04);
   }
@@ -49,8 +86,21 @@
   .vk-testi__author strong{font-size:13.5px;font-weight:600}
   .vk-testi__author span{color:var(--muted,#7d7a74)}
 
-  @media(max-width:900px){.vk-testi__grid{grid-template-columns:1fr 1fr;gap:14px}}
-  @media(max-width:640px){.vk-testi__grid{grid-template-columns:1fr}}
+  .vk-testi__btn{
+    flex:none;width:42px;height:42px;border-radius:50%;
+    border:1px solid var(--line,#e6ddd0);background:#fff;color:var(--ink,#1a1a1a);
+    font-size:20px;line-height:1;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .16s ease,opacity .16s ease;
+  }
+  .vk-testi__btn:hover:not(:disabled){background:var(--cream,#f7ede0)}
+  .vk-testi__btn:disabled{opacity:.25;cursor:default}
+
+  @media(max-width:640px){
+    .vk-testi__wrap{gap:6px}
+    .vk-testi__card{width:82vw}
+    .vk-testi__btn{width:36px;height:36px;font-size:17px}
+  }
 </style>
 
 {% schema %}{"name":"Testimonials","settings":[{"type":"text","id":"eyebrow","label":"Eyebrow","default":"REVIEWS"},{"type":"text","id":"heading","label":"Heading","default":"Loved by thousands"},{"type":"textarea","id":"subheading","label":"Subheading"}],"blocks":[{"type":"testimonial","name":"Testimonial","settings":[{"type":"textarea","id":"quote","label":"Quote","default":"Beautiful design, easy to use and a great addition to my routine."},{"type":"text","id":"author","label":"Author","default":"Verified customer"},{"type":"text","id":"detail","label":"Detail (location, product)"}]}],"presets":[{"name":"Testimonials","blocks":[{"type":"testimonial"},{"type":"testimonial"},{"type":"testimonial"},{"type":"testimonial"},{"type":"testimonial"},{"type":"testimonial"}]}]}{% endschema %}

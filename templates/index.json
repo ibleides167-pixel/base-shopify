@@ -82,10 +82,10 @@
     "concern": {
       "type": "vk-concern",
       "blocks": {
-        "c1": { "type": "concern", "settings": { "label": "Fine lines & firmness", "text": "Skin that has lost its bounce", "collection": "fine-lines-firmness", "product": "saksraar-collagen-peptide-face-cream" } },
-        "c2": { "type": "concern", "settings": { "label": "Breakouts & congestion", "text": "Clogged pores, uneven texture", "collection": "breakouts-congestion", "product": "2-in-1-double-sided-facial-cleansing-brush-soft-bristle-cleanser-silicone-exfoliating-massage-tool" } },
-        "c3": { "type": "concern", "settings": { "label": "Tired, puffy eyes", "text": "Mornings that need a shortcut", "collection": "tired-puffy-eyes", "product": "hydrating-collagen-eye-cream" } },
-        "c4": { "type": "concern", "settings": { "label": "Muscle tension & recovery", "text": "Knots a foam roller can't reach", "collection": "body", "product": "smart-electric-cupping-massager-heated-vacuum-therapy-device-with-gua-sha-massage-adjustable-suction" } }
+        "c1": { "type": "concern", "settings": { "label": "Fine lines & firmness", "text": "Skin that has lost its bounce", "collection": "fine-lines-firmness", "product": "saksraar-collagen-peptide-face-cream", "image": "shopify://shop_images/velkrova-concern-finelines.jpg" } },
+        "c2": { "type": "concern", "settings": { "label": "Breakouts & congestion", "text": "Clogged pores, uneven texture", "collection": "breakouts-congestion", "product": "2-in-1-double-sided-facial-cleansing-brush-soft-bristle-cleanser-silicone-exfoliating-massage-tool", "image": "shopify://shop_images/velkrova-concern-breakouts.jpg" } },
+        "c3": { "type": "concern", "settings": { "label": "Tired, puffy eyes", "text": "Mornings that need a shortcut", "collection": "tired-puffy-eyes", "product": "hydrating-collagen-eye-cream", "image": "shopify://shop_images/velkrova-concern-eyes.jpg" } },
+        "c4": { "type": "concern", "settings": { "label": "Muscle tension & recovery", "text": "Knots a foam roller can't reach", "collection": "body", "product": "smart-electric-cupping-massager-heated-vacuum-therapy-device-with-gua-sha-massage-adjustable-suction", "image": "shopify://shop_images/velkrova-concern-tension.jpg" } }
       },
       "block_order": ["c1", "c2", "c3", "c4"],
       "settings": {
@@ -145,6 +145,7 @@
             "ours_label": "Yours to keep",
             "ours_price": "£64.99",
             "product": "smart-electric-cupping-massager-heated-vacuum-therapy-device-with-gua-sha-massage-adjustable-suction",
+            "image": "shopify://shop_images/velkrova-value-cupping.jpg",
             "note": "Pays for itself after roughly one appointment, then costs nothing.",
             "cta": "Shop it"
           }
@@ -158,6 +159,7 @@
             "ours_label": "Yours to keep",
             "ours_price": "£99.99",
             "product": "fodrk-30-speed-deep-tissue-massage-gun",
+            "image": "shopify://shop_images/velkrova-value-massagegun.jpg",
             "note": "Pays for itself in one or two sessions, then it is free.",
             "cta": "Shop it"
           }
@@ -171,6 +173,7 @@
             "ours_label": "Yours to keep",
             "ours_price": "£119.99",
             "product": "neck-massager-electric-microcurrent-multi-head-replaceable-wireless-knead-shiatsu-heating-vibration-cervical-shoulder-massager",
+            "image": "shopify://shop_images/velkrova-value-neckmassager.jpg",
             "note": "Two appointments in and it has already paid for itself.",
             "cta": "Shop it"
           }
@@ -201,7 +204,7 @@
           "type": "demo",
           "settings": {
             "product": "fodrk-30-speed-deep-tissue-massage-gun",
-            "image": "shopify://shop_images/velkrova-demo-massagegun.jpg",
+            "image": "shopify://shop_images/velkrova-demo-massagegun-v2.jpg",
             "number": "2",
             "step": "Ten minutes, before or after training",
             "text": "Warm up sore shoulders before a workout, or ease them out afterwards. 30 speeds, so it works for a light touch too."
@@ -211,7 +214,7 @@
           "type": "demo",
           "settings": {
             "product": "neck-massager-electric-microcurrent-multi-head-replaceable-wireless-knead-shiatsu-heating-vibration-cervical-shoulder-massager",
-            "image": "shopify://shop_images/velkrova-demo-neckmassager.jpg",
+            "image": "shopify://shop_images/velkrova-demo-neckmassager-v2.jpg",
             "number": "3",
             "step": "Four heads, one stiff neck",
             "text": "Kneading, shiatsu, heat and vibration in one wireless unit, worn while you are doing something else entirely."
@@ -227,13 +230,21 @@
     },
     "offer": {
       "type": "offer-banner",
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "text": "LED light therapy mask and 24K gold eye patches, together in one box" } },
+        "f2": { "type": "feature", "settings": { "text": "20% less than buying the mask and patches separately" } },
+        "f3": { "type": "feature", "settings": { "text": "Cordless and USB rechargeable, ready in under a minute" } },
+        "f4": { "type": "feature", "settings": { "text": "Free UK delivery and 30-day returns, same as every order" } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"],
       "settings": {
         "eyebrow": "BUNDLE OFFER",
         "heading": "The Glow Duo",
         "text": "LED light therapy for the whole face, collagen patches for the one area that always shows tiredness first. Together, 20% less than buying them separately.",
         "product": "the-glow-duo-led-light-therapy-mask-24k-gold-eye-masks",
         "button_label": "Shop the duo",
-        "button_link": ""
+        "button_link": "",
+        "footnote": "Usually ships within 5-9 business days."
       }
     },
     "testimonials": {
