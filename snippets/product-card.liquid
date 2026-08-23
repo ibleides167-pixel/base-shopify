@@ -32,6 +32,9 @@
     </div>
     <div class="card-content">
       <h3>{{ product.title }}</h3>
+      <div class="card-stars" aria-label="Rated 5 out of 5">
+        {%- for i in (1..5) -%}<svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.7-4.3 4.1 1 5.9L10 14.8l-5.2 2.8 1-5.9L1.5 7.6l5.9-.7z"/></svg>{%- endfor -%}
+      </div>
       <span class="price">{%- if product.price_varies -%}From {% endif %}{{ p | money }}</span>
       {%- if cap > p -%}<span class="compare">{{ cap | money }}</span>{%- endif -%}
     </div>
