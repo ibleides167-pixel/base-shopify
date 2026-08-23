@@ -48,9 +48,9 @@
         "t1": {
           "type": "tile",
           "settings": {
-            "product": "fodrk-30-speed-deep-tissue-massage-gun",
-            "heading": "Unleash your inner strength",
-            "discount": "30-SPEED MASSAGE GUN",
+            "product": "smart-electric-cupping-massager-heated-vacuum-therapy-device-with-gua-sha-massage-adjustable-suction",
+            "heading": "Ease the knots that won't quit",
+            "discount": "CUPPING & GUA SHA MASSAGER",
             "button_label": "Shop massage",
             "collection": "body"
           }
@@ -58,21 +58,21 @@
         "t2": {
           "type": "tile",
           "settings": {
-            "product": "the-glow-duo-led-light-therapy-mask-24k-gold-eye-masks",
-            "heading": "Embrace your everyday glow",
-            "discount": "THE GLOW DUO BUNDLE",
-            "button_label": "Shop skincare",
-            "collection": "face"
+            "product": "fodrk-30-speed-deep-tissue-massage-gun",
+            "heading": "Recover like it's routine",
+            "discount": "30-SPEED MASSAGE GUN",
+            "button_label": "Shop best sellers",
+            "collection": "best-sellers-1"
           }
         },
         "t3": {
           "type": "tile",
           "settings": {
-            "product": "saksraar-collagen-peptide-face-cream",
-            "heading": "Reveal your natural beauty",
-            "discount": "COLLAGEN & PEPTIDE CREAM",
-            "button_label": "Shop best sellers",
-            "collection": "best-sellers-1"
+            "product": "neck-massager-electric-microcurrent-multi-head-replaceable-wireless-knead-shiatsu-heating-vibration-cervical-shoulder-massager",
+            "heading": "Unwind in ten minutes",
+            "discount": "MICROCURRENT NECK MASSAGER",
+            "button_label": "Shop wellness",
+            "collection": "wellness-accessories"
           }
         }
       },
@@ -123,7 +123,7 @@
       },
       "block_order": ["p1", "p2", "p3"],
       "settings": {
-        "image": "shopify://shop_images/velkrova-lifestyle-massagegun.jpg",
+        "image": "shopify://shop_images/velkrova-lifestyle-massagegun-v2.jpg",
         "image_url": "",
         "reverse": false,
         "eyebrow": "IN YOUR ROUTINE",
