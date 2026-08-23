@@ -194,7 +194,7 @@
           "type": "demo",
           "settings": {
             "product": "smart-electric-cupping-massager-heated-vacuum-therapy-device-with-gua-sha-massage-adjustable-suction",
-            "image": "shopify://shop_images/velkrova-demo-cupping.jpg",
+            "image": "shopify://shop_images/velkrova-demo-cupping-v2.jpg",
             "number": "1",
             "step": "Cupping & gua sha, warmed",
             "text": "Heated suction on the spots a foam roller cannot reach, used for five minutes before or after a shower."
@@ -204,7 +204,7 @@
           "type": "demo",
           "settings": {
             "product": "fodrk-30-speed-deep-tissue-massage-gun",
-            "image": "shopify://shop_images/velkrova-demo-massagegun-v2.jpg",
+            "image": "shopify://shop_images/velkrova-demo-massagegun-v3.jpg",
             "number": "2",
             "step": "Ten minutes, before or after training",
             "text": "Warm up sore shoulders before a workout, or ease them out afterwards. 30 speeds, so it works for a light touch too."
@@ -308,5 +308,5 @@
       }
     }
   },
-  "order": ["hero", "marquee", "promo", "concern", "categories", "featured", "lifestyle", "value", "demo", "offer", "testimonials", "compare", "homefaq", "newsletter"]
+  "order": ["hero", "marquee", "promo", "categories", "featured", "concern", "lifestyle", "value", "demo", "offer", "testimonials", "compare", "homefaq", "newsletter"]
 }

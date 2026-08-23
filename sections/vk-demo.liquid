@@ -1,0 +1,160 @@
+{%- comment -%}
+  Velkrova "See it in action" strip.
+
+  Built from the video-proof layout, but demonstration rather than
+  testimonial: no invented customers, no star ratings. Each card pulls
+  a real product, its own image and a short benefit line.
+
+  If a video URL is added to a block later, that block plays the video
+  instead of showing the image - so real customer clips can drop in
+  without rebuilding the section.
+{%- endcomment -%}
+
+<section class="vk-demo">
+  <div class="page-width">
+    <div class="vk-demo__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="vk-demo__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h2 class="vk-demo__title">{{ section.settings.heading }}</h2>
+      {%- if section.settings.subheading != blank -%}
+        <p class="vk-demo__sub">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="vk-demo__grid">
+      {%- for block in section.blocks -%}
+        {%- assign p = all_products[block.settings.product] -%}
+        <article class="vk-demo__card" {{ block.shopify_attributes }}>
+          <a class="vk-demo__media" href="{% if p != blank %}{{ p.url }}{% else %}{{ block.settings.link | default: '/collections/best-sellers-1' }}{% endif %}">
+            {%- if block.settings.video_url != blank -%}
+              <video class="vk-demo__video" src="{{ block.settings.video_url }}" muted loop playsinline preload="metadata"></video>
+            {%- elsif block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'vk-demo__img', alt: block.settings.step }}
+            {%- elsif p.featured_image != blank -%}
+              {{ p.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'vk-demo__img', alt: p.title }}
+            {%- else -%}
+              <div class="vk-demo__placeholder">Add an image</div>
+            {%- endif -%}
+            {%- if block.settings.number != blank -%}
+              <span class="vk-demo__num">{{ block.settings.number }}</span>
+            {%- endif -%}
+          </a>
+
+          <div class="vk-demo__body">
+            <h3 class="vk-demo__step">{{ block.settings.step }}</h3>
+            <p class="vk-demo__text">{{ block.settings.text }}</p>
+            {%- if p != blank -%}
+              <a class="vk-demo__link" href="{{ p.url }}">{{ p.title | truncate: 42 }} &rsaquo;</a>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var root = document.currentScript.previousElementSibling;
+  if (!root) return;
+  var videos = root.querySelectorAll('.vk-demo__video');
+  if (!videos.length) return;
+
+  videos.forEach(function (video) {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.loop = true;
+  });
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.play().catch(function () {});
+        } else {
+          entry.target.pause();
+        }
+      });
+    }, { threshold: 0.2 });
+    videos.forEach(function (video) { observer.observe(video); });
+  }
+
+  videos.forEach(function (video) {
+    video.addEventListener('click', function (event) {
+      event.preventDefault();
+      if (video.paused) { video.play(); } else { video.pause(); }
+    });
+  });
+})();
+</script>
+
+<style>
+  .vk-demo{padding:clamp(40px,5vw,72px) 0;background:var(--cream,#f5f1eb)}
+  .vk-demo__head{max-width:680px;margin:0 auto clamp(26px,3vw,40px);text-align:center}
+  .vk-demo__eyebrow{
+    display:inline-block;margin-bottom:12px;font-size:11px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--muted,#7d7a74);font-weight:500;
+  }
+  .vk-demo__title{
+    margin:0;font-family:var(--font-heading,'Marcellus',Georgia,serif);
+    font-weight:400;font-size:clamp(24px,2.6vw,32px);line-height:1.1;letter-spacing:-.015em;
+  }
+  .vk-demo__sub{margin:14px auto 0;max-width:56ch;font-size:15px;line-height:1.6;color:var(--muted,#7d7a74)}
+
+  .vk-demo__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .vk-demo__card{
+    background:#fff;border:1px solid var(--line,#e8e3dc);border-radius:16px;
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:transform .26s ease,box-shadow .26s ease;
+  }
+  .vk-demo__card:hover{transform:translateY(-3px);box-shadow:0 16px 38px rgba(15,48,45,.08)}
+
+  .vk-demo__media{
+    position:relative;display:block;width:100%;aspect-ratio:4/5;
+    background:#f7f5f2;overflow:hidden;
+  }
+  .vk-demo__img,.vk-demo__video{width:100%;height:100%;object-fit:cover;display:block}
+  .vk-demo__placeholder{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-size:13px;color:var(--muted,#7d7a74);
+  }
+  .vk-demo__num{
+    position:absolute;top:12px;left:12px;z-index:2;
+    width:30px;height:30px;border-radius:50%;
+    background:var(--green,#073f3a);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:600;
+  }
+
+  .vk-demo__body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:7px;flex:1 1 auto}
+  .vk-demo__step{
+    margin:0;font-family:var(--font-body,'Inter',sans-serif);
+    font-size:15px;font-weight:600;line-height:1.3;
+  }
+  .vk-demo__text{margin:0;font-size:14px;line-height:1.55;color:var(--muted,#7d7a74)}
+  .vk-demo__link{
+    margin-top:auto;padding-top:8px;font-size:12px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--green,#073f3a);text-decoration:none;
+  }
+  .vk-demo__link:hover{text-decoration:underline}
+
+  @media(max-width:900px){
+    .vk-demo__grid{
+      display:flex;gap:14px;overflow-x:auto;
+      scroll-snap-type:x mandatory;padding-bottom:6px;
+      scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    }
+    .vk-demo__grid::-webkit-scrollbar{display:none}
+    .vk-demo__card{min-width:74%;scroll-snap-align:center}
+  }
+  @media(max-width:640px){
+    .vk-demo__head{text-align:left}
+    .vk-demo__card{min-width:82%}
+  }
+</style>
+
+{% schema %}{"name":"See it in action","settings":[{"type":"text","id":"eyebrow","label":"Eyebrow","default":"HOW IT WORKS"},{"type":"text","id":"heading","label":"Heading","default":"See it in action"},{"type":"textarea","id":"subheading","label":"Subheading","default":"Three routines that fit into ten minutes at home."}],"blocks":[{"type":"demo","name":"Demonstration","settings":[{"type":"product","id":"product","label":"Product"},{"type":"image_picker","id":"image","label":"Image override"},{"type":"text","id":"video_url","label":"Video URL (optional)"},{"type":"text","id":"number","label":"Step number","default":"1"},{"type":"text","id":"step","label":"Step title","default":"Ten minutes, hands-free"},{"type":"textarea","id":"text","label":"Description","default":"Wear it while you read or wind down. No wand to hold, no mess."},{"type":"url","id":"link","label":"Link override"}]}],"presets":[{"name":"See it in action","blocks":[{"type":"demo"},{"type":"demo"},{"type":"demo"}]}]}{% endschema %}
