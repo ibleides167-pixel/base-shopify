@@ -16,7 +16,7 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/velkrova-hero-glowduo-v2.jpg",
-            "image_mobile": "shopify://shop_images/velkrova-hero-glowduo-v2.jpg",
+            "image_mobile": "shopify://shop_images/velkrova-hero-glowduo-mobile.jpg",
             "image_url": "",
             "image_url_mobile": "",
             "alt": "Lift, brighten and glow - LED light therapy and 24K gold under-eye care",
@@ -194,7 +194,7 @@
           "type": "demo",
           "settings": {
             "product": "smart-electric-cupping-massager-heated-vacuum-therapy-device-with-gua-sha-massage-adjustable-suction",
-            "image": "shopify://shop_images/velkrova-demo-cupping-v2.jpg",
+            "image": "shopify://shop_images/velkrova-demo-cupping-v3.jpg",
             "number": "1",
             "step": "Cupping & gua sha, warmed",
             "text": "Heated suction on the spots a foam roller cannot reach, used for five minutes before or after a shower."
@@ -204,7 +204,7 @@
           "type": "demo",
           "settings": {
             "product": "fodrk-30-speed-deep-tissue-massage-gun",
-            "image": "shopify://shop_images/velkrova-demo-massagegun-v3.jpg",
+            "image": "shopify://shop_images/velkrova-demo-massagegun-v4.jpg",
             "number": "2",
             "step": "Ten minutes, before or after training",
             "text": "Warm up sore shoulders before a workout, or ease them out afterwards. 30 speeds, so it works for a light touch too."
