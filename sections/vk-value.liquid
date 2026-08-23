@@ -21,8 +21,9 @@
         {%- assign p = all_products[block.settings.product] -%}
         <article class="vk-value__card" {{ block.shopify_attributes }}>
           {%- if p.featured_image != blank -%}
-            <div class="vk-value__media">{{ p.featured_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: p.title, width: 150, height: 150 }}</div>
+            <div class="vk-value__media">{{ p.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: p.title, width: 300, height: 300 }}</div>
           {%- endif -%}
+          <div class="vk-value__content">
           <h3 class="vk-value__what">{{ block.settings.treatment }}</h3>
 
           <div class="vk-value__rows">
@@ -41,6 +42,7 @@
           {%- if p != blank -%}
             <a class="vk-value__link" href="{{ p.url }}">{{ block.settings.cta | default: 'Shop it' }} &rsaquo;</a>
           {%- endif -%}
+          </div>
         </article>
       {%- endfor -%}
     </div>
@@ -66,14 +68,15 @@
 
   .vk-value__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
   .vk-value__card{
-    border:1px solid var(--line,#e8e3dc);border-radius:14px;
-    padding:22px 22px 24px;display:flex;flex-direction:column;gap:14px;
+    border:1px solid var(--line,#e8e3dc);border-radius:14px;overflow:hidden;
+    display:flex;flex-direction:column;
     box-shadow:0 4px 18px rgba(0,0,0,.04);
     transition:transform .18s ease,box-shadow .18s ease;
   }
   .vk-value__card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.08)}
+  .vk-value__content{padding:20px 22px 24px;display:flex;flex-direction:column;gap:14px}
   .vk-value__media{
-    width:64px;height:64px;border-radius:12px;overflow:hidden;background:var(--cream,#f7ede0);
+    width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--cream,#f7ede0);
   }
   .vk-value__media img{width:100%;height:100%;object-fit:cover;display:block}
   .vk-value__what{
@@ -102,7 +105,7 @@
 
   @media(max-width:900px){
     .vk-value__grid{grid-template-columns:1fr;gap:14px}
-    .vk-value__card{padding:20px 18px}
+    .vk-value__content{padding:18px}
   }
 </style>
 
