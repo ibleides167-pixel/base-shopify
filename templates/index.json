@@ -26,101 +26,99 @@
             "text": "No code needed. Once your basket reaches £80, the discount applies itself at checkout - on this order and every one after.",
             "button_label": "Shop now"
           }
+        },
+        "s2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/render_5fee5835-df99-4f55-82f4-1bc6c18bd7e4.jpg",
+            "image_mobile": "shopify://shop_images/render_140d3fc9-d9be-4d33-a8ad-14911d8e8fa9.jpg",
+            "image_url": "",
+            "image_url_mobile": "",
+            "alt": "The Glow Duo - LED light therapy mask and 24K gold eye masks together",
+            "button_link": "/products/the-glow-duo-led-light-therapy-mask-24k-gold-eye-masks",
+            "eyebrow": "BUNDLE OFFER",
+            "heading": "The Glow Duo",
+            "text": "LED light therapy for the whole face, paired with 24K gold eye patches for the area that shows tiredness first. Save 20% when you buy them together.",
+            "button_label": "Shop the duo"
+          }
         }
       },
-      "block_order": [
-        "s1"
-      ],
+      "block_order": ["s1", "s2"],
       "settings": {}
     },
     "marquee": {
       "type": "marquee",
       "blocks": {
-        "a": {
-          "type": "item",
+        "a": { "type": "item", "settings": { "text": "Free UK delivery on every order", "icon": "truck" } },
+        "b": { "type": "item", "settings": { "text": "30-day returns", "icon": "return" } },
+        "c": { "type": "item", "settings": { "text": "Tracked shipping", "icon": "pin" } },
+        "d": { "type": "item", "settings": { "text": "Secure checkout", "icon": "shield" } }
+      },
+      "block_order": ["a", "b", "c", "d"],
+      "settings": { "label": "Store benefits", "brand": true }
+    },
+    "promo": {
+      "type": "vk-promo-tiles",
+      "blocks": {
+        "t1": {
+          "type": "tile",
           "settings": {
-            "text": "Free UK delivery on every order",
-            "icon": "truck"
+            "product": "smart-electric-cupping-massager-heated-vacuum-therapy-device-with-gua-sha-massage-adjustable-suction",
+            "heading": "Reaches what a foam roller can't",
+            "discount": "CUPPING & GUA SHA MASSAGER",
+            "button_label": "Shop massage",
+            "collection": "body"
           }
         },
-        "b": {
-          "type": "item",
+        "t2": {
+          "type": "tile",
           "settings": {
-            "text": "30-day returns",
-            "icon": "return"
+            "product": "fodrk-30-speed-deep-tissue-massage-gun",
+            "heading": "Warm up before, recover after",
+            "discount": "30-SPEED MASSAGE GUN",
+            "button_label": "Shop best sellers",
+            "collection": "best-sellers-1"
           }
         },
-        "c": {
-          "type": "item",
+        "t3": {
+          "type": "tile",
           "settings": {
-            "text": "Tracked shipping",
-            "icon": "pin"
-          }
-        },
-        "d": {
-          "type": "item",
-          "settings": {
-            "text": "Secure checkout",
-            "icon": "shield"
+            "product": "neck-massager-electric-microcurrent-multi-head-replaceable-wireless-knead-shiatsu-heating-vibration-cervical-shoulder-massager",
+            "heading": "Hands-free relief for a stiff neck",
+            "discount": "MICROCURRENT NECK MASSAGER",
+            "button_label": "Shop wellness",
+            "collection": "wellness-accessories"
           }
         }
       },
-      "block_order": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
+      "block_order": ["t1", "t2", "t3"],
+      "settings": {}
+    },
+    "concern": {
+      "type": "vk-concern",
+      "blocks": {
+        "c1": { "type": "concern", "settings": { "label": "Fine lines & firmness", "text": "Skin that has lost its bounce", "collection": "fine-lines-firmness", "product": "saksraar-collagen-peptide-face-cream", "image": "shopify://shop_images/render_7f7f0982-24d0-41c8-ab36-c6ee87fe13c8.jpg" } },
+        "c2": { "type": "concern", "settings": { "label": "Breakouts & congestion", "text": "Clogged pores, uneven texture", "collection": "breakouts-congestion", "product": "2-in-1-double-sided-facial-cleansing-brush-soft-bristle-cleanser-silicone-exfoliating-massage-tool", "image": "shopify://shop_images/render.jpg" } },
+        "c3": { "type": "concern", "settings": { "label": "Tired, puffy eyes", "text": "Mornings that need a shortcut", "collection": "tired-puffy-eyes", "product": "hydrating-collagen-eye-cream", "image": "shopify://shop_images/render_ba2d9c8d-e4be-42f5-a9ce-bd8b48493bb5.jpg" } },
+        "c4": { "type": "concern", "settings": { "label": "Muscle tension & recovery", "text": "Knots a foam roller can't reach", "collection": "body", "product": "smart-electric-cupping-massager-heated-vacuum-therapy-device-with-gua-sha-massage-adjustable-suction", "image": "shopify://shop_images/velkrova-value-cupping-v2.jpg" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4"],
       "settings": {
-        "label": "Store benefits",
-        "brand": true
+        "eyebrow": "WHAT ARE YOU WORKING ON?",
+        "heading": "Shop by concern",
+        "subheading": "Start with the thing that bothers you, not the shelf it sits on."
       }
     },
     "categories": {
       "type": "category-grid",
       "blocks": {
-        "a": {
-          "type": "category",
-          "settings": {
-            "heading": "Face",
-            "collection": "face",
-            "link": "/collections/face"
-          }
-        },
-        "b": {
-          "type": "category",
-          "settings": {
-            "heading": "Hair",
-            "collection": "hair",
-            "link": "/collections/hair"
-          }
-        },
-        "c": {
-          "type": "category",
-          "settings": {
-            "heading": "Body",
-            "collection": "body",
-            "link": "/collections/body"
-          }
-        },
-        "d": {
-          "type": "category",
-          "settings": {
-            "heading": "Wellness",
-            "collection": "wellness-accessories",
-            "link": "/collections/wellness-accessories"
-          }
-        }
+        "a": { "type": "category", "settings": { "heading": "Face", "collection": "face", "link": "/collections/face" } },
+        "b": { "type": "category", "settings": { "heading": "Hair", "collection": "hair", "link": "/collections/hair" } },
+        "c": { "type": "category", "settings": { "heading": "Body", "collection": "body", "link": "/collections/body" } },
+        "d": { "type": "category", "settings": { "heading": "Wellness", "collection": "wellness-accessories", "link": "/collections/wellness-accessories" } }
       },
-      "block_order": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "settings": {
-        "heading": "Shop by category"
-      }
+      "block_order": ["a", "b", "c", "d"],
+      "settings": { "heading": "Shop by category" }
     },
     "featured": {
       "type": "featured-collection-premium",
@@ -131,95 +129,16 @@
         "limit": 12
       }
     },
-    "concern": {
-      "type": "vk-concern",
-      "blocks": {
-        "c1": {
-          "type": "concern",
-          "settings": {
-            "label": "Fine lines & firmness",
-            "text": "Skin that has lost its bounce",
-            "collection": "fine-lines-firmness",
-            "product": "saksraar-collagen-peptide-face-cream",
-            "image": "shopify://shop_images/velkrova-concern-finelines.jpg",
-            "link": ""
-          }
-        },
-        "c2": {
-          "type": "concern",
-          "settings": {
-            "label": "Breakouts & congestion",
-            "text": "Clogged pores, uneven texture",
-            "collection": "breakouts-congestion",
-            "product": "2-in-1-double-sided-facial-cleansing-brush-soft-bristle-cleanser-silicone-exfoliating-massage-tool",
-            "image": "shopify://shop_images/velkrova-concern-breakouts.jpg",
-            "link": ""
-          }
-        },
-        "c3": {
-          "type": "concern",
-          "settings": {
-            "label": "Tired, puffy eyes",
-            "text": "Mornings that need a shortcut",
-            "collection": "tired-puffy-eyes",
-            "product": "hydrating-collagen-eye-cream",
-            "image": "shopify://shop_images/velkrova-concern-eyes.jpg",
-            "link": ""
-          }
-        },
-        "c4": {
-          "type": "concern",
-          "settings": {
-            "label": "Muscle tension & recovery",
-            "text": "Knots a foam roller can't reach",
-            "collection": "body",
-            "product": "smart-electric-cupping-massager-heated-vacuum-therapy-device-with-gua-sha-massage-adjustable-suction",
-            "image": "shopify://shop_images/velkrova-concern-tension.jpg",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "c1",
-        "c2",
-        "c3",
-        "c4"
-      ],
-      "settings": {
-        "eyebrow": "WHAT ARE YOU WORKING ON?",
-        "heading": "Shop by concern",
-        "subheading": "Start with the thing that bothers you, not the shelf it sits on."
-      }
-    },
     "lifestyle": {
       "type": "vk-lifestyle",
       "blocks": {
-        "p1": {
-          "type": "point",
-          "settings": {
-            "text": "Hands-free while you read or wind down"
-          }
-        },
-        "p2": {
-          "type": "point",
-          "settings": {
-            "text": "Cordless, so there is no cable pulling at the wrong moment"
-          }
-        },
-        "p3": {
-          "type": "point",
-          "settings": {
-            "text": "Quiet enough for the room next door"
-          }
-        }
+        "p1": { "type": "point", "settings": { "text": "Hands-free while you read or wind down" } },
+        "p2": { "type": "point", "settings": { "text": "Cordless, so there is no cable pulling at the wrong moment" } },
+        "p3": { "type": "point", "settings": { "text": "Quiet enough for the room next door" } }
       },
-      "block_order": [
-        "p1",
-        "p2",
-        "p3"
-      ],
+      "block_order": ["p1", "p2", "p3"],
       "settings": {
-        "image": "shopify://shop_images/velkrova-lifestyle-massagegun-v3.jpg",
+        "image": "shopify://shop_images/enhanced-optimized.jpg",
         "image_url": "",
         "reverse": false,
         "eyebrow": "IN YOUR ROUTINE",
@@ -275,11 +194,7 @@
           }
         }
       },
-      "block_order": [
-        "v1",
-        "v2",
-        "v3"
-      ],
+      "block_order": ["v1", "v2", "v3"],
       "settings": {
         "eyebrow": "WHAT IT REPLACES",
         "heading": "Own it once, or pay every visit",
@@ -294,12 +209,10 @@
           "type": "demo",
           "settings": {
             "product": "smart-electric-cupping-massager-heated-vacuum-therapy-device-with-gua-sha-massage-adjustable-suction",
-            "image": "shopify://shop_images/velkrova-demo-cupping-v4.jpg",
-            "video_url": "",
+            "image": "shopify://shop_images/render_ceff3421-d3b4-4a34-8f6b-d915d722519e.jpg",
             "number": "1",
             "step": "Cupping & gua sha, warmed",
-            "text": "Heated suction on the spots a foam roller cannot reach, used for five minutes before or after a shower.",
-            "link": ""
+            "text": "Heated suction on the spots a foam roller cannot reach, used for five minutes before or after a shower."
           }
         },
         "d2": {
@@ -307,11 +220,9 @@
           "settings": {
             "product": "fodrk-30-speed-deep-tissue-massage-gun",
             "image": "shopify://shop_images/velkrova-demo-massagegun-v4.jpg",
-            "video_url": "",
             "number": "2",
             "step": "Ten minutes, before or after training",
-            "text": "Warm up sore shoulders before a workout, or ease them out afterwards. 30 speeds, so it works for a light touch too.",
-            "link": ""
+            "text": "Warm up sore shoulders before a workout, or ease them out afterwards. 30 speeds, so it works for a light touch too."
           }
         },
         "d3": {
@@ -319,19 +230,13 @@
           "settings": {
             "product": "neck-massager-electric-microcurrent-multi-head-replaceable-wireless-knead-shiatsu-heating-vibration-cervical-shoulder-massager",
             "image": "shopify://shop_images/velkrova-demo-neckmassager-v2.jpg",
-            "video_url": "",
             "number": "3",
             "step": "Four heads, one stiff neck",
-            "text": "Kneading, shiatsu, heat and vibration in one wireless unit, worn while you are doing something else entirely.",
-            "link": ""
+            "text": "Kneading, shiatsu, heat and vibration in one wireless unit, worn while you are doing something else entirely."
           }
         }
       },
-      "block_order": [
-        "d1",
-        "d2",
-        "d3"
-      ],
+      "block_order": ["d1", "d2", "d3"],
       "settings": {
         "eyebrow": "HOW IT WORKS",
         "heading": "See it in action",
@@ -341,37 +246,12 @@
     "offer": {
       "type": "offer-banner",
       "blocks": {
-        "f1": {
-          "type": "feature",
-          "settings": {
-            "text": "LED light therapy mask and 24K gold eye patches, together in one box"
-          }
-        },
-        "f2": {
-          "type": "feature",
-          "settings": {
-            "text": "20% less than buying the mask and patches separately"
-          }
-        },
-        "f3": {
-          "type": "feature",
-          "settings": {
-            "text": "Cordless and USB rechargeable, ready in under a minute"
-          }
-        },
-        "f4": {
-          "type": "feature",
-          "settings": {
-            "text": "Free UK delivery and 30-day returns, same as every order"
-          }
-        }
+        "f1": { "type": "feature", "settings": { "text": "LED light therapy mask and 24K gold eye patches, together in one box" } },
+        "f2": { "type": "feature", "settings": { "text": "20% less than buying the mask and patches separately" } },
+        "f3": { "type": "feature", "settings": { "text": "Cordless and USB rechargeable, ready in under a minute" } },
+        "f4": { "type": "feature", "settings": { "text": "Free UK delivery and 30-day returns, same as every order" } }
       },
-      "block_order": [
-        "f1",
-        "f2",
-        "f3",
-        "f4"
-      ],
+      "block_order": ["f1", "f2", "f3", "f4"],
       "settings": {
         "eyebrow": "BUNDLE OFFER",
         "heading": "The Glow Duo",
@@ -385,116 +265,30 @@
     "testimonials": {
       "type": "testimonials",
       "blocks": {
-        "t1": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "The neck massager has become part of my evening routine. I put it on while I'm making dinner and my shoulders actually thank me for it.",
-            "author": "Priya S.",
-            "detail": "Manchester - Microcurrent Neck Massager",
-            "avatar": "shopify://shop_images/velkrova-review-priya.jpg"
-          }
-        },
-        "t2": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "Ordered on a Tuesday, it was on my doorstep by Friday. The massage gun is genuinely as good as the one at my physio.",
-            "author": "Charlotte H.",
-            "detail": "Leeds - 30-Speed Massage Gun",
-            "avatar": "shopify://shop_images/velkrova-review-charlotte-2.jpg"
-          }
-        },
-        "t3": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "Wasn't sure a heated cupping device could replace an actual massage, but after a week of using it after work I'm converted.",
-            "author": "Megan R.",
-            "detail": "Bristol - Cupping Massager",
-            "avatar": "shopify://shop_images/velkrova-review-megan-2.jpg"
-          }
-        },
-        "t4": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "My under-eyes have genuinely looked less tired since I started using the gold patches with the LED mask. Ten minutes while I scroll my phone, easy habit to keep.",
-            "author": "Aisha K.",
-            "detail": "London - The Glow Duo",
-            "avatar": "shopify://shop_images/velkrova-review-aisha-2.jpg"
-          }
-        },
-        "t5": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "Free delivery with no minimum spend sold me, but it's the honesty about how long results take that made me trust the brand. No wild promises here.",
-            "author": "Emily T.",
-            "detail": "Edinburgh - Collagen & Peptide Cream",
-            "avatar": "shopify://shop_images/velkrova-review-emily-2.jpg"
-          }
-        },
-        "t6": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "Sent one item back because it wasn't right for me and the refund landed in three days, no argument. Buying with confidence again since.",
-            "author": "Sophie W.",
-            "detail": "Cardiff - Returns experience",
-            "avatar": "shopify://shop_images/velkrova-review-sophie-2.jpg"
-          }
-        }
+        "t1": { "type": "testimonial", "settings": { "quote": "The neck massager has become part of my evening routine. I put it on while I'm making dinner and my shoulders actually thank me for it.", "author": "Priya S.", "detail": "Manchester - Microcurrent Neck Massager", "avatar": "shopify://shop_images/velkrova-review-priya.jpg" } },
+        "t2": { "type": "testimonial", "settings": { "quote": "Ordered on a Tuesday, it was on my doorstep by Friday. The massage gun is genuinely as good as the one at my physio.", "author": "Charlotte H.", "detail": "Leeds - 30-Speed Massage Gun", "avatar": "shopify://shop_images/velkrova-review-charlotte-2.jpg" } },
+        "t3": { "type": "testimonial", "settings": { "quote": "Wasn't sure a heated cupping device could replace an actual massage, but after a week of using it after work I'm converted.", "author": "Megan R.", "detail": "Bristol - Cupping Massager", "avatar": "shopify://shop_images/velkrova-review-megan-2.jpg" } },
+        "t4": { "type": "testimonial", "settings": { "quote": "My under-eyes have genuinely looked less tired since I started using the gold patches with the LED mask. Ten minutes while I scroll my phone, easy habit to keep.", "author": "Aisha K.", "detail": "London - The Glow Duo", "avatar": "shopify://shop_images/velkrova-review-aisha-2.jpg" } },
+        "t5": { "type": "testimonial", "settings": { "quote": "Free delivery with no minimum spend sold me, but it's the honesty about how long results take that made me trust the brand. No wild promises here.", "author": "Emily T.", "detail": "Edinburgh - Collagen & Peptide Cream", "avatar": "shopify://shop_images/velkrova-review-emily-2.jpg" } },
+        "t6": { "type": "testimonial", "settings": { "quote": "Sent one item back because it wasn't right for me and the refund landed in three days, no argument. Buying with confidence again since.", "author": "Sophie W.", "detail": "Cardiff - Returns experience", "avatar": "shopify://shop_images/velkrova-review-sophie-2.jpg" } },
+        "t7": { "type": "testimonial", "settings": { "quote": "Ten minutes with the LED mask before bed has become non-negotiable. My skin looks noticeably calmer by the third week.", "author": "Hannah B.", "detail": "Glasgow - LED Face Mask", "avatar": "shopify://shop_images/render_fdda3daf-4307-4473-acb8-3759aa3c85fe.jpg" } },
+        "t8": { "type": "testimonial", "settings": { "quote": "I keep a pack of the gold eye masks in the fridge door. Fifteen minutes before a video call and the puffiness is just gone.", "author": "Olivia P.", "detail": "Birmingham - 24K Gold Eye Masks", "avatar": "shopify://shop_images/render_a7633a85-c7de-42b9-a786-29c1fee7db27.jpg" } },
+        "t9": { "type": "testimonial", "settings": { "quote": "Didn't think a mini fridge would change my routine, but chilled serum on tired skin in the morning is a different feeling entirely.", "author": "Grace M.", "detail": "Newcastle - Skincare Fridge", "avatar": "shopify://shop_images/render_c18c4b4b-6c91-4467-b30a-d62e55c4b03d.jpg" } },
+        "t10": { "type": "testimonial", "settings": { "quote": "Small thing, but the cleansing brush actually lifts my make-up off instead of just moving it around. Wish I'd bought it years ago.", "author": "Rebecca T.", "detail": "Liverpool - Cleansing Brush", "avatar": "shopify://shop_images/render_e7a3256e-1447-4652-a276-aaee40f4fe77.jpg" } }
       },
-      "block_order": [
-        "t1",
-        "t2",
-        "t3",
-        "t4",
-        "t5",
-        "t6"
-      ],
-      "settings": {
-        "eyebrow": "REVIEWS",
-        "heading": "Loved across the UK",
-        "subheading": "Real routines, real results, in customers' own words."
-      }
+      "block_order": ["t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "t9", "t10"],
+      "settings": { "eyebrow": "REVIEWS", "heading": "Loved across the UK", "subheading": "Real routines, real results, in customers' own words." }
     },
     "compare": {
       "type": "vk-compare",
       "blocks": {
-        "r1": {
-          "type": "row",
-          "settings": {
-            "label": "Free UK delivery, no minimum spend"
-          }
-        },
-        "r2": {
-          "type": "row",
-          "settings": {
-            "label": "30-day returns, not the legal 14"
-          }
-        },
-        "r3": {
-          "type": "row",
-          "settings": {
-            "label": "Tracked on every single order"
-          }
-        },
-        "r4": {
-          "type": "row",
-          "settings": {
-            "label": "Honest timeframes for results"
-          }
-        },
-        "r5": {
-          "type": "row",
-          "settings": {
-            "label": "Routines built for ten minutes"
-          }
-        }
+        "r1": { "type": "row", "settings": { "label": "Free UK delivery, no minimum spend" } },
+        "r2": { "type": "row", "settings": { "label": "30-day returns, not the legal 14" } },
+        "r3": { "type": "row", "settings": { "label": "Tracked on every single order" } },
+        "r4": { "type": "row", "settings": { "label": "Honest timeframes for results" } },
+        "r5": { "type": "row", "settings": { "label": "Routines built for ten minutes" } }
       },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3",
-        "r4",
-        "r5"
-      ],
+      "block_order": ["r1", "r2", "r3", "r4", "r5"],
       "settings": {
         "eyebrow": "THE VELKROVA DIFFERENCE",
         "heading": "Made for the ten minutes",
@@ -502,63 +296,20 @@
         "text": "Salon-grade devices chosen for routines that fit into a normal evening, backed by delivery and returns terms we put in writing. No thresholds to reach, no fine print at checkout, and honest timeframes for how long results really take.",
         "us_label": "Velkrova",
         "them_label": "Others",
-        "background": "#ffffff"
+        "background": "#FFFFFF"
       }
     },
     "homefaq": {
       "type": "vk-home-faq",
       "blocks": {
-        "q1": {
-          "type": "question",
-          "settings": {
-            "question": "How long will my order take?",
-            "answer": "<p>Orders are typically delivered within <strong>5 to 9 business days</strong>, with free tracked delivery anywhere in the UK and no minimum spend. You will get a tracking link by email as soon as your parcel leaves the warehouse.</p>"
-          }
-        },
-        "q2": {
-          "type": "question",
-          "settings": {
-            "question": "Is delivery really free?",
-            "answer": "<p>Yes, on every order and with no minimum spend. There is no threshold to reach and nothing added at checkout.</p>"
-          }
-        },
-        "q3": {
-          "type": "question",
-          "settings": {
-            "question": "What if it is not right for me?",
-            "answer": "<p>You have <strong>30 days from delivery</strong> to return it, which is longer than the 14 days you are entitled to by law. If an item arrives faulty, we cover the postage both ways.</p>"
-          }
-        },
-        "q4": {
-          "type": "question",
-          "settings": {
-            "question": "How quickly will I see results?",
-            "answer": "<p>It depends on the device, and we would rather tell you honestly than promise three days. Massage and depuffing are immediate. Skin tone and firmness usually take six to eight weeks of regular use, and anything to do with hair takes eight to twelve. Every product page says which applies.</p>"
-          }
-        },
-        "q5": {
-          "type": "question",
-          "settings": {
-            "question": "Do the devices come with a UK plug?",
-            "answer": "<p>Where a product has plug options, choose UK at checkout. Most of our devices are USB rechargeable, so they work with any charger you already own.</p>"
-          }
-        },
-        "q6": {
-          "type": "question",
-          "settings": {
-            "question": "Is it safe to buy from you?",
-            "answer": "<p>Payments run through Shopify's encrypted checkout, so we never see or store your card details. Every order is tracked, and if anything goes wrong you can reach a real person by email.</p>"
-          }
-        }
+        "q1": { "type": "question", "settings": { "question": "How long will my order take?", "answer": "<p>Orders are typically delivered within <strong>5 to 9 business days</strong>, with free tracked delivery anywhere in the UK and no minimum spend. You will get a tracking link by email as soon as your parcel leaves the warehouse.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "Is delivery really free?", "answer": "<p>Yes, on every order and with no minimum spend. There is no threshold to reach and nothing added at checkout.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "What if it is not right for me?", "answer": "<p>You have <strong>30 days from delivery</strong> to return it, which is longer than the 14 days you are entitled to by law. If an item arrives faulty, we cover the postage both ways.</p>" } },
+        "q4": { "type": "question", "settings": { "question": "How quickly will I see results?", "answer": "<p>It depends on the device, and we would rather tell you honestly than promise three days. Massage and depuffing are immediate. Skin tone and firmness usually take six to eight weeks of regular use, and anything to do with hair takes eight to twelve. Every product page says which applies.</p>" } },
+        "q5": { "type": "question", "settings": { "question": "Do the devices come with a UK plug?", "answer": "<p>Where a product has plug options, choose UK at checkout. Most of our devices are USB rechargeable, so they work with any charger you already own.</p>" } },
+        "q6": { "type": "question", "settings": { "question": "Is it safe to buy from you?", "answer": "<p>Payments run through Shopify's encrypted checkout, so we never see or store your card details. Every order is tracked, and if anything goes wrong you can reach a real person by email.</p>" } }
       },
-      "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4",
-        "q5",
-        "q6"
-      ],
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"],
       "settings": {
         "eyebrow": "FAQ",
         "heading": "Frequently asked questions",
@@ -576,19 +327,5 @@
       }
     }
   },
-  "order": [
-    "hero",
-    "marquee",
-    "categories",
-    "featured",
-    "concern",
-    "lifestyle",
-    "value",
-    "demo",
-    "offer",
-    "testimonials",
-    "compare",
-    "homefaq",
-    "newsletter"
-  ]
+  "order": ["hero", "marquee", "promo", "categories", "featured", "concern", "lifestyle", "value", "demo", "offer", "testimonials", "compare", "homefaq", "newsletter"]
 }

@@ -49,7 +49,7 @@
   if(total<2) return;
   var i=0,timer=null;
   function go(n){i=(n+total)%total;track.style.transform='translateX(-'+(i*100)+'%)';dots.forEach(function(d,x){d.setAttribute('aria-current',x===i?'true':'false')})}
-  function play(){stop();timer=setInterval(function(){go(i+1)},6000)}
+  function play(){stop();timer=setInterval(function(){go(i+1)},5000)}
   function stop(){if(timer){clearInterval(timer);timer=null}}
   dots.forEach(function(d){d.addEventListener('click',function(){stop();go(+d.dataset.index);play()})});
   root.addEventListener('mouseenter',stop);
