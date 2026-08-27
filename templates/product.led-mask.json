@@ -11,19 +11,12 @@
   "sections": {
     "main": {
       "type": "main-product-premium",
-      "settings": {
-        "media_limit": 5
-      }
+      "settings": { "media_limit": 5, "bundle_product": "the-glow-duo-led-light-therapy-mask-24k-gold-eye-masks" }
     },
     "recommendations": {
       "type": "product-recommendations",
-      "settings": {
-        "heading": "You may also like"
-      }
+      "settings": { "heading": "You may also like" }
     }
   },
-  "order": [
-    "main",
-    "recommendations"
-  ]
+  "order": ["main", "recommendations"]
 }
