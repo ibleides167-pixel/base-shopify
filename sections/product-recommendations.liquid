@@ -49,7 +49,7 @@
   {%- endif -%}
 {%- endfor -%}
 {%- if src == blank -%}{%- assign src = product.collections.first -%}{%- endif -%}
-{%- if src == blank -%}{%- assign src = collections['best-sellers-1'] -%}{%- endif -%}
+{%- if src == blank -%}{%- assign src = collections['best-sellers'] -%}{%- endif -%}
 {%- assign pool = src.all_products_count | default: src.products_count -%}
 {%- if src != blank and pool > 1 -%}
   {%- assign picked = '' -%}

@@ -4,16 +4,6 @@
     {%- if section.settings.eyebrow != blank -%}<div class="eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
     <h2>{{ section.settings.heading }}</h2>
     {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
-    {%- if section.blocks.size > 0 -%}
-      <ul class="offer-features">
-        {%- for block in section.blocks -%}
-          <li {{ block.shopify_attributes }}>
-            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l3.5 3.5L16 6"/></svg>
-            <span>{{ block.settings.text }}</span>
-          </li>
-        {%- endfor -%}
-      </ul>
-    {%- endif -%}
     {%- if p != blank -%}
       {%- assign v = p.selected_or_first_available_variant -%}
       <div class="offer-price">
@@ -28,15 +18,12 @@
     {%- else -%}
       <a class="btn" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
     {%- endif -%}
-    {%- if section.settings.footnote != blank -%}<p class="offer-footnote">{{ section.settings.footnote }}</p>{%- endif -%}
   </div>
   <a class="offer-media" href="{% if p != blank %}{{ p.url }}{% else %}{{ section.settings.button_link }}{% endif %}">
     {%- if section.settings.image != blank -%}
-      {%- assign offer_img_h = 900 | divided_by: section.settings.image.aspect_ratio | round -%}
-      <img src="{{ section.settings.image | image_url: width: 900 }}" srcset="{{ section.settings.image | image_url: width: 500 }} 500w, {{ section.settings.image | image_url: width: 900 }} 900w" sizes="(max-width: 900px) 90vw, 42vw" alt="{{ section.settings.heading | escape }}" loading="lazy" width="900" height="{{ offer_img_h }}">
+      <img src="{{ section.settings.image | image_url: width: 900 }}" srcset="{{ section.settings.image | image_url: width: 500 }} 500w, {{ section.settings.image | image_url: width: 900 }} 900w" sizes="(max-width: 900px) 90vw, 42vw" alt="{{ section.settings.heading | escape }}" loading="lazy">
     {%- elsif p.featured_image != blank -%}
-      {%- assign offer_pimg_h = 900 | divided_by: p.featured_image.aspect_ratio | round -%}
-      <img src="{{ p.featured_image | image_url: width: 900 }}" srcset="{{ p.featured_image | image_url: width: 500 }} 500w, {{ p.featured_image | image_url: width: 900 }} 900w" sizes="(max-width: 900px) 90vw, 42vw" alt="{{ p.title | escape }}" loading="lazy" width="900" height="{{ offer_pimg_h }}">
+      <img src="{{ p.featured_image | image_url: width: 900 }}" srcset="{{ p.featured_image | image_url: width: 500 }} 500w, {{ p.featured_image | image_url: width: 900 }} 900w" sizes="(max-width: 900px) 90vw, 42vw" alt="{{ p.title | escape }}" loading="lazy">
     {%- else -%}
       <div class="placeholder">Offer image</div>
     {%- endif -%}
@@ -45,14 +32,6 @@
 
 <style>
   .offer{padding-block:clamp(34px,4.4vw,72px)}
-  .offer-features{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:10px}
-  .offer-features li{display:flex;align-items:flex-start;gap:10px;font-size:14.5px;line-height:1.4}
-  .offer-features svg{
-    flex:none;width:19px;height:19px;margin-top:1px;border-radius:50%;
-    background:var(--green,#1c9350);padding:3px;box-sizing:border-box;
-    fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;
-  }
-  .offer-footnote{margin:14px 0 0;font-size:12px;line-height:1.5;color:var(--muted,#7d7a74)}
   .offer-media{
     display:block;width:100%;aspect-ratio:5/4;
     overflow:hidden;border-radius:12px;background:#fff;line-height:0;
@@ -78,4 +57,4 @@
     .offer-price .now{font-size:28px}
   }
 </style>
-{% schema %}{"name":"Offer banner","settings":[{"type":"text","id":"eyebrow","label":"Eyebrow","default":"BUNDLE OFFER"},{"type":"text","id":"heading","label":"Heading","default":"The Glow Duo"},{"type":"textarea","id":"text","label":"Text"},{"type":"product","id":"product","label":"Product"},{"type":"image_picker","id":"image","label":"Image override"},{"type":"text","id":"button_label","label":"Button label","default":"Shop the duo"},{"type":"url","id":"button_link","label":"Button link"},{"type":"text","id":"footnote","label":"Footnote"}],"blocks":[{"type":"feature","name":"Feature","settings":[{"type":"text","id":"text","label":"Text","default":"Free UK delivery"}]}],"presets":[{"name":"Offer banner","blocks":[{"type":"feature"},{"type":"feature"},{"type":"feature"}]}]}{% endschema %}
+{% schema %}{"name":"Offer banner","settings":[{"type":"text","id":"eyebrow","label":"Eyebrow","default":"BUNDLE OFFER"},{"type":"text","id":"heading","label":"Heading","default":"The Glow Duo"},{"type":"textarea","id":"text","label":"Text"},{"type":"product","id":"product","label":"Product"},{"type":"image_picker","id":"image","label":"Image override"},{"type":"text","id":"button_label","label":"Button label","default":"Shop the duo"},{"type":"url","id":"button_link","label":"Button link"}],"presets":[{"name":"Offer banner"}]}{% endschema %}

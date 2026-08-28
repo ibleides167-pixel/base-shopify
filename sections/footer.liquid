@@ -4,10 +4,9 @@
       <div>
         <div class="footer-logo" style="margin-bottom:16px">
           {%- if section.settings.logo != blank -%}
-            {%- assign footer_logo_h = 500 | divided_by: section.settings.logo.aspect_ratio | round -%}
-            <img src="{{ section.settings.logo | image_url: width: 500 }}" alt="{{ shop.name | escape }}" width="500" height="{{ footer_logo_h }}">
+            <img src="{{ section.settings.logo | image_url: width: 500 }}" alt="{{ shop.name | escape }}">
           {%- elsif section.settings.logo_url != blank -%}
-            <img src="{{ section.settings.logo_url }}" alt="{{ shop.name | escape }}" width="500" height="500">
+            <img src="{{ section.settings.logo_url }}" alt="{{ shop.name | escape }}">
           {%- else -%}
             <div class="wordmark" style="color:#fff">{{ shop.name | strip }}</div>
           {%- endif -%}

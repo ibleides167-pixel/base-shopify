@@ -3,7 +3,7 @@
     {%- if section.settings.image != blank -%}
       {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', alt: section.settings.heading }}
     {%- elsif section.settings.image_url != blank -%}
-      <img src="{{ section.settings.image_url }}" alt="{{ section.settings.heading | escape }}" loading="lazy" width="1200" height="800">
+      <img src="{{ section.settings.image_url }}" alt="{{ section.settings.heading | escape }}" loading="lazy">
     {%- endif -%}
   </div>
   <div class="story-copy">

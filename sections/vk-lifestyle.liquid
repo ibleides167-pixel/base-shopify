@@ -1,0 +1,100 @@
+{%- comment -%}
+  Velkrova lifestyle section.
+
+  Full-bleed image beside a short editorial block, for showing the product
+  inside an everyday routine rather than on a white background.
+
+  Add it to a product template and pick an image in the editor. It renders
+  nothing at all until an image is set, so it can sit in the template
+  disabled without leaving an empty frame on the page.
+{%- endcomment -%}
+
+{%- liquid
+  assign img = section.settings.image
+  if img == blank and section.settings.image_url == blank
+    assign has_media = false
+  else
+    assign has_media = true
+  endif
+-%}
+
+{%- if has_media -%}
+  <section class="vk-life{% if section.settings.reverse %} vk-life--reverse{% endif %}">
+    <div class="page-width">
+      <div class="vk-life__grid">
+        <div class="vk-life__media">
+          {%- if img != blank -%}
+            <img
+              src="{{ img | image_url: width: 1200 }}"
+              srcset="{{ img | image_url: width: 600 }} 600w, {{ img | image_url: width: 1200 }} 1200w"
+              sizes="(max-width: 900px) 92vw, 48vw"
+              alt="{{ section.settings.heading | escape }}"
+              loading="lazy">
+          {%- else -%}
+            <img src="{{ section.settings.image_url }}" alt="{{ section.settings.heading | escape }}" loading="lazy">
+          {%- endif -%}
+        </div>
+
+        <div class="vk-life__copy">
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="vk-life__eyebrow">{{ section.settings.eyebrow }}</span>
+          {%- endif -%}
+          <h2>{{ section.settings.heading }}</h2>
+          {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+
+          {%- if section.blocks.size > 0 -%}
+            <ul class="vk-life__points">
+              {%- for block in section.blocks -%}
+                <li {{ block.shopify_attributes }}>
+                  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 10.5l3.4 3.4 7.6-7.8"/></svg>
+                  <span>{{ block.settings.text }}</span>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+
+          {%- if section.settings.button_label != blank -%}
+            <a class="btn" href="{{ section.settings.button_link | default: product.url }}">{{ section.settings.button_label }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+<style>
+  .vk-life{padding:clamp(34px,4.2vw,64px) 0}
+  .vk-life__grid{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:clamp(28px,4vw,60px);align-items:center;
+  }
+  .vk-life--reverse .vk-life__media{order:2}
+  .vk-life__media img{
+    width:100%;height:auto;display:block;
+    border-radius:16px;background:#f7f5f2;
+  }
+  .vk-life__eyebrow{
+    display:inline-block;margin-bottom:11px;font-size:11px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--muted,#7d7a74);
+  }
+  .vk-life__copy h2{
+    margin:0 0 14px;font-family:var(--font-heading,'Marcellus',Georgia,serif);
+    font-weight:400;font-size:clamp(22px,2.6vw,32px);
+    line-height:1.12;letter-spacing:-.015em;
+  }
+  .vk-life__copy p{margin:0;font-size:15px;line-height:1.65;max-width:48ch}
+  .vk-life__points{list-style:none;padding:0;margin:20px 0 24px;display:grid;gap:10px}
+  .vk-life__points li{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:1.5}
+  .vk-life__points svg{
+    width:17px;height:17px;flex:none;margin-top:3px;fill:none;
+    stroke:var(--green,#073f3a);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+  }
+
+  @media(max-width:900px){
+    .vk-life__grid{grid-template-columns:1fr;gap:22px}
+    .vk-life--reverse .vk-life__media{order:0}
+    .vk-life__media img{border-radius:14px}
+  }
+</style>
+
+{% schema %}{"name":"Lifestyle","settings":[{"type":"paragraph","content":"Nothing renders until you choose an image, so this section can stay in the template while you wait for photography."},{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"image_url","label":"Image URL (fallback)"},{"type":"checkbox","id":"reverse","label":"Image on the right","default":false},{"type":"text","id":"eyebrow","label":"Eyebrow","default":"IN YOUR ROUTINE"},{"type":"text","id":"heading","label":"Heading","default":"Ten minutes, on the sofa"},{"type":"textarea","id":"text","label":"Text","default":"Most beauty devices end up in a drawer because the routine asks for more time than anyone has. This one fits into the part of the evening you were spending anyway."},{"type":"text","id":"button_label","label":"Button label"},{"type":"url","id":"button_link","label":"Button link"}],"blocks":[{"type":"point","name":"Point","settings":[{"type":"text","id":"text","label":"Text","default":"Hands-free while you read or wind down"}]}],"presets":[{"name":"Lifestyle","blocks":[{"type":"point"},{"type":"point"},{"type":"point"}]}]}{% endschema %}

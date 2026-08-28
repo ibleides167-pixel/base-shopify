@@ -11,12 +11,52 @@
   "sections": {
     "main": {
       "type": "main-product-premium",
-      "settings": { "media_limit": 5 }
+      "settings": {
+        "media_limit": 5,
+        "trust_1": "Cruelty-free & vegan",
+        "trust_2": "Dermatologist tested",
+        "show_buy_with": true
+      }
     },
     "recommendations": {
       "type": "product-recommendations",
       "settings": { "heading": "You may also like" }
+    },
+    "community": {
+      "type": "vk-community",
+      "blocks": {
+        "c1": { "type": "cell", "settings": { "image_url": "https://cdn.shopify.com/s/files/1/0837/6945/8943/collections/render.jpg?v=1787947525", "username": "@velkrova", "link": "/collections/face" } },
+        "c2": { "type": "cell", "settings": { "image_url": "https://cdn.shopify.com/s/files/1/0837/6945/8943/collections/render_f2306652-26ef-461d-bf1c-f4a1df9dd268.jpg?v=1787947529", "username": "@velkrova", "link": "/collections/hair" } },
+        "c3": { "type": "cell", "settings": { "image_url": "https://cdn.shopify.com/s/files/1/0837/6945/8943/collections/render_5757ed77-a8a0-4e2a-9ed3-e1e9864575c0.jpg?v=1787947534", "username": "@velkrova", "link": "/collections/body" } },
+        "c4": { "type": "cell", "settings": { "image_url": "https://cdn.shopify.com/s/files/1/0837/6945/8943/collections/render_036ba83b-cd55-421e-ae3d-c331a3855c78.jpg?v=1787947539", "username": "@velkrova", "link": "/collections/wellness-accessories" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4"],
+      "settings": {
+        "eyebrow": "TAG @VELKROVA FOR A CHANCE TO BE FEATURED",
+        "heading": "Join our community of 100k+"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "Is this suitable for all skin types?", "answer": "<p>Yes. Our devices and formulas are designed to be gentle and suitable for all skin types, including sensitive skin. If you have a specific condition, check with your dermatologist first.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "How long until I see results?", "answer": "<p>It depends on the product. Massage and depuffing are immediate, while skin tone and firmness usually take six to eight weeks of regular use. We would rather be honest than over-promise.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "Is it cruelty-free and vegan?", "answer": "<p>Always. We never test on animals, and our formulas are vegan.</p>" } },
+        "q4": { "type": "question", "settings": { "question": "How does delivery and returns work?", "answer": "<p>Free tracked UK delivery on every order, typically within 5 to 9 business days, and 30 days to return it if it is not right for you.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"],
+      "settings": { "heading": "Frequently asked questions" }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Get 10% off your first order",
+        "text": "Join the list for early access to new devices and subscriber-only offers.",
+        "placeholder": "Your email",
+        "button_label": "Sign up",
+        "success": "Thanks - check your inbox for your code."
+      }
     }
   },
-  "order": ["main", "recommendations"]
+  "order": ["main", "recommendations", "community", "faq", "newsletter"]
 }

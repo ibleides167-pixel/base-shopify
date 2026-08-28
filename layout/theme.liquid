@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" href="https://cdn.shopify.com/s/files/1/0748/0429/7797/files/ChatGPT_Image_26_de_jul._de_2026_17_57_22.png?v=1785103014&width=180">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@400;500;600&display=swap">
   {{ content_for_header }}
   {{ 'theme.css' | asset_url | stylesheet_tag }}
   {{ 'velkrova-refine.css' | asset_url | stylesheet_tag }}
@@ -17,6 +17,7 @@
   {{ 'velkrova-tune.css' | asset_url | stylesheet_tag }}
   {{ 'velkrova-polish.css' | asset_url | stylesheet_tag }}
   {{ 'velkrova-gallery.css' | asset_url | stylesheet_tag }}
+  {{ 'store-reference.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
   {%- if template.name == 'product' -%}
     <script src="{{ 'velkrova-gallery.js' | asset_url }}" defer="defer"></script>

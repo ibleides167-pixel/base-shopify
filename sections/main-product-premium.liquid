@@ -12,9 +12,6 @@
   endif
   assign promo = product.metafields.custom.promo_message.value
   assign hero_img = v.featured_image | default: product.featured_image
-  assign review_count = product.id | modulo: 180 | plus: 24
-  assign bundle_product = section.settings.bundle_product
-  assign bundle_variant = bundle_product.selected_or_first_available_variant
 -%}
 
 {%- comment -%}
@@ -27,9 +24,6 @@
 {%- endcomment -%}
 
 <style>
-.pdp-stars{display:flex;align-items:center;gap:3px;margin:10px 0 0}
-.pdp-stars svg{width:15px;height:15px;fill:#e8a33d}
-.pdp-stars__count{margin-left:6px;font-size:13px;color:var(--muted)}
 .product-price{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:16px 0}
 .save-inline{font-size:12px;letter-spacing:.07em;text-transform:uppercase;background:var(--green);color:#fff;padding:6px 11px;border-radius:2px}
 .product-description{max-width:none}
@@ -53,20 +47,28 @@
 .bundle-price strong{display:block;font-size:16px;font-weight:600}
 .bundle-price em{display:inline-block;font-style:normal;font-size:10px;letter-spacing:.07em;text-transform:uppercase;background:var(--green);color:#fff;padding:3px 7px;border-radius:999px;margin-top:4px}
 .bundle-flag{position:absolute;top:-9px;right:14px;background:var(--ink);color:#fff;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:999px;z-index:2}
-.pdp-bundle{margin:22px 0 4px;padding:20px 20px 22px;border:1px solid var(--line,#e8e3dc);border-radius:16px;background:var(--cream,#f7ede0)}
-.pdp-bundle__eyebrow{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#7d7a74);font-weight:500;margin-bottom:8px}
-.pdp-bundle__heading{margin:0 0 16px;font-family:var(--font-heading,'Poppins',Arial,sans-serif);font-size:17px;font-weight:600;line-height:1.3}
-.pdp-bundle__row{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-.pdp-bundle__item{flex:1 1 0;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
-.pdp-bundle__item img{width:72px;height:72px;object-fit:cover;border-radius:10px;background:#fff;display:block}
-.pdp-bundle__item span{font-size:12px;line-height:1.35}
-.pdp-bundle__plus{flex:none;font-size:18px;color:var(--muted,#7d7a74)}
-.pdp-bundle__price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-.pdp-bundle__was{font-size:14px;color:var(--muted,#7d7a74);text-decoration:line-through}
-.pdp-bundle__now{font-size:20px;font-weight:700}
-.pdp-bundle__save{font-size:11px;letter-spacing:.06em;text-transform:uppercase;background:var(--green);color:#fff;padding:5px 10px;border-radius:999px}
-.pdp-bundle__form .btn{width:100%;background:transparent;color:var(--green,#073f3a);border:1.5px solid var(--green,#073f3a)}
-.pdp-bundle__form .btn:hover{background:var(--green,#073f3a);color:#fff}
+/* Palo-Alto-style buy box, in Velkrova colours */
+.pdp-pill{display:inline-block;background:var(--cream);color:var(--green);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:6px 13px;border-radius:999px;margin-bottom:14px}
+.pdp-stock{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin:-2px 0 18px}
+.pdp-stock__dot{width:9px;height:9px;border-radius:50%;background:#3aa76d;box-shadow:0 0 0 3px rgba(58,167,109,.18)}
+.pdp-stock--out .pdp-stock__dot{background:#c0392b;box-shadow:0 0 0 3px rgba(192,57,43,.18)}
+.pdp-trust{display:flex;flex-wrap:wrap;gap:14px 26px;margin:0 0 22px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pdp-trust__item{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink)}
+.pdp-trust__item svg{width:22px;height:22px;flex:none;stroke:var(--green);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.add-price{margin-left:7px;font-weight:600}
+.pdp-accordion{margin-top:28px}
+.pdp-accordion .vk-acc + .vk-acc{margin-top:0}
+.biw{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-top:22px;background:#fff}
+.biw__media{flex:none;width:76px;height:76px;border-radius:11px;overflow:hidden;background:var(--cream);display:block}
+.biw__media img{width:100%;height:100%;object-fit:cover;display:block}
+.biw__info{flex:1;min-width:0}
+.biw__label{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.biw__title{display:block;font-weight:600;font-size:14px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:2px}
+.biw__price{font-size:14px;color:var(--ink)}
+.biw form{margin:0;flex:none}
+.biw__btn{background:var(--green);color:#fff;border:0;border-radius:999px;padding:12px 20px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .2s ease}
+.biw__btn:hover{opacity:.88}
+@media(max-width:560px){.biw{flex-wrap:wrap}.biw__info{flex:1 1 auto}.biw form{flex:1 1 100%}.biw__btn{width:100%}}
 </style>
 
 <section class="product-main">
@@ -115,15 +117,25 @@
       </div>
 
       <div class="product-info">
-        {%- if product.tags contains 'best-seller' -%}<span class="badge">Best seller</span>{%- endif -%}
+        {%- assign urgency = '' -%}
+        {%- if product.tags contains 'best-seller' or product.tags contains 'Best seller' -%}{%- assign urgency = 'Selling fast' -%}{%- endif -%}
+        {%- if urgency != blank -%}<span class="pdp-pill">{{ urgency }}</span>{%- endif -%}
         <h1 class="product-title">{{ product.title }}</h1>
 
-        <div class="pdp-stars" aria-label="Rated 5 out of 5, {{ review_count }} reviews">
-          {%- for i in (1..5) -%}<svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.7-4.3 4.1 1 5.9L10 14.8l-5.2 2.8 1-5.9L1.5 7.6l5.9-.7z"/></svg>{%- endfor -%}
-          <span class="pdp-stars__count">{{ review_count }} reviews</span>
+        {%- if promo != blank -%}<p class="vk-promo">{{ promo }}</p>{%- endif -%}
+
+        <div class="product-price">
+          <span data-product-price>{{ v.price | money }}</span>
+          <span class="compare" data-product-compare{% unless v.compare_at_price > v.price %} hidden{% endunless %}>{% if v.compare_at_price > v.price %}{{ v.compare_at_price | money }}{% endif %}</span>
+          <span class="save-inline" data-product-save{% unless v.compare_at_price > v.price %} hidden{% endunless %}>{% if v.compare_at_price > v.price %}Save {{ v.compare_at_price | minus: v.price | money }}{% endif %}</span>
         </div>
 
-        {%- if promo != blank -%}<p class="vk-promo">{{ promo }}</p>{%- endif -%}
+        <p class="pdp-stock{% unless product.available %} pdp-stock--out{% endunless %}"><span class="pdp-stock__dot"></span>{% if product.available %}In stock, ready to ship{% else %}Currently out of stock{% endif %}</p>
+
+        <div class="pdp-trust">
+          <span class="pdp-trust__item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21c5-2 8.5-6 8.5-11.5V5L12 2.5 3.5 5v4.5C3.5 15 7 19 12 21z"/><path d="M8.6 11.4l2.3 2.3 4.5-5"/></svg><span>{{ section.settings.trust_1 | default: 'Cruelty-free & vegan' }}</span></span>
+          <span class="pdp-trust__item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c2.4 3.2 5.4 4.2 7.5 4.2 0 7.4-3.3 11.6-7.5 14.3C7.8 18.8 4.5 14.6 4.5 7.2 6.6 7.2 9.6 6.2 12 3z"/></svg><span>{{ section.settings.trust_2 | default: 'Dermatologist tested' }}</span></span>
+        </div>
 
         {%- if benefits and benefits.size > 0 -%}
           <ul class="vk-benefits">
@@ -132,12 +144,6 @@
             {%- endfor -%}
           </ul>
         {%- endif -%}
-
-        <div class="product-price">
-          <span data-product-price>{{ v.price | money }}</span>
-          <span class="compare" data-product-compare{% unless v.compare_at_price > v.price %} hidden{% endunless %}>{% if v.compare_at_price > v.price %}{{ v.compare_at_price | money }}{% endif %}</span>
-          <span class="save-inline" data-product-save{% unless v.compare_at_price > v.price %} hidden{% endunless %}>{% if v.compare_at_price > v.price %}Save {{ v.compare_at_price | minus: v.price | money }}{% endif %}</span>
-        </div>
 
         {% form 'product', product, class: 'product-form' %}
           {%- unless product.has_only_default_variant -%}
@@ -214,45 +220,47 @@
             <input class="qty" id="Quantity" name="quantity" type="number" min="1" max="99" value="1" inputmode="numeric" aria-label="Quantity">
             <button type="button" data-qty-step="1" aria-label="Increase quantity">+</button>
           </div>
-          <button class="btn" type="submit" data-main-add{% unless product.available %} disabled{% endunless %}>{% render 'icon', name: 'bag' %}<span>{% if product.available %}Add to cart{% else %}Sold out{% endif %}</span></button>
+          <button class="btn" type="submit" data-main-add{% unless product.available %} disabled{% endunless %}>{% render 'icon', name: 'bag' %}<span>{% if product.available %}Add to cart{% else %}Sold out{% endif %}</span>{% if product.available %}<span class="add-price" data-add-price>&middot; {{ v.price | money }}</span>{% endif %}</button>
           {{ form | payment_button }}
         {% endform %}
         {%- if shop.enabled_payment_types.size > 0 -%}
           <div class="payment-row product-payments">{%- for type in shop.enabled_payment_types -%}{{ type | payment_type_svg_tag: class: 'payment-icon' }}{%- endfor -%}</div>
         {%- endif -%}
 
-        {%- if bundle_product != blank and bundle_variant != blank -%}
-          <div class="pdp-bundle">
-            <span class="pdp-bundle__eyebrow">COMPLETE YOUR RITUAL</span>
-            <h3 class="pdp-bundle__heading">Pair it with 24K gold eye masks</h3>
-            <div class="pdp-bundle__row">
-              <div class="pdp-bundle__item">
-                {%- if hero_img != blank -%}{{ hero_img | image_url: width: 144 | image_tag: width: 72, height: 72, alt: product.title, loading: 'lazy' }}{%- endif -%}
-                <span>{{ product.title | truncate: 30 }}</span>
+        {%- if section.settings.show_buy_with -%}
+          {%- assign biw = blank -%}
+          {%- assign biw_src = collections['best-sellers'] -%}
+          {%- if biw_src == blank or biw_src.products_count < 2 -%}{%- assign biw_src = product.collections.first -%}{%- endif -%}
+          {%- for p in biw_src.products -%}
+            {%- if p.id != product.id and p.available -%}{%- assign biw = p -%}{%- break -%}{%- endif -%}
+          {%- endfor -%}
+          {%- if biw != blank -%}
+            <div class="biw">
+              <a class="biw__media" href="{{ biw.url }}">{%- if biw.featured_image != blank -%}<img src="{{ biw.featured_image | image_url: width: 200 }}" alt="{{ biw.title | escape }}" width="200" height="200" loading="lazy">{%- endif -%}</a>
+              <div class="biw__info">
+                <span class="biw__label">Buy it with</span>
+                <a class="biw__title" href="{{ biw.url }}">{{ biw.title }}</a>
+                <span class="biw__price">{{ biw.price | money }}</span>
               </div>
-              <span class="pdp-bundle__plus" aria-hidden="true">+</span>
-              <div class="pdp-bundle__item">
-                {%- if bundle_product.featured_image != blank -%}{{ bundle_product.featured_image | image_url: width: 144 | image_tag: width: 72, height: 72, alt: bundle_product.title, loading: 'lazy' }}{%- endif -%}
-                <span>24K Gold Eye Masks</span>
-              </div>
+              {%- form 'product', biw -%}
+                <input type="hidden" name="id" value="{{ biw.selected_or_first_available_variant.id }}">
+                <button class="biw__btn" type="submit">Quick add</button>
+              {%- endform -%}
             </div>
-            <div class="pdp-bundle__price">
-              {%- if bundle_variant.compare_at_price > bundle_variant.price -%}
-                <span class="pdp-bundle__was">{{ bundle_variant.compare_at_price | money }}</span>
-              {%- endif -%}
-              <span class="pdp-bundle__now">{{ bundle_variant.price | money }}</span>
-              {%- if bundle_variant.compare_at_price > bundle_variant.price -%}
-                {%- assign bundle_pct = bundle_variant.compare_at_price | minus: bundle_variant.price | times: 100 | divided_by: bundle_variant.compare_at_price -%}
-                <span class="pdp-bundle__save">Save {{ bundle_pct }}%</span>
-              {%- endif -%}
-            </div>
-            <form action="/cart/add" method="post" class="pdp-bundle__form">
-              <input type="hidden" name="id" value="{{ bundle_variant.id }}">
-              <input type="hidden" name="quantity" value="1">
-              <button type="submit" class="btn">{% render 'icon', name: 'bag' %}<span>Add both to cart - {{ bundle_variant.price | money }}</span></button>
-            </form>
-          </div>
+          {%- endif -%}
         {%- endif -%}
+
+        <div class="pdp-accordion">
+          <div class="vk-acc">
+            {%- if product.description != blank -%}
+              <details class="vk-acc__item" open>
+                <summary><span>Description</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg></summary>
+                <div class="vk-acc__body description-content">{{ product.description }}</div>
+              </details>
+            {%- endif -%}
+          </div>
+          {% render 'vk-product-accordion' %}
+        </div>
       </div>
     </div>
   </div>
@@ -272,23 +280,6 @@
 </div>
 
 {% render 'vk-pdp-editorial', section: section %}
-
-<section class="vk-details">
-  <div class="page-width">
-    <div class="vk-details__grid">
-      <div class="vk-details__main">
-        {%- if product.description != blank -%}
-          <h2>Product description</h2>
-          <div class="product-description"><div class="description-content">{{ product.description }}</div></div>
-        {%- endif -%}
-      </div>
-      <aside class="vk-details__aside">
-        <h2>Before you buy</h2>
-        {% render 'vk-product-accordion' %}
-      </aside>
-    </div>
-  </div>
-</section>
 
 {%- if product.available -%}
 <div class="sticky-atc" data-sticky-atc>
@@ -314,6 +305,7 @@
   var firstSlide = strip ? strip.querySelector('[data-vk-slot="first"]') : null;
   var dotWrap = document.querySelector('[data-vk-mdots]');
   var stickyPrice = document.querySelector('[data-sticky-price]');
+  var addPrice = document.querySelector('[data-add-price]');
 
   var slideDefault = firstSlide ? { src: firstSlide.src, srcset: firstSlide.srcset } : null;
 
@@ -354,6 +346,7 @@
       if (idField) idField.value = input.value;
       if (priceEl) priceEl.textContent = input.dataset.price || '';
       if (stickyPrice) stickyPrice.textContent = input.dataset.price || '';
+      if (addPrice) addPrice.textContent = input.dataset.price ? ('· ' + input.dataset.price) : '';
       if (cmp) { cmp.textContent = input.dataset.compare || ''; cmp.hidden = !input.dataset.compare; }
       if (sav) { sav.textContent = input.dataset.save ? ('Save ' + input.dataset.save) : ''; sav.hidden = !input.dataset.save; }
       showVariantImage(input.dataset.imgId, input.dataset.imgSrc);
@@ -434,4 +427,4 @@
   }
 })();
 </script>
-{% schema %}{"name":"Main product premium","settings":[{"type":"range","id":"media_limit","label":"Images to show","min":3,"max":10,"step":1,"default":5},{"type":"product","id":"bundle_product","label":"Bundle add-on product"}]}{% endschema %}
+{% schema %}{"name":"Main product premium","settings":[{"type":"range","id":"media_limit","label":"Images to show","min":3,"max":10,"step":1,"default":5},{"type":"header","content":"Trust badges"},{"type":"text","id":"trust_1","label":"Trust badge 1","default":"Cruelty-free & vegan"},{"type":"text","id":"trust_2","label":"Trust badge 2","default":"Dermatologist tested"},{"type":"header","content":"Upsell"},{"type":"checkbox","id":"show_buy_with","label":"Show \"Buy it with\" card","default":true}]}{% endschema %}

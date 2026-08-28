@@ -1,6 +1,6 @@
 /* Velkrova - refinement layer (loaded after theme.css) */
 :root{
-  --font-heading:'Poppins',Arial,sans-serif;
+  --font-heading:'Marcellus',Georgia,serif;
   --font-body:'Inter',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
   --line:#e8e3dc;--page:1240px;
 }
@@ -51,7 +51,7 @@ section.section{padding:clamp(56px,7vw,96px) 0}
 .hero-overlay{position:absolute;inset:0;display:flex;align-items:center;background:linear-gradient(90deg,rgba(7,63,58,.62) 0%,rgba(7,63,58,.15) 55%,rgba(7,63,58,0) 78%)}
 .hero-copy{max-width:560px;color:#fff}
 .hero-copy .eyebrow{color:rgba(255,255,255,.82);margin-bottom:14px}
-.hero-copy h2{font-family:'Marcellus',Georgia,serif;font-weight:400;font-size:clamp(30px,4.2vw,58px);line-height:1.06;letter-spacing:-.015em;margin:0 0 14px;color:#fff}
+.hero-copy h2{font-family:var(--font-heading);font-weight:400;font-size:clamp(30px,4.2vw,58px);line-height:1.06;letter-spacing:-.015em;margin:0 0 14px;color:#fff}
 .hero-copy p{font-size:17px;margin:0 0 26px;color:rgba(255,255,255,.9)}
 .hero-copy .btn{background:#fff;color:var(--green);border-color:#fff}
 .hero-copy .btn:hover{background:var(--cream);border-color:var(--cream);color:var(--green)}
@@ -60,7 +60,7 @@ section.section{padding:clamp(56px,7vw,96px) 0}
 .hero-dot[aria-current=true]{background:#fff;width:24px;border-radius:4px}
 @media(max-width:760px){
   .hero-media-wrap{aspect-ratio:941/1360}
-  .hero-overlay{align-items:flex-end;background:linear-gradient(0deg,rgba(7,63,58,.82) 0%,rgba(7,63,58,.3) 55%,rgba(7,63,58,0) 78%);padding-bottom:28px}
+  .hero-overlay{align-items:flex-end;background:linear-gradient(0deg,rgba(7,63,58,.78) 0%,rgba(7,63,58,.2) 48%,rgba(7,63,58,0) 72%);padding-bottom:64px}
   .hero-copy{max-width:100%;text-align:center}
   .hero-copy p{font-size:15px}
 }
@@ -143,5 +143,5 @@ section.section{padding:clamp(56px,7vw,96px) 0}
 .carousel-btn[data-dir=prev]{left:-21px}
 .carousel-btn[data-dir=next]{right:-21px}
 .carousel-btn:disabled{opacity:.2;cursor:default}
-@media(max-width:900px){.carousel{grid-auto-columns:calc((100% - 14px)/1.4);gap:14px}.carousel-btn{display:none}}
-@media(max-width:560px){.carousel{grid-auto-columns:calc((100% - 12px)/1.18);gap:12px}}
+@media(max-width:900px){.carousel{grid-auto-columns:calc((100% - 14px)/1.55);gap:14px}.carousel-btn{display:none}}
+@media(max-width:560px){.carousel{grid-auto-columns:calc((100% - 12px)/1.35);gap:12px}}

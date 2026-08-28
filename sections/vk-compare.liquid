@@ -1,0 +1,90 @@
+{%- comment -%}
+  Velkrova comparison section (home page).
+
+  Rows are concrete store commitments rather than subjective claims like
+  "premium quality". Under the UK CAP Code a comparison against unnamed
+  competitors has to be verifiable: a delivery or returns policy either is
+  or is not published on a site. Vague quality claims are the ones that get
+  challenged, so they are kept out.
+{%- endcomment -%}
+
+<section class="vk-compare">
+  <div class="page-width">
+    <div class="vk-compare__grid">
+      <div class="vk-compare__copy">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="vk-compare__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        <h2>{{ section.settings.heading }}{% if section.settings.heading_accent != blank %} <em>{{ section.settings.heading_accent }}</em>{% endif %}</h2>
+        {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+      </div>
+
+      <div class="vk-compare__wrap">
+        <table class="vk-compare__table">
+          <thead>
+            <tr>
+              <th scope="col"><span class="visually-hidden skip-link">Feature</span></th>
+              <th scope="col" class="is-us">{{ section.settings.us_label }}</th>
+              <th scope="col">{{ section.settings.them_label }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for block in section.blocks -%}
+              <tr {{ block.shopify_attributes }}>
+                <th scope="row">{{ block.settings.label }}</th>
+                <td class="is-us">{% render 'vk-tick' %}</td>
+                <td>{% render 'vk-cross' %}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .vk-compare{padding:clamp(34px,4vw,64px) 0;background:{{ section.settings.background }}}
+  .vk-compare__grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(28px,4vw,60px);align-items:center}
+  .vk-compare__eyebrow{display:inline-block;margin-bottom:11px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted,#7d7a74)}
+  .vk-compare__copy h2{margin:0 0 14px;font-family:var(--font-heading,'Marcellus',Georgia,serif);font-weight:400;font-size:clamp(24px,3vw,36px);line-height:1.1;letter-spacing:-.015em}
+  .vk-compare__copy h2 em{font-style:normal;color:var(--green,#073f3a)}
+  .vk-compare__copy p{margin:0;font-size:15px;line-height:1.65;max-width:46ch;color:var(--muted,#7d7a74)}
+
+  .vk-compare__wrap{position:relative;padding-block:18px}
+  .vk-compare__wrap::before{
+    content:"";position:absolute;top:0;bottom:0;left:calc(50% + 2px);width:26%;
+    background:var(--green,#073f3a);border-radius:18px;
+    box-shadow:0 14px 34px rgba(7,63,58,.18);z-index:0;
+  }
+  .vk-compare__table{width:100%;border-collapse:collapse;font-size:14px;position:relative;z-index:1}
+  .vk-compare__table th,.vk-compare__table td{padding:15px 8px;text-align:center}
+  .vk-compare__table thead th{font-size:12px;letter-spacing:.07em;text-transform:uppercase;font-weight:600;padding-block:8px 14px}
+  .vk-compare__table thead .is-us{color:#fff}
+  .vk-compare__table tbody th{text-align:left;font-weight:500;line-height:1.35;padding-left:0;width:48%}
+  .vk-compare__table tbody tr + tr th,
+  .vk-compare__table tbody tr + tr td:not(.is-us){border-top:1px solid var(--line,#e8e3dc)}
+  .vk-compare__table td:not(.is-us){background:#faf9f7}
+  .vk-compare__table tbody tr:first-child td:not(.is-us){border-radius:10px 10px 0 0}
+  .vk-compare__table tbody tr:last-child td:not(.is-us){border-radius:0 0 10px 10px}
+
+  .vk-compare__table svg{width:26px;height:26px;vertical-align:middle}
+  .vk-compare__table .is-us svg circle{fill:#fff;stroke:none}
+  .vk-compare__table .is-us svg path{stroke:var(--green,#073f3a);stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .vk-compare__table td:not(.is-us) svg circle{fill:#ddd6cc;stroke:none}
+  .vk-compare__table td:not(.is-us) svg path{stroke:#fff;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+  @media(max-width:900px){
+    .vk-compare__grid{grid-template-columns:1fr;gap:24px}
+    .vk-compare__wrap::before{left:calc(50% + 1px);width:27%;border-radius:14px}
+    .vk-compare__table th,.vk-compare__table td{padding:13px 4px}
+    .vk-compare__table tbody th{font-size:13px;width:46%}
+    .vk-compare__table svg{width:23px;height:23px}
+  }
+  @media(max-width:480px){
+    .vk-compare__table tbody th{font-size:12.5px;width:44%}
+    .vk-compare__table thead th{font-size:11px}
+  }
+</style>
+
+{% schema %}{"name":"Comparison","settings":[{"type":"text","id":"eyebrow","label":"Eyebrow","default":"THE VELKROVA DIFFERENCE"},{"type":"text","id":"heading","label":"Heading","default":"Made for the ten minutes"},{"type":"text","id":"heading_accent","label":"Heading (accent colour)","default":"you actually have"},{"type":"textarea","id":"text","label":"Text","default":"Salon-grade devices chosen for routines that fit into a normal evening, backed by delivery and returns terms we put in writing. No thresholds to reach, no fine print at checkout, and honest timeframes for how long results really take."},{"type":"text","id":"us_label","label":"Our column","default":"Velkrova"},{"type":"text","id":"them_label","label":"Comparison column","default":"Others"},{"type":"color","id":"background","label":"Background","default":"#FFFFFF"}],"blocks":[{"type":"row","name":"Row","settings":[{"type":"text","id":"label","label":"Label","default":"Free UK delivery, no minimum spend"}]}],"presets":[{"name":"Comparison","blocks":[{"type":"row"},{"type":"row"},{"type":"row"},{"type":"row"},{"type":"row"}]}]}{% endschema %}

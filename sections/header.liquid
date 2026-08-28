@@ -71,10 +71,9 @@
   <div class="page-width header-inner">
     <a href="{{ routes.root_url }}" class="site-logo" aria-label="{{ shop.name }}">
       {%- if section.settings.logo != blank -%}
-        {%- assign header_logo_h = section.settings.logo_width | divided_by: section.settings.logo.aspect_ratio | round -%}
-        <img src="{{ section.settings.logo | image_url: width: 600 }}" alt="{{ shop.name | escape }}" width="{{ section.settings.logo_width }}" height="{{ header_logo_h }}">
+        <img src="{{ section.settings.logo | image_url: width: 600 }}" alt="{{ shop.name | escape }}" width="{{ section.settings.logo_width }}">
       {%- elsif section.settings.logo_url != blank -%}
-        <img src="{{ section.settings.logo_url }}" alt="{{ shop.name | escape }}" width="{{ section.settings.logo_width }}" height="{{ section.settings.logo_width }}">
+        <img src="{{ section.settings.logo_url }}" alt="{{ shop.name | escape }}" width="{{ section.settings.logo_width }}">
       {%- else -%}
         <span class="wordmark">{{ shop.name | strip }}</span>
       {%- endif -%}

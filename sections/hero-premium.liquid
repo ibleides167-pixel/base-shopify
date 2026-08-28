@@ -4,16 +4,15 @@
       {%- assign has_copy = false -%}
       {%- if block.settings.heading != blank or block.settings.text != blank or block.settings.button_label != blank or block.settings.eyebrow != blank -%}{%- assign has_copy = true -%}{%- endif -%}
       <div class="hero-slide" {{ block.shopify_attributes }}>
-        <div class="hero-media-wrap{% unless has_copy %} hero-media-wrap--contain{% endunless %}">
+        <div class="hero-media-wrap">
           {%- unless has_copy -%}{%- if block.settings.button_link != blank -%}<a href="{{ block.settings.button_link }}" class="hero-link" aria-label="{{ block.settings.link_label | default: 'Shop now' }}">{%- endif -%}{%- endunless -%}
           <picture>
             {%- if block.settings.image_mobile != blank -%}<source media="(max-width:760px)" srcset="{{ block.settings.image_mobile | image_url: width: 1100 }}">
             {%- elsif block.settings.image_url_mobile != blank -%}<source media="(max-width:760px)" srcset="{{ block.settings.image_url_mobile }}">{%- endif -%}
             {%- if block.settings.image != blank -%}
-              {%- assign hero_img_h = 2000 | divided_by: block.settings.image.aspect_ratio | round -%}
-              <img src="{{ block.settings.image | image_url: width: 2000 }}" alt="{{ block.settings.alt | default: shop.name | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" width="2000" height="{{ hero_img_h }}">
+              <img src="{{ block.settings.image | image_url: width: 2000 }}" alt="{{ block.settings.alt | default: shop.name | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
             {%- elsif block.settings.image_url != blank -%}
-              <img src="{{ block.settings.image_url }}" alt="{{ block.settings.alt | default: shop.name | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" width="2000" height="1125">
+              <img src="{{ block.settings.image_url }}" alt="{{ block.settings.alt | default: shop.name | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
             {%- endif -%}
           </picture>
           {%- unless has_copy -%}{%- if block.settings.button_link != blank -%}</a>{%- endif -%}{%- endunless -%}
@@ -49,7 +48,7 @@
   if(total<2) return;
   var i=0,timer=null;
   function go(n){i=(n+total)%total;track.style.transform='translateX(-'+(i*100)+'%)';dots.forEach(function(d,x){d.setAttribute('aria-current',x===i?'true':'false')})}
-  function play(){stop();timer=setInterval(function(){go(i+1)},5000)}
+  function play(){stop();timer=setInterval(function(){go(i+1)},6000)}
   function stop(){if(timer){clearInterval(timer);timer=null}}
   dots.forEach(function(d){d.addEventListener('click',function(){stop();go(+d.dataset.index);play()})});
   root.addEventListener('mouseenter',stop);
