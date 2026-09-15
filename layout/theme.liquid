@@ -13,15 +13,6 @@
   {{ content_for_header }}
   {{ 'theme.css' | asset_url | stylesheet_tag }}
   {{ 'velkrova-refine.css' | asset_url | stylesheet_tag }}
-  {{ 'velkrova-tweaks.css' | asset_url | stylesheet_tag }}
-  {{ 'velkrova-tune.css' | asset_url | stylesheet_tag }}
-  {{ 'velkrova-polish.css' | asset_url | stylesheet_tag }}
-  {{ 'velkrova-gallery.css' | asset_url | stylesheet_tag }}
-  {{ 'store-reference.css' | asset_url | stylesheet_tag }}
-  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
-  {%- if template.name == 'product' -%}
-    <script src="{{ 'velkrova-gallery.js' | asset_url }}" defer="defer"></script>
-  {%- endif -%}
 
   {%- if template.name == 'product' and product != blank -%}
     {%- assign pv = product.selected_or_first_available_variant -%}

@@ -13,8 +13,8 @@
       "type": "main-product-premium",
       "settings": {
         "media_limit": 5,
-        "trust_1": "Cruelty-free & vegan",
-        "trust_2": "Dermatologist tested",
+        "trust_1": "Free UK delivery",
+        "trust_2": "30-day returns",
         "show_buy_with": true
       }
     },

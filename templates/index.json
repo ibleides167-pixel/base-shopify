@@ -19,12 +19,14 @@
             "image_mobile": "",
             "image_url": "https://cdn.shopify.com/s/files/1/0837/6945/8943/files/render_96988307-c67e-4566-9a23-70ac6e637535.jpg?v=1787947572",
             "image_url_mobile": "",
-            "alt": "Discover the power of natural beauty - LED light therapy and 24K gold under-eye care",
-            "button_link": "shopify://products/the-glow-duo-led-light-therapy-mask-24k-gold-eye-masks",
-            "eyebrow": "",
-            "heading": "",
-            "text": "",
-            "button_label": ""
+            "alt": "A calm at-home LED light therapy and 24K gold under-eye routine",
+            "eyebrow": "BEAUTY TECHNOLOGY, MADE FOR REAL LIFE",
+            "heading": "Your salon-inspired routine, in ten minutes",
+            "text": "Professional-inspired beauty devices designed to fit into the ten minutes you actually have.",
+            "button_label": "Shop bestsellers",
+            "button_link": "/collections/best-sellers-1",
+            "button_label_2": "Explore LED therapy",
+            "button_link_2": "/products/rechargeable-7-colour-led-facial-mask"
           }
         }
       },
@@ -42,56 +44,49 @@
       "block_order": ["a", "b", "c", "d"],
       "settings": { "label": "Store benefits", "brand": true }
     },
-    "promo": {
-      "type": "promo-tiles",
+    "concern": {
+      "type": "vk-concern",
       "blocks": {
-        "t1": {
-          "type": "tile",
-          "settings": {
-            "bg_color": "#E38B3B",
-            "text_color": "light",
-            "heading": "Unleash Your Inner Beauty",
-            "discount": "UP TO 50% DISCOUNT",
-            "button_label": "Buy now",
-            "button_link": "/collections/best-sellers",
-            "button_style": "dark"
-          }
-        },
-        "t2": {
-          "type": "tile",
-          "settings": {
-            "bg_color": "#0f302d",
-            "text_color": "light",
-            "heading": "Embrace Your Uniqueness",
-            "discount": "UP TO 30% DISCOUNT",
-            "button_label": "Buy now",
-            "button_link": "/collections/face",
-            "button_style": "white"
-          }
-        },
-        "t3": {
-          "type": "tile",
-          "settings": {
-            "bg_color": "#E39B8B",
-            "text_color": "light",
-            "heading": "Reveal Your Beauty",
-            "discount": "UP TO 50% DISCOUNT",
-            "button_label": "Buy now",
-            "button_link": "/collections/hair",
-            "button_style": "dark"
-          }
-        }
+        "c1": { "type": "concern", "settings": { "label": "Fine lines & firmness", "text": "Skin that has lost its bounce", "collection": "fine-lines-firmness" } },
+        "c2": { "type": "concern", "settings": { "label": "Blemishes & congestion", "text": "Breakouts, blackheads and clogged pores", "collection": "breakouts-congestion" } },
+        "c3": { "type": "concern", "settings": { "label": "Tired, puffy eyes", "text": "Dark circles and morning puffiness", "collection": "tired-puffy-eyes" } },
+        "c4": { "type": "concern", "settings": { "label": "Tension & recovery", "text": "Knots, aches and tight shoulders", "collection": "tension-recovery" } },
+        "c5": { "type": "concern", "settings": { "label": "Shaping & firming", "text": "Targeted body toning and contouring", "collection": "shaping-firming" } },
+        "c6": { "type": "concern", "settings": { "label": "Thinning & shedding", "text": "Support for hair at the root", "collection": "thinning-shedding" } },
+        "c7": { "type": "concern", "settings": { "label": "Damage & breakage", "text": "Dry, brittle or over-styled hair", "collection": "damage-breakage" } },
+        "c8": { "type": "concern", "settings": { "label": "Nails & feet", "text": "At-home manicures and smoother heels", "collection": "nails-feet" } }
       },
-      "block_order": ["t1", "t2", "t3"],
-      "settings": { "heading": "" }
+      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
+      "settings": {
+        "eyebrow": "SHOP BY CONCERN",
+        "heading": "What are you looking to improve?",
+        "subheading": "Start with the thing you want to change, not the shelf it sits on."
+      }
     },
     "featured": {
       "type": "featured-collection-premium",
       "settings": {
-        "heading": "Most popular",
-        "subheading": "The ones our customers keep coming back for",
-        "collection": "best-sellers",
+        "heading": "Our bestsellers",
+        "subheading": "The devices our customers keep coming back for",
+        "collection": "best-sellers-1",
         "limit": 12
+      }
+    },
+    "routine": {
+      "type": "vk-routine",
+      "blocks": {
+        "s1": { "type": "step", "settings": { "number": "01", "title": "Cleanse", "text": "Start on clean, dry skin so every step works as it should." } },
+        "s2": { "type": "step", "settings": { "number": "02", "title": "Choose your device", "text": "Pick the tool for tonight — LED, microcurrent, massage or gua sha." } },
+        "s3": { "type": "step", "settings": { "number": "03", "title": "Relax for ten minutes", "text": "Most devices are hands-free, so you can read or wind down while they work." } },
+        "s4": { "type": "step", "settings": { "number": "04", "title": "Continue your routine", "text": "Follow with your serum or moisturiser and you are done." } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": {
+        "eyebrow": "THE 10-MINUTE ROUTINE",
+        "heading": "Beauty care that fits into real life",
+        "subheading": "You do not need an hour-long routine to make time for yourself.",
+        "button_label": "Shop the range",
+        "button_link": "/collections/best-sellers-1"
       }
     },
     "categories": {
@@ -194,5 +189,5 @@
       }
     }
   },
-  "order": ["hero", "marquee", "promo", "featured", "categories", "offer", "more", "brand", "compare", "testimonials", "homefaq", "newsletter"]
+  "order": ["hero", "marquee", "concern", "featured", "routine", "categories", "offer", "more", "brand", "compare", "testimonials", "homefaq", "newsletter"]
 }
