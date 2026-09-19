@@ -24,7 +24,7 @@
         "threshold": 80,
         "reward": "10% off your order",
         "upsell_heading": "Complete your routine",
-        "upsell_collection": "best-sellers-1"
+        "upsell_collection": "best-sellers"
       }
     }
   },
