@@ -55,6 +55,9 @@ section.section{padding:clamp(56px,7vw,96px) 0}
 .hero-copy p{font-size:17px;margin:0 0 26px;color:rgba(255,255,255,.9)}
 .hero-copy .btn{background:#fff;color:var(--green);border-color:#fff}
 .hero-copy .btn:hover{background:var(--cream);border-color:var(--cream);color:var(--green)}
+.hero-copy__ctas{display:flex;flex-wrap:wrap;gap:12px}
+.hero-copy .btn.hero-btn--ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+.hero-copy .btn.hero-btn--ghost:hover{background:rgba(255,255,255,.14);border-color:#fff;color:#fff}
 .hero-dots{position:absolute;bottom:20px;left:0;right:0;display:flex;justify-content:center;gap:9px;z-index:3}
 .hero-dot{width:8px;height:8px;border-radius:50%;border:0;background:rgba(255,255,255,.55);cursor:pointer;padding:0;transition:all .2s}
 .hero-dot[aria-current=true]{background:#fff;width:24px;border-radius:4px}
@@ -63,6 +66,7 @@ section.section{padding:clamp(56px,7vw,96px) 0}
   .hero-overlay{align-items:flex-end;background:linear-gradient(0deg,rgba(7,63,58,.78) 0%,rgba(7,63,58,.2) 48%,rgba(7,63,58,0) 72%);padding-bottom:64px}
   .hero-copy{max-width:100%;text-align:center}
   .hero-copy p{font-size:15px}
+  .hero-copy__ctas{justify-content:center}
 }
 
 /* Round categories */

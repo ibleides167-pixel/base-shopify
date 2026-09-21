@@ -12,7 +12,7 @@
       {%- for block in section.blocks -%}
         <div class="vk-community__cell" {{ block.shopify_attributes }}>
           <span class="vk-community__user">{{ block.settings.username | default: '@velkrova' }}</span>
-          <a class="vk-community__media" href="{{ block.settings.link | default: '/collections/best-sellers' }}" aria-label="{{ block.settings.username | default: 'Shop the look' | escape }}">
+          <a class="vk-community__media" href="{{ block.settings.link | default: '/collections/best-sellers-1' }}" aria-label="{{ block.settings.username | default: 'Shop the look' | escape }}">
             {%- if block.settings.image != blank -%}
               {{ block.settings.image | image_url: width: 700 | image_tag: loading: 'lazy', alt: block.settings.username }}
             {%- elsif block.settings.image_url != blank -%}
@@ -21,7 +21,7 @@
               <span class="placeholder">Add an image</span>
             {%- endif -%}
           </a>
-          <a class="vk-community__cta" href="{{ block.settings.link | default: '/collections/best-sellers' }}">Shop the look</a>
+          <a class="vk-community__cta" href="{{ block.settings.link | default: '/collections/best-sellers-1' }}">Shop the look</a>
         </div>
       {%- endfor -%}
     </div>

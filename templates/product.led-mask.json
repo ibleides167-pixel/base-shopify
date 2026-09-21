@@ -12,8 +12,27 @@
     "main": {
       "type": "main-product-premium",
       "settings": {
-        "media_limit": 5,
+        "media_limit": 6,
         "bundle_product": "avocado-24k-gold-collagen-eye-masks-hydrating-under-eye-patches-for-dark-circles-puffiness-firm-skin"
+      }
+    },
+    "modes": {
+      "type": "vk-led-modes",
+      "blocks": {
+        "m1": { "type": "mode", "settings": { "hex": "#E4572E", "name": "Red light", "focus": "Firmness & fine lines", "text": "A setting many build into routines focused on the look of firmness and fine lines." } },
+        "m2": { "type": "mode", "settings": { "hex": "#3B6FE4", "name": "Blue light", "focus": "Blemish-prone skin", "text": "Suitable for routines focused on clearer-looking, blemish-prone skin." } },
+        "m3": { "type": "mode", "settings": { "hex": "#3B9E63", "name": "Green light", "focus": "Uneven-looking tone", "text": "For routines focused on the appearance of a more even tone." } },
+        "m4": { "type": "mode", "settings": { "hex": "#E7C13B", "name": "Yellow light", "focus": "Dull-looking skin", "text": "Suitable for routines focused on a brighter, more radiant-looking finish." } },
+        "m5": { "type": "mode", "settings": { "hex": "#7E5BE4", "name": "Purple light", "focus": "A combined light", "text": "Combines the red and blue settings in one." } },
+        "m6": { "type": "mode", "settings": { "hex": "#3BC6E4", "name": "Cyan light", "focus": "Calm, comfortable skin", "text": "A gentle setting for routines focused on calm, comfortable-looking skin." } },
+        "m7": { "type": "mode", "settings": { "hex": "#ECECEC", "name": "White light", "focus": "All-over finish", "text": "A blended light for an all-over, well-kept-looking finish." } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4", "m5", "m6", "m7"],
+      "settings": {
+        "eyebrow": "SEVEN LIGHT MODES",
+        "heading": "One mask. Seven light modes.",
+        "subheading": "Switch colour depending on what your skin needs that week.",
+        "note": "These are cosmetic light settings, not medical treatments. Follow the supplied manual for session length and frequency, and read the safety notes below before your first use."
       }
     },
     "recommendations": {
@@ -21,10 +40,22 @@
       "settings": {
         "heading": "You may also like"
       }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Make time for your routine",
+        "text": "Get skincare tips, product guidance and exclusive Velkrova offers.",
+        "placeholder": "Your email",
+        "button_label": "Sign up",
+        "success": "Thanks - check your inbox."
+      }
     }
   },
   "order": [
     "main",
-    "recommendations"
+    "modes",
+    "recommendations",
+    "newsletter"
   ]
 }
