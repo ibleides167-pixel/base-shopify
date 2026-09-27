@@ -14,6 +14,7 @@
   {{ 'theme.css' | asset_url | stylesheet_tag }}
   {{ 'velkrova-refine.css' | asset_url | stylesheet_tag }}
   {{ 'velkrova-fix.css' | asset_url | stylesheet_tag }}
+  {{ 'velkrova-brand.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'velkrova-fix.js' | asset_url }}" defer="defer"></script>
 
   {%- if template.name == 'product' and product != blank -%}
