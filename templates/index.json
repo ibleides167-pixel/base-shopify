@@ -15,6 +15,8 @@
         "s1": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_25_de_set._de_2026_16_00_01_1.webp",
+            "image_mobile": "shopify://shop_images/ChatGPT_Image_25_de_set._de_2026_16_00_01_2.webp",
             "image_url": "https://cdn.shopify.com/s/files/1/0837/6945/8943/files/render_96988307-c67e-4566-9a23-70ac6e637535.jpg?v=1787947572",
             "image_url_mobile": "",
             "alt": "Rechargeable LED light therapy face mask",
@@ -24,10 +26,26 @@
             "text": "",
             "button_label": ""
           }
+        },
+        "slide_QnFgQx": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_25_de_set._de_2026_16_10_03_1_66db2fb4-b5bd-4e2a-aa1b-e6a18c66968c.webp",
+            "image_mobile": "shopify://shop_images/ChatGPT_Image_25_de_set._de_2026_16_00_01_2.webp",
+            "image_url": "",
+            "image_url_mobile": "",
+            "alt": "",
+            "button_link": "",
+            "eyebrow": "",
+            "heading": "",
+            "text": "",
+            "button_label": ""
+          }
         }
       },
       "block_order": [
-        "s1"
+        "s1",
+        "slide_QnFgQx"
       ],
       "settings": {}
     },
