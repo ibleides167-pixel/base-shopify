@@ -15,8 +15,6 @@
         "s1": {
           "type": "slide",
           "settings": {
-            "image": "",
-            "image_mobile": "",
             "image_url": "https://cdn.shopify.com/s/files/1/0837/6945/8943/files/render_96988307-c67e-4566-9a23-70ac6e637535.jpg?v=1787947572",
             "image_url_mobile": "",
             "alt": "Rechargeable LED light therapy face mask",
@@ -28,19 +26,53 @@
           }
         }
       },
-      "block_order": ["s1"],
+      "block_order": [
+        "s1"
+      ],
       "settings": {}
     },
     "marquee": {
       "type": "marquee",
       "blocks": {
-        "a": { "type": "item", "settings": { "text": "Free UK delivery on every order", "icon": "truck" } },
-        "b": { "type": "item", "settings": { "text": "30-day returns", "icon": "return" } },
-        "c": { "type": "item", "settings": { "text": "Tracked shipping", "icon": "pin" } },
-        "d": { "type": "item", "settings": { "text": "Secure checkout", "icon": "shield" } }
+        "a": {
+          "type": "item",
+          "settings": {
+            "text": "Free UK delivery on every order",
+            "icon": "truck"
+          }
+        },
+        "b": {
+          "type": "item",
+          "settings": {
+            "text": "30-day returns",
+            "icon": "return"
+          }
+        },
+        "c": {
+          "type": "item",
+          "settings": {
+            "text": "Tracked shipping",
+            "icon": "pin"
+          }
+        },
+        "d": {
+          "type": "item",
+          "settings": {
+            "text": "Secure checkout",
+            "icon": "shield"
+          }
+        }
       },
-      "block_order": ["a", "b", "c", "d"],
-      "settings": { "label": "Store benefits", "brand": true }
+      "block_order": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "settings": {
+        "label": "Store benefits",
+        "brand": true
+      }
     },
     "promo": {
       "type": "promo-tiles",
@@ -85,8 +117,15 @@
           }
         }
       },
-      "block_order": ["t1", "t2", "t3"],
-      "settings": { "heading": "" }
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": ""
+      }
     },
     "featured": {
       "type": "featured-collection-premium",
@@ -100,13 +139,49 @@
     "categories": {
       "type": "category-grid",
       "blocks": {
-        "a": { "type": "category", "settings": { "heading": "Face Care", "collection": "face", "link": "/collections/face" } },
-        "b": { "type": "category", "settings": { "heading": "Hair Care", "collection": "hair", "link": "/collections/hair" } },
-        "c": { "type": "category", "settings": { "heading": "Body Care", "collection": "body", "link": "/collections/body" } },
-        "d": { "type": "category", "settings": { "heading": "Wellness", "collection": "wellness-accessories", "link": "/collections/wellness-accessories" } }
+        "a": {
+          "type": "category",
+          "settings": {
+            "heading": "Face Care",
+            "collection": "face",
+            "link": "/collections/face"
+          }
+        },
+        "b": {
+          "type": "category",
+          "settings": {
+            "heading": "Hair Care",
+            "collection": "hair",
+            "link": "/collections/hair"
+          }
+        },
+        "c": {
+          "type": "category",
+          "settings": {
+            "heading": "Body Care",
+            "collection": "body",
+            "link": "/collections/body"
+          }
+        },
+        "d": {
+          "type": "category",
+          "settings": {
+            "heading": "Wellness",
+            "collection": "wellness-accessories",
+            "link": "/collections/wellness-accessories"
+          }
+        }
       },
-      "block_order": ["a", "b", "c", "d"],
-      "settings": { "heading": "Shop by category", "show_labels": true }
+      "block_order": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "settings": {
+        "heading": "Shop by category",
+        "show_labels": true
+      }
     },
     "offer": {
       "type": "offer-banner",
@@ -144,13 +219,44 @@
     "compare": {
       "type": "vk-compare",
       "blocks": {
-        "r1": { "type": "row", "settings": { "label": "Free UK delivery, no minimum spend" } },
-        "r2": { "type": "row", "settings": { "label": "30-day returns, not the legal 14" } },
-        "r3": { "type": "row", "settings": { "label": "Tracked on every single order" } },
-        "r4": { "type": "row", "settings": { "label": "Honest timeframes for results" } },
-        "r5": { "type": "row", "settings": { "label": "Routines built for ten minutes" } }
+        "r1": {
+          "type": "row",
+          "settings": {
+            "label": "Free UK delivery, no minimum spend"
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "label": "30-day returns, not the legal 14"
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "label": "Tracked on every single order"
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "label": "Honest timeframes for results"
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "label": "Routines built for ten minutes"
+          }
+        }
       },
-      "block_order": ["r1", "r2", "r3", "r4", "r5"],
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5"
+      ],
       "settings": {
         "eyebrow": "THE VELKROVA DIFFERENCE",
         "heading": "Made for the ten minutes",
@@ -158,31 +264,118 @@
         "text": "Salon-grade devices chosen for routines that fit into a normal evening, backed by delivery and returns terms we put in writing. No thresholds to reach, no fine print at checkout, and honest timeframes for how long results really take.",
         "us_label": "Velkrova",
         "them_label": "Others",
-        "background": "#FFFFFF"
+        "background": "#ffffff"
       }
     },
     "testimonials": {
       "type": "testimonials",
       "blocks": {
-        "b1": { "type": "testimonial", "settings": { "title": "Exceptional Quality", "quote": "Beautiful design, genuinely easy to use and now the best part of my evening routine. I noticed a difference within a few weeks.", "rating": 5, "author": "Amelia R.", "role": "Verified customer" } },
-        "b2": { "type": "testimonial", "settings": { "title": "Life-Changing Experience", "quote": "I was sceptical about at-home devices, but the results speak for themselves. Delivery was fast and everything was well packaged.", "rating": 5, "author": "James T.", "role": "Verified customer" } },
-        "b3": { "type": "testimonial", "settings": { "title": "Worth Every Penny", "quote": "Replaced my monthly salon visits and paid for itself almost straight away. The honest timeframes on the product page were spot on.", "rating": 5, "author": "Priya K.", "role": "Verified customer" } },
-        "b4": { "type": "testimonial", "settings": { "title": "Gentle and Effective", "quote": "Perfect for sensitive skin. Ten minutes on the sofa and my skin looks brighter. Would happily recommend to friends.", "rating": 4, "author": "Sofia M.", "role": "Verified customer" } }
+        "b1": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Exceptional Quality",
+            "quote": "Beautiful design, genuinely easy to use and now the best part of my evening routine. I noticed a difference within a few weeks.",
+            "rating": 5,
+            "author": "Amelia R.",
+            "role": "Verified customer"
+          }
+        },
+        "b2": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Life-Changing Experience",
+            "quote": "I was sceptical about at-home devices, but the results speak for themselves. Delivery was fast and everything was well packaged.",
+            "rating": 5,
+            "author": "James T.",
+            "role": "Verified customer"
+          }
+        },
+        "b3": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Worth Every Penny",
+            "quote": "Replaced my monthly salon visits and paid for itself almost straight away. The honest timeframes on the product page were spot on.",
+            "rating": 5,
+            "author": "Priya K.",
+            "role": "Verified customer"
+          }
+        },
+        "b4": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Gentle and Effective",
+            "quote": "Perfect for sensitive skin. Ten minutes on the sofa and my skin looks brighter. Would happily recommend to friends.",
+            "rating": 4,
+            "author": "Sofia M.",
+            "role": "Verified customer"
+          }
+        }
       },
-      "block_order": ["b1", "b2", "b3", "b4"],
-      "settings": { "heading": "Testimonial", "subheading": "Real reviews from customers who made the switch." }
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
+      "settings": {
+        "heading": "Testimonial",
+        "subheading": "Real reviews from customers who made the switch."
+      }
     },
     "homefaq": {
       "type": "vk-home-faq",
       "blocks": {
-        "q1": { "type": "question", "settings": { "question": "How long will my order take?", "answer": "<p>Orders are typically delivered within <strong>5 to 9 business days</strong>, with free tracked delivery anywhere in the UK and no minimum spend. You will get a tracking link by email as soon as your parcel leaves the warehouse.</p>" } },
-        "q2": { "type": "question", "settings": { "question": "Is delivery really free?", "answer": "<p>Yes, on every order and with no minimum spend. There is no threshold to reach and nothing added at checkout.</p>" } },
-        "q3": { "type": "question", "settings": { "question": "What if it is not right for me?", "answer": "<p>You have <strong>30 days from delivery</strong> to return it, which is longer than the 14 days you are entitled to by law. If an item arrives faulty, we cover the postage both ways.</p>" } },
-        "q4": { "type": "question", "settings": { "question": "How quickly will I see results?", "answer": "<p>It depends on the device, and we would rather tell you honestly than promise three days. Massage and depuffing are immediate. Skin tone and firmness usually take six to eight weeks of regular use, and anything to do with hair takes eight to twelve. Every product page says which applies.</p>" } },
-        "q5": { "type": "question", "settings": { "question": "Do the devices come with a UK plug?", "answer": "<p>Where a product has plug options, choose UK at checkout. Most of our devices are USB rechargeable, so they work with any charger you already own.</p>" } },
-        "q6": { "type": "question", "settings": { "question": "Is it safe to buy from you?", "answer": "<p>Payments run through Shopify's encrypted checkout, so we never see or store your card details. Every order is tracked, and if anything goes wrong you can reach a real person by email.</p>" } }
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "How long will my order take?",
+            "answer": "<p>Orders are typically delivered within <strong>5 to 9 business days</strong>, with free tracked delivery anywhere in the UK and no minimum spend. You will get a tracking link by email as soon as your parcel leaves the warehouse.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Is delivery really free?",
+            "answer": "<p>Yes, on every order and with no minimum spend. There is no threshold to reach and nothing added at checkout.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "What if it is not right for me?",
+            "answer": "<p>You have <strong>30 days from delivery</strong> to return it, which is longer than the 14 days you are entitled to by law. If an item arrives faulty, we cover the postage both ways.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "How quickly will I see results?",
+            "answer": "<p>It depends on the device, and we would rather tell you honestly than promise three days. Massage and depuffing are immediate. Skin tone and firmness usually take six to eight weeks of regular use, and anything to do with hair takes eight to twelve. Every product page says which applies.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Do the devices come with a UK plug?",
+            "answer": "<p>Where a product has plug options, choose UK at checkout. Most of our devices are USB rechargeable, so they work with any charger you already own.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "Is it safe to buy from you?",
+            "answer": "<p>Payments run through Shopify's encrypted checkout, so we never see or store your card details. Every order is tracked, and if anything goes wrong you can reach a real person by email.</p>"
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"],
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6"
+      ],
       "settings": {
         "eyebrow": "FAQ",
         "heading": "Frequently asked questions",
@@ -200,5 +393,18 @@
       }
     }
   },
-  "order": ["hero", "marquee", "promo", "featured", "categories", "offer", "more", "brand", "compare", "testimonials", "homefaq", "newsletter"]
+  "order": [
+    "hero",
+    "marquee",
+    "promo",
+    "featured",
+    "categories",
+    "offer",
+    "more",
+    "brand",
+    "compare",
+    "testimonials",
+    "homefaq",
+    "newsletter"
+  ]
 }
