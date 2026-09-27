@@ -1,9 +1,9 @@
 {%- comment -%}
   Shop by category.
-  Each card reads its image from the collection it points to, so the
-  picture always matches the category: image override > collection
-  image > first product image. The collection setting is used directly
-  (it is already a collection object, not a handle).
+  Image priority per card: uploaded image > image URL > collection image >
+  first product image. The image URL setting guarantees the card always
+  shows its category artwork, even if the collection lookup comes back
+  empty in a preview or draft theme.
 {%- endcomment -%}
 
 <section class="section vk-cats"><div class="page-width">
@@ -12,49 +12,54 @@
       <h2 class="section-title">{{ section.settings.heading }}</h2>
     </div>
   {%- endif -%}
-  <div class="grid categories">
+  <div class="vk-cats__grid">
     {%- for block in section.blocks -%}
       {%- liquid
         assign col = block.settings.collection
+        if col == blank and block.settings.handle != blank
+          assign col = collections[block.settings.handle]
+        endif
         assign target = block.settings.link
         if target == blank and col != blank
           assign target = col.url
         endif
         assign label = block.settings.heading | default: col.title
         assign pic = block.settings.image
-        if pic == blank and col != blank
+        if pic == blank and block.settings.image_url == blank and col != blank
           assign pic = col.image
-        endif
-        if pic == blank and col != blank
-          assign pic = col.products.first.featured_image
+          if pic == blank
+            assign pic = col.products.first.featured_image
+          endif
         endif
       -%}
-      <a class="category-card" href="{{ target | default: '/collections/all' }}" aria-label="{{ label | escape }}" {{ block.shopify_attributes }}>
-        <div class="card-media">
+      <a class="vk-cats__card" href="{{ target | default: '/collections/all' }}" aria-label="{{ label | escape }}" {{ block.shopify_attributes }}>
+        <span class="vk-cats__media">
           {%- if pic != blank -%}
-            <img src="{{ pic | image_url: width: 900 }}" srcset="{{ pic | image_url: width: 450 }} 450w, {{ pic | image_url: width: 900 }} 900w" sizes="(max-width: 900px) 48vw, 24vw" alt="{{ pic.alt | default: label | escape }}" loading="lazy" width="900" height="1125">
+            <img src="{{ pic | image_url: width: 900 }}" srcset="{{ pic | image_url: width: 450 }} 450w, {{ pic | image_url: width: 900 }} 900w" sizes="(max-width: 900px) 48vw, 24vw" alt="{{ pic.alt | default: label | escape }}" loading="lazy" width="900" height="900">
+          {%- elsif block.settings.image_url != blank -%}
+            {%- assign base = block.settings.image_url | split: '?' | first -%}
+            <img src="{{ base }}?width=900" srcset="{{ base }}?width=450 450w, {{ base }}?width=900 900w" sizes="(max-width: 900px) 48vw, 24vw" alt="{{ label | escape }}" loading="lazy" width="900" height="900">
           {%- else -%}
-            <div class="placeholder">{{ label }}</div>
+            <span class="vk-cats__ph">{{ label }}</span>
           {%- endif -%}
-          {%- if section.settings.show_labels -%}<span class="category-pill">{{ label }}</span>{%- endif -%}
-        </div>
+          {%- if section.settings.show_labels -%}<span class="vk-cats__pill">{{ label }}</span>{%- endif -%}
+        </span>
       </a>
     {%- endfor -%}
   </div>
 </div></section>
 
 <style>
-  .vk-cats .grid.categories{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
-  .vk-cats .category-card{display:block;padding:0;border:0;background:transparent;text-align:left}
-  .vk-cats .category-card .card-media{position:relative;display:block;width:100%;max-width:none;margin:0;aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:#f2efe9;transform:none}
-  .vk-cats .category-card:hover .card-media{transform:none}
-  .vk-cats .card-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .5s ease}
-  .vk-cats .category-card:hover .card-media img{transform:scale(1.04)}
-  .vk-cats .card-media .placeholder{display:flex;align-items:center;justify-content:center;height:100%}
-  .vk-cats .category-pill{position:absolute;left:14px;right:14px;bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;background:rgba(255,255,255,.94);color:var(--ink);padding:12px 16px;border-radius:999px;font-size:14px;font-weight:500;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 6px 18px rgba(0,0,0,.10);transition:background .25s ease,color .25s ease}
-  .vk-cats .category-pill::after{content:'\2192';flex:none}
-  .vk-cats .category-card:hover .category-pill{background:var(--green);color:#fff}
-  @media(max-width:900px){.vk-cats .grid.categories{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
-  @media(max-width:560px){.vk-cats .category-pill{left:8px;right:8px;bottom:8px;padding:9px 12px;font-size:12.5px}.vk-cats .card-media{border-radius:12px}}
+  .vk-cats__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+  .vk-cats__card{display:block;color:inherit;text-decoration:none}
+  .vk-cats__media{position:relative;display:block;width:100%;aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:#f2efe9}
+  .vk-cats__media img{position:absolute;inset:0;width:100%!important;height:100%!important;max-width:none;object-fit:cover;object-position:center;transition:transform .5s ease}
+  .vk-cats__card:hover .vk-cats__media img{transform:scale(1.04)}
+  .vk-cats__ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+  .vk-cats__pill{position:absolute;left:14px;right:14px;bottom:14px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;background:rgba(255,255,255,.94);color:var(--ink);padding:12px 16px;border-radius:999px;font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 6px 18px rgba(0,0,0,.10);transition:background .25s ease,color .25s ease}
+  .vk-cats__pill::after{content:'\2192';flex:none}
+  .vk-cats__card:hover .vk-cats__pill{background:var(--green);color:#fff}
+  @media(max-width:900px){.vk-cats__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
+  @media(max-width:560px){.vk-cats__pill{left:8px;right:8px;bottom:8px;padding:9px 12px;font-size:12.5px}.vk-cats__media{border-radius:12px}}
 </style>
-{% schema %}{"name":"Category grid","settings":[{"type":"text","id":"heading","label":"Heading","default":"Shop by category"},{"type":"checkbox","id":"show_labels","label":"Show label on images","default":true}],"blocks":[{"type":"category","name":"Category","settings":[{"type":"text","id":"heading","label":"Label","default":"Face"},{"type":"collection","id":"collection","label":"Collection"},{"type":"image_picker","id":"image","label":"Image override"},{"type":"url","id":"link","label":"Link override"}]}],"presets":[{"name":"Category grid","blocks":[{"type":"category"},{"type":"category"},{"type":"category"},{"type":"category"}]}]}{% endschema %}
+{% schema %}{"name":"Category grid","settings":[{"type":"text","id":"heading","label":"Heading","default":"Shop by category"},{"type":"checkbox","id":"show_labels","label":"Show label on images","default":true}],"blocks":[{"type":"category","name":"Category","settings":[{"type":"text","id":"heading","label":"Label","default":"Face"},{"type":"collection","id":"collection","label":"Collection"},{"type":"text","id":"handle","label":"Collection handle (fallback)"},{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"image_url","label":"Image URL (fallback)"},{"type":"url","id":"link","label":"Link override"}]}],"presets":[{"name":"Category grid","blocks":[{"type":"category"},{"type":"category"},{"type":"category"},{"type":"category"}]}]}{% endschema %}
