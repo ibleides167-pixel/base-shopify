@@ -159,18 +159,19 @@ body.cd-lock{overflow:hidden}
   });
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&drawer.classList.contains('is-open'))close()});
 
+  /* Keep the button's inner markup (icon + live price) intact after adding. */
   document.addEventListener('submit',function(e){
     var f=e.target;
     if(!f.action||f.action.indexOf('/cart/add')===-1) return;
     e.preventDefault();
-    var btn=f.querySelector('button[type=submit]'); var label=btn?btn.textContent:'';
+    var btn=f.querySelector('button[type=submit]'); var label=btn?btn.innerHTML:'';
     if(btn){btn.disabled=true;btn.textContent='Adding...'}
     fetch('/cart/add.js',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
-      .then(function(r){return r.json()})
+      .then(function(r){if(!r.ok) throw new Error('add failed');return r.json()})
       .then(function(){return load()})
       .then(function(){open()})
       .catch(function(){f.submit()})
-      .finally(function(){if(btn){btn.disabled=false;btn.textContent=label}});
+      .finally(function(){if(btn){btn.disabled=false;btn.innerHTML=label}});
   });
 
   load();
