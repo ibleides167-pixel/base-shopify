@@ -17,15 +17,15 @@
         "m1": {
           "type": "message",
           "settings": {
-            "text": "20% OFF THE GLOW DUO - LED FACE MASK + 24K GOLD EYE MASKS",
-            "link": "/products/the-glow-duo-led-light-therapy-mask-24k-gold-eye-masks"
+            "text": "FREE TRACKED UK DELIVERY - 30-DAY RETURNS",
+            "link": "/collections/all"
           }
         },
         "m2": {
           "type": "message",
           "settings": {
-            "text": "UP TO 37% OFF OUR 12 BEST SELLERS",
-            "link": "/collections/best-sellers-1"
+            "text": "SHOP OUR BEST SELLERS",
+            "link": "/collections/best-sellers"
           }
         },
         "m3": {

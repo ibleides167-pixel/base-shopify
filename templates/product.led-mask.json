@@ -12,19 +12,42 @@
     "main": {
       "type": "main-product-premium",
       "settings": {
-        "media_limit": 5,
-        "bundle_product": "avocado-24k-gold-collagen-eye-masks-hydrating-under-eye-patches-for-dark-circles-puffiness-firm-skin"
+        "media_limit": 6,
+        "trust_1": "Free tracked UK delivery",
+        "trust_2": "30-day returns",
+        "show_buy_with": true
       }
     },
     "recommendations": {
       "type": "product-recommendations",
+      "settings": { "heading": "You may also like" }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "How long does delivery take?", "answer": "<p>Free tracked delivery anywhere in the UK on every order. Orders are typically delivered within <strong>5 to 9 business days</strong>, and you get a tracking link by email as soon as your parcel ships.</p>" } },
+        "q2": { "type": "question", "settings": { "question": "Can I return it if it is not right for me?", "answer": "<p>Yes. You have <strong>30 days from delivery</strong> to return it, longer than the 14 days required by law. If an item arrives faulty, we cover the postage both ways.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "Is it safe for me to use?", "answer": "<p>Check the <strong>Safety &amp; precautions</strong> tab above before your first use. If you are pregnant, photosensitive, take photosensitising medication or have a medical condition, speak to your GP first.</p>" } },
+        "q4": { "type": "question", "settings": { "question": "Is checkout secure?", "answer": "<p>Payments run through Shopify's encrypted checkout, so we never see or store your card details.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"],
       "settings": {
-        "heading": "You may also like"
+        "eyebrow": "FAQ",
+        "heading": "Questions, answered",
+        "subheading": "About this product first, then delivery and returns.",
+        "use_product_faq": true
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Join the Velkrova list",
+        "text": "Early access to new devices and subscriber-only offers.",
+        "placeholder": "Your email",
+        "button_label": "Sign up",
+        "success": "Thanks - you are on the list."
       }
     }
   },
-  "order": [
-    "main",
-    "recommendations"
-  ]
+  "order": ["main", "recommendations", "faq", "newsletter"]
 }

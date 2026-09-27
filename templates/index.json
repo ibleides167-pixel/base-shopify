@@ -19,8 +19,8 @@
             "image_mobile": "",
             "image_url": "https://cdn.shopify.com/s/files/1/0837/6945/8943/files/render_96988307-c67e-4566-9a23-70ac6e637535.jpg?v=1787947572",
             "image_url_mobile": "",
-            "alt": "Discover the power of natural beauty - LED light therapy and 24K gold under-eye care",
-            "button_link": "shopify://products/the-glow-duo-led-light-therapy-mask-24k-gold-eye-masks",
+            "alt": "Rechargeable LED light therapy face mask",
+            "button_link": "shopify://products/rechargeable-7-colour-led-facial-mask",
             "eyebrow": "",
             "heading": "",
             "text": "",
@@ -48,37 +48,40 @@
         "t1": {
           "type": "tile",
           "settings": {
-            "bg_color": "#E38B3B",
+            "collection": "face",
+            "product": "anlan-9-in-1-rf-ems-facial-device",
+            "bg_color": "#073f3a",
             "text_color": "light",
-            "heading": "Unleash Your Inner Beauty",
-            "discount": "UP TO 50% DISCOUNT",
-            "button_label": "Buy now",
-            "button_link": "/collections/best-sellers",
-            "button_style": "dark"
+            "heading": "Clinic-inspired skin tech",
+            "button_label": "Shop face",
+            "button_link": "",
+            "button_style": "white"
           }
         },
         "t2": {
           "type": "tile",
           "settings": {
-            "bg_color": "#0f302d",
-            "text_color": "light",
-            "heading": "Embrace Your Uniqueness",
-            "discount": "UP TO 30% DISCOUNT",
-            "button_label": "Buy now",
-            "button_link": "/collections/face",
-            "button_style": "white"
+            "collection": "hair",
+            "product": "red-light-scalp-massager",
+            "bg_color": "#e9e1d7",
+            "text_color": "dark",
+            "heading": "Salon-smooth hair at home",
+            "button_label": "Shop hair",
+            "button_link": "",
+            "button_style": "dark"
           }
         },
         "t3": {
           "type": "tile",
           "settings": {
-            "bg_color": "#E39B8B",
+            "collection": "body",
+            "product": "cordless-massage-gun-42-heads",
+            "bg_color": "#2f5d57",
             "text_color": "light",
-            "heading": "Reveal Your Beauty",
-            "discount": "UP TO 50% DISCOUNT",
-            "button_label": "Buy now",
-            "button_link": "/collections/hair",
-            "button_style": "dark"
+            "heading": "Recovery on your schedule",
+            "button_label": "Shop body",
+            "button_link": "",
+            "button_style": "white"
           }
         }
       },
@@ -103,17 +106,20 @@
         "d": { "type": "category", "settings": { "heading": "Wellness", "collection": "wellness-accessories", "link": "/collections/wellness-accessories" } }
       },
       "block_order": ["a", "b", "c", "d"],
-      "settings": { "heading": "Shop by collection", "show_labels": true }
+      "settings": { "heading": "Shop by category", "show_labels": true }
     },
     "offer": {
       "type": "offer-banner",
       "settings": {
-        "eyebrow": "FEATURED PRODUCT",
-        "heading": "The Glow Duo",
-        "text": "LED light therapy for the whole face, collagen patches for the one area that always shows tiredness first. Together, 20% less than buying them separately.",
-        "product": "the-glow-duo-led-light-therapy-mask-24k-gold-eye-masks",
-        "button_label": "Shop the duo",
-        "button_link": ""
+        "product": "rechargeable-7-colour-led-facial-mask",
+        "eyebrow": "BEST SELLER",
+        "heading": "Rechargeable 7-Colour LED Face Mask",
+        "text": "Seven selectable light colours in a hands-free, face-shaped mask. It runs on a rechargeable battery, so there is no cable keeping you by the wall while you use it.",
+        "button_label": "Shop the mask",
+        "button_link": "",
+        "secondary_label": "All face care",
+        "secondary_link": "/collections/face",
+        "assurance": "Free tracked UK delivery · 30-day returns"
       }
     },
     "more": {
