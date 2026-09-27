@@ -1,7 +1,10 @@
 {%- comment -%}
-  Promo tiles — a row of colourful offer banners, each with its own
-  background colour, a floating product cut-out, a discount line and a
-  button. Styled after the "Unleash Your Inner Beauty" strip.
+  Promo tiles - one tile per category.
+  Image: override > hero product of that category > collection image, so
+  each tile always shows something from its own category.
+  The offer line is calculated from real compare-at prices in the
+  collection; if nothing in it is reduced, the product count is shown
+  instead of a discount claim.
 {%- endcomment -%}
 <section class="section promo-tiles-section">
   <div class="page-width">
@@ -10,24 +13,55 @@
     {%- endif -%}
     <div class="promo-tiles" style="--cols:{{ section.blocks.size }}">
       {%- for block in section.blocks -%}
-        {%- assign link = block.settings.button_link | default: '/collections/all' -%}
-        <a class="promo-tile promo-tile--{{ block.settings.text_color }}"
-           href="{{ link }}"
-           style="background:{{ block.settings.bg_color }}"
-           {{ block.shopify_attributes }}>
+        {%- liquid
+          assign col = block.settings.collection
+          assign hero = block.settings.product
+          assign link = block.settings.button_link
+          if link == blank and col != blank
+            assign link = col.url
+          endif
+          if link == blank
+            assign link = '/collections/all'
+          endif
+          assign pic = block.settings.image
+          if pic == blank and hero != blank
+            assign pic = hero.featured_image
+          endif
+          if pic == blank and col != blank
+            assign pic = col.image
+          endif
+          assign best = 0
+          if col != blank
+            for p in col.products limit: 50
+              for v in p.variants
+                if v.compare_at_price > v.price
+                  assign d = v.compare_at_price | minus: v.price | times: 100 | divided_by: v.compare_at_price
+                  if d > best
+                    assign best = d
+                  endif
+                endif
+              endfor
+            endfor
+          endif
+        -%}
+        <a class="promo-tile promo-tile--{{ block.settings.text_color }}" href="{{ link }}" style="background:{{ block.settings.bg_color }}" {{ block.shopify_attributes }}>
           <div class="promo-tile__copy">
+            {%- if col != blank -%}<span class="promo-tile__kicker">{{ col.title }}</span>{%- endif -%}
             {%- if block.settings.heading != blank -%}<h3 class="promo-tile__title">{{ block.settings.heading }}</h3>{%- endif -%}
-            {%- if block.settings.discount != blank -%}<p class="promo-tile__discount">{{ block.settings.discount }}</p>{%- endif -%}
+            {%- if best > 0 -%}
+              <p class="promo-tile__meta">Up to {{ best }}% off</p>
+            {%- elsif col != blank -%}
+              <p class="promo-tile__meta">{{ col.products_count }} products</p>
+            {%- endif -%}
+          </div>
+          <div class="promo-tile__foot">
             {%- if block.settings.button_label != blank -%}
               <span class="promo-tile__btn promo-tile__btn--{{ block.settings.button_style }}">{{ block.settings.button_label }}</span>
             {%- endif -%}
+            {%- if pic != blank -%}
+              <span class="promo-tile__media"><img src="{{ pic | image_url: width: 600 }}" alt="{{ pic.alt | default: block.settings.heading | escape }}" loading="lazy" width="600" height="600"></span>
+            {%- endif -%}
           </div>
-          {%- if block.settings.image != blank -%}
-            <img class="promo-tile__img" src="{{ block.settings.image | image_url: width: 700 }}"
-                 alt="{{ block.settings.heading | escape }}" loading="lazy" width="700" height="700">
-          {%- elsif block.settings.image_url != blank -%}
-            <img class="promo-tile__img" src="{{ block.settings.image_url }}" alt="{{ block.settings.heading | escape }}" loading="lazy">
-          {%- endif -%}
         </a>
       {%- endfor -%}
     </div>
@@ -36,32 +70,28 @@
 
 <style>
   .promo-tiles-section{padding-block:clamp(30px,4vw,64px)}
-  .promo-tiles{display:grid;grid-template-columns:repeat(var(--cols,3),1fr);gap:20px}
-  .promo-tile{
-    position:relative;overflow:hidden;border-radius:14px;
-    min-height:360px;padding:36px 34px;display:flex;flex-direction:column;
-    isolation:isolate;color:#12100e;transition:transform .35s ease,box-shadow .35s ease;
-  }
-  .promo-tile:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.14)}
+  .promo-tiles{display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:20px}
+  .promo-tile{position:relative;overflow:hidden;border-radius:16px;min-height:340px;padding:28px 26px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:20px;color:var(--ink);transition:transform .35s ease,box-shadow .35s ease}
+  .promo-tile:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(15,48,45,.14)}
   .promo-tile--light{color:#fff}
-  .promo-tile__copy{position:relative;z-index:2;max-width:78%}
-  .promo-tile__title{font-family:'Marcellus',Georgia,serif;font-weight:400;font-size:clamp(24px,2.2vw,32px);line-height:1.12;margin:0 0 12px}
-  .promo-tile__discount{text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:600;margin:0 0 22px;opacity:.9}
-  .promo-tile__btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 26px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-radius:2px;transition:opacity .25s ease,transform .25s ease}
-  .promo-tile__btn--dark{background:#12100e;color:#fff}
-  .promo-tile__btn--white{background:#fff;color:#12100e}
+  .promo-tile__kicker{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;opacity:.8;margin-bottom:10px}
+  .promo-tile__title{font-family:var(--font-heading);font-weight:400;font-size:clamp(22px,2vw,29px);line-height:1.15;margin:0 0 10px}
+  .promo-tile__meta{margin:0;font-size:13px;letter-spacing:.04em;opacity:.85}
+  .promo-tile__foot{display:flex;align-items:flex-end;justify-content:space-between;gap:14px}
+  .promo-tile__btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 22px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;white-space:nowrap;transition:transform .25s ease}
+  .promo-tile__btn--dark{background:var(--ink);color:#fff}
+  .promo-tile__btn--white{background:#fff;color:var(--ink)}
   .promo-tile:hover .promo-tile__btn{transform:translateX(3px)}
-  .promo-tile__img{
-    position:absolute;right:0;bottom:0;z-index:1;
-    width:auto;max-width:60%;max-height:66%;object-fit:contain;object-position:right bottom;
-    pointer-events:none;filter:drop-shadow(0 10px 22px rgba(0,0,0,.18));
-    transition:transform .5s ease;
-  }
-  .promo-tile:hover .promo-tile__img{transform:scale(1.05)}
+  .promo-tile__media{flex:none;width:48%;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 10px 24px rgba(0,0,0,.14)}
+  .promo-tile__media img{width:100%;height:100%;object-fit:contain;transition:transform .5s ease}
+  .promo-tile:hover .promo-tile__media img{transform:scale(1.05)}
   @media(max-width:900px){
-    .promo-tiles{grid-template-columns:1fr;gap:16px}
-    .promo-tile{min-height:280px;padding:28px 26px}
-    .promo-tile__copy{max-width:70%}
+    .promo-tiles{grid-template-columns:1fr;gap:14px}
+    .promo-tile{min-height:0;padding:22px 20px 20px;flex-direction:row;align-items:stretch}
+    .promo-tile__copy{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center}
+    .promo-tile__foot{flex:none;width:42%;flex-direction:column-reverse;align-items:stretch;justify-content:space-between;gap:12px}
+    .promo-tile__media{width:100%}
+    .promo-tile__btn{padding:11px 12px;font-size:10.5px}
   }
 </style>
 {% schema %}
@@ -75,28 +105,21 @@
       "type": "tile",
       "name": "Tile",
       "settings": [
-        { "type": "color", "id": "bg_color", "label": "Background colour", "default": "#F28C28" },
+        { "type": "collection", "id": "collection", "label": "Category collection" },
+        { "type": "product", "id": "product", "label": "Hero product (image)" },
+        { "type": "image_picker", "id": "image", "label": "Image override" },
+        { "type": "color", "id": "bg_color", "label": "Background colour", "default": "#073f3a" },
         { "type": "select", "id": "text_color", "label": "Text colour", "default": "light", "options": [ { "value": "light", "label": "Light (for dark backgrounds)" }, { "value": "dark", "label": "Dark (for light backgrounds)" } ] },
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Unleash Your Inner Beauty" },
-        { "type": "text", "id": "discount", "label": "Discount line", "default": "UP TO 50% DISCOUNT" },
-        { "type": "text", "id": "button_label", "label": "Button label", "default": "Buy now" },
-        { "type": "url", "id": "button_link", "label": "Button link" },
-        { "type": "select", "id": "button_style", "label": "Button style", "default": "dark", "options": [ { "value": "dark", "label": "Dark" }, { "value": "white", "label": "White" } ] },
-        { "type": "image_picker", "id": "image", "label": "Product image (cut-out)" },
-        { "type": "text", "id": "image_url", "label": "Image URL (fallback)" }
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Clinic-inspired skin tech" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
+        { "type": "url", "id": "button_link", "label": "Button link (defaults to the collection)" },
+        { "type": "select", "id": "button_style", "label": "Button style", "default": "white", "options": [ { "value": "dark", "label": "Dark" }, { "value": "white", "label": "White" } ] }
       ]
     }
   ],
   "max_blocks": 4,
   "presets": [
-    {
-      "name": "Promo tiles",
-      "blocks": [
-        { "type": "tile", "settings": { "bg_color": "#F28C28", "text_color": "light", "heading": "Unleash Your Inner Beauty", "discount": "UP TO 50% DISCOUNT", "button_style": "dark" } },
-        { "type": "tile", "settings": { "bg_color": "#B7A98C", "text_color": "light", "heading": "Embrace Your Uniqueness", "discount": "UP TO 30% DISCOUNT", "button_style": "white" } },
-        { "type": "tile", "settings": { "bg_color": "#E39B8B", "text_color": "light", "heading": "Reveal Your Beauty", "discount": "UP TO 50% DISCOUNT", "button_style": "dark" } }
-      ]
-    }
+    { "name": "Promo tiles", "blocks": [ { "type": "tile" }, { "type": "tile" }, { "type": "tile" } ] }
   ]
 }
 {% endschema %}

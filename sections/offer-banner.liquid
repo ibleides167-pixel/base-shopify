@@ -1,60 +1,102 @@
-{%- assign p = section.settings.product -%}
-<section class="offer"><div class="page-width"><div class="offer-grid">
-  <div class="offer-copy">
-    {%- if section.settings.eyebrow != blank -%}<div class="eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
-    <h2>{{ section.settings.heading }}</h2>
-    {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
-    {%- if p != blank -%}
-      {%- assign v = p.selected_or_first_available_variant -%}
-      <div class="offer-price">
-        <span class="now">{{ v.price | money }}</span>
-        {%- if v.compare_at_price > v.price -%}
-          <span class="was">{{ v.compare_at_price | money }}</span>
-          {%- assign pct = v.compare_at_price | minus: v.price | times: 100 | divided_by: v.compare_at_price -%}
-          <span class="offer-save">Save {{ pct }}%</span>
+{%- comment -%}
+  Product spotlight (replaces the old Glow Duo offer banner).
+  Everything is read from the chosen product: images, key benefits
+  (custom.key_benefits), price and compare-at price. A saving is only
+  shown when the variant really has a higher compare-at price.
+{%- endcomment -%}
+{%- liquid
+  assign p = section.settings.product
+  if p != blank
+    assign v = p.selected_or_first_available_variant
+    assign benefits = p.metafields.custom.key_benefits.value
+  endif
+  assign heading = section.settings.heading | default: p.title
+  assign pic = section.settings.image | default: p.featured_image
+-%}
+<section class="spot">
+  <div class="page-width">
+    <div class="spot__grid">
+      <div class="spot__media">
+        <a class="spot__main" href="{{ p.url | default: section.settings.button_link }}" aria-label="{{ heading | escape }}">
+          {%- if pic != blank -%}
+            <img src="{{ pic | image_url: width: 1100 }}" srcset="{{ pic | image_url: width: 550 }} 550w, {{ pic | image_url: width: 1100 }} 1100w" sizes="(max-width: 900px) 92vw, 46vw" alt="{{ pic.alt | default: heading | escape }}" loading="lazy" width="1100" height="1100">
+          {%- else -%}
+            <span class="placeholder">Choose a product</span>
+          {%- endif -%}
+        </a>
+        {%- if p != blank and p.images.size > 1 -%}
+          <div class="spot__thumbs">
+            {%- for img in p.images offset: 1 limit: 3 -%}
+              <a href="{{ p.url }}" tabindex="-1"><img src="{{ img | image_url: width: 300 }}" alt="{{ img.alt | default: heading | escape }}" loading="lazy" width="300" height="300"></a>
+            {%- endfor -%}
+          </div>
         {%- endif -%}
       </div>
-      <a class="btn" href="{{ p.url }}">{{ section.settings.button_label }}</a>
-    {%- else -%}
-      <a class="btn" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
-    {%- endif -%}
+
+      <div class="spot__copy">
+        {%- if section.settings.eyebrow != blank -%}<span class="spot__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="spot__title">{{ heading }}</h2>
+        {%- if section.settings.text != blank -%}<p class="spot__text">{{ section.settings.text }}</p>{%- endif -%}
+
+        {%- if benefits and benefits.size > 0 -%}
+          <ul class="spot__list">
+            {%- for b in benefits limit: 4 -%}
+              <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 10.5l3.4 3.4 7.6-7.8"/></svg><span>{{ b }}</span></li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if p != blank -%}
+          <div class="spot__price">
+            <span class="spot__now">{%- if p.price_varies -%}From {% endif %}{{ v.price | money }}</span>
+            {%- if v.compare_at_price > v.price -%}
+              <span class="spot__was">{{ v.compare_at_price | money }}</span>
+              <span class="spot__save">Save {{ v.compare_at_price | minus: v.price | money }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <div class="spot__actions">
+          <a class="btn" href="{{ p.url | default: section.settings.button_link }}">{{ section.settings.button_label }}</a>
+          {%- if section.settings.secondary_label != blank and section.settings.secondary_link != blank -%}
+            <a class="btn secondary" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label }}</a>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.assurance != blank -%}<p class="spot__assure">{{ section.settings.assurance }}</p>{%- endif -%}
+      </div>
+    </div>
   </div>
-  <a class="offer-media" href="{% if p != blank %}{{ p.url }}{% else %}{{ section.settings.button_link }}{% endif %}">
-    {%- if section.settings.image != blank -%}
-      <img src="{{ section.settings.image | image_url: width: 900 }}" srcset="{{ section.settings.image | image_url: width: 500 }} 500w, {{ section.settings.image | image_url: width: 900 }} 900w" sizes="(max-width: 900px) 90vw, 42vw" alt="{{ section.settings.heading | escape }}" loading="lazy">
-    {%- elsif p.featured_image != blank -%}
-      <img src="{{ p.featured_image | image_url: width: 900 }}" srcset="{{ p.featured_image | image_url: width: 500 }} 500w, {{ p.featured_image | image_url: width: 900 }} 900w" sizes="(max-width: 900px) 90vw, 42vw" alt="{{ p.title | escape }}" loading="lazy">
-    {%- else -%}
-      <div class="placeholder">Offer image</div>
-    {%- endif -%}
-  </a>
-</div></div></section>
+</section>
 
 <style>
-  .offer{padding-block:clamp(34px,4.4vw,72px)}
-  .offer-media{
-    display:block;width:100%;aspect-ratio:5/4;
-    overflow:hidden;border-radius:12px;background:#fff;line-height:0;
-  }
-  .offer-media img{
-    width:100%;height:100%;object-fit:cover;object-position:center;
-    display:block;border-radius:12px;transition:transform .4s ease;
-  }
-  .offer-media:hover img{transform:scale(1.03)}
-  .offer-media .placeholder{display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:#f7f5f2;font-size:13px}
-  .offer-save{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.16);color:#fff;padding:5px 10px;border-radius:999px}
-
+  .spot{padding:clamp(44px,6vw,88px) 0;background:var(--cream)}
+  .spot__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:center}
+  .spot__main{display:block;aspect-ratio:1/1;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 18px 44px rgba(15,48,45,.08)}
+  .spot__main img{width:100%;height:100%;object-fit:contain;transition:transform .5s ease}
+  .spot__main:hover img{transform:scale(1.03)}
+  .spot__main .placeholder{display:flex;align-items:center;justify-content:center;height:100%}
+  .spot__thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+  .spot__thumbs a{display:block;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#fff}
+  .spot__thumbs img{width:100%;height:100%;object-fit:cover}
+  .spot__eyebrow{display:inline-block;margin-bottom:14px;padding:6px 13px;border-radius:999px;background:#fff;color:var(--green);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+  .spot__title{margin:0 0 14px;font-family:var(--font-heading);font-weight:400;font-size:clamp(28px,3.4vw,44px);line-height:1.08;letter-spacing:-.015em}
+  .spot__text{margin:0 0 20px;font-size:16px;line-height:1.65;color:#3d4b48;max-width:52ch}
+  .spot__list{list-style:none;margin:0 0 24px;padding:0;display:grid;gap:10px}
+  .spot__list li{display:flex;gap:11px;align-items:flex-start;font-size:15px;line-height:1.5}
+  .spot__list svg{width:22px;height:22px;flex:none;padding:4px;border-radius:50%;background:var(--green);fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .spot__price{display:flex;align-items:baseline;flex-wrap:wrap;gap:12px;margin:0 0 22px}
+  .spot__now{font-size:30px;font-weight:600;color:var(--ink)}
+  .spot__was{font-size:18px;color:#9a948c;text-decoration:line-through}
+  .spot__save{font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:var(--green);color:#fff;padding:5px 10px;border-radius:999px}
+  .spot__actions{display:flex;flex-wrap:wrap;gap:12px}
+  .spot__actions .btn{border-radius:999px;padding:15px 30px}
+  .spot__assure{margin:16px 0 0;font-size:13px;color:var(--muted)}
   @media(max-width:900px){
-    /* No fixed frame on mobile: the container hugs the image, so nothing
-       is cropped and there is no letterboxing at any screen width. */
-    .offer{padding-block:30px}
-    .offer-grid{gap:20px}
-    .offer-media{aspect-ratio:auto;max-height:none;border-radius:10px;line-height:0}
-    .offer-media img{height:auto;object-fit:contain;border-radius:10px}
-    .offer-copy h2{margin-bottom:10px}
-    .offer-copy p{margin-bottom:16px;font-size:15px}
-    .offer-price{margin-bottom:18px}
-    .offer-price .now{font-size:28px}
+    .spot__grid{grid-template-columns:1fr;gap:26px}
+    .spot__copy{order:2}
+    .spot__thumbs{gap:8px}
+    .spot__now{font-size:26px}
+    .spot__actions .btn{flex:1 1 100%}
   }
 </style>
-{% schema %}{"name":"Offer banner","settings":[{"type":"text","id":"eyebrow","label":"Eyebrow","default":"BUNDLE OFFER"},{"type":"text","id":"heading","label":"Heading","default":"The Glow Duo"},{"type":"textarea","id":"text","label":"Text"},{"type":"product","id":"product","label":"Product"},{"type":"image_picker","id":"image","label":"Image override"},{"type":"text","id":"button_label","label":"Button label","default":"Shop the duo"},{"type":"url","id":"button_link","label":"Button link"}],"presets":[{"name":"Offer banner"}]}{% endschema %}
+{% schema %}{"name":"Product spotlight","settings":[{"type":"product","id":"product","label":"Product"},{"type":"text","id":"eyebrow","label":"Eyebrow","default":"BEST SELLER"},{"type":"text","id":"heading","label":"Heading (defaults to product title)"},{"type":"textarea","id":"text","label":"Text"},{"type":"image_picker","id":"image","label":"Image override"},{"type":"text","id":"button_label","label":"Button label","default":"Shop now"},{"type":"url","id":"button_link","label":"Button link (used only without a product)"},{"type":"text","id":"secondary_label","label":"Secondary button label"},{"type":"url","id":"secondary_link","label":"Secondary button link"},{"type":"text","id":"assurance","label":"Assurance line","default":"Free tracked UK delivery · 30-day returns"}],"presets":[{"name":"Product spotlight"}]}{% endschema %}
