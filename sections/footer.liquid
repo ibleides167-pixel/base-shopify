@@ -2,49 +2,53 @@
   <div class="page-width">
     <div class="footer-grid">
       <div>
-        <div class="footer-logo" style="margin-bottom:16px">
+        <a class="footer-logo" href="{{ routes.root_url }}" style="display:inline-block;margin-bottom:16px" aria-label="{{ shop.name | strip | escape }}">
           {%- if section.settings.logo != blank -%}
             <img src="{{ section.settings.logo | image_url: width: 500 }}" alt="{{ shop.name | escape }}">
           {%- elsif section.settings.logo_url != blank -%}
             <img src="{{ section.settings.logo_url }}" alt="{{ shop.name | escape }}">
           {%- else -%}
-            <div class="wordmark" style="color:#fff">{{ shop.name | strip }}</div>
+            <span class="wordmark" style="color:#fff">{{ shop.name | strip }}</span>
           {%- endif -%}
-        </div>
-        <p>Premium beauty technology designed to elevate everyday self-care.</p>
+        </a>
+        <p>Salon-grade beauty technology for the ten minutes you actually have. Free tracked UK delivery and 30-day returns on every order.</p>
       </div>
       <div>
         <h3 class="footer-title">Shop</h3>
         <div class="footer-links">
-          <a href="/collections/best-sellers-1">Best sellers</a>
-          <a href="/collections/face">Face</a>
-          <a href="/collections/hair">Hair</a>
-          <a href="/collections/body">Body</a>
-          <a href="/collections/wellness-accessories">Wellness &amp; Accessories</a>
+          <a href="/collections/best-sellers">Best sellers</a>
+          <a href="/collections/face">Face care</a>
+          <a href="/collections/hair">Hair care</a>
+          <a href="/collections/body">Body &amp; personal care</a>
+          <a href="/collections/wellness-accessories">Wellness &amp; accessories</a>
+          <a href="/collections/all">Shop all</a>
         </div>
       </div>
       <div>
         <h3 class="footer-title">Customer care</h3>
         <div class="footer-links">
-          {%- if shop.shipping_policy != blank -%}<a href="{{ shop.shipping_policy.url }}">Delivery</a>{%- endif -%}
-          {%- if shop.refund_policy != blank -%}<a href="{{ shop.refund_policy.url }}">Returns &amp; refunds</a>{%- endif -%}
-          <a href="{{ routes.search_url }}">Search</a>
+          <a href="/pages/contact">Contact us</a>
+          <a href="/pages/faq">FAQ</a>
+          <a href="/pages/shipping-policy">Delivery</a>
+          <a href="/pages/refund-policy">Returns &amp; refunds</a>
           <a href="{{ routes.account_url }}">Your account</a>
         </div>
       </div>
       <div>
-        <h3 class="footer-title">Legal</h3>
+        <h3 class="footer-title">Company</h3>
         <div class="footer-links">
-          {%- if shop.privacy_policy != blank -%}<a href="{{ shop.privacy_policy.url }}">Privacy</a>{%- endif -%}
-          {%- if shop.terms_of_service != blank -%}<a href="{{ shop.terms_of_service.url }}">Terms</a>{%- endif -%}
+          <a href="/pages/about">About Velkrova</a>
+          <a href="{{ routes.search_url }}">Search</a>
+          <a href="/pages/terms-of-service">Terms of service</a>
+          {%- if shop.privacy_policy != blank -%}<a href="{{ shop.privacy_policy.url }}">Privacy policy</a>{%- endif -%}
         </div>
       </div>
     </div>
 
     <ul class="footer-promise">
-      <li>{% render 'icon', name: 'truck' %}<span>Free UK delivery on every order</span></li>
-      <li>{% render 'icon', name: 'return' %}<span>30-day returns</span></li>
-      <li>{% render 'icon', name: 'shield' %}<span>Secure checkout</span></li>
+      <li><a href="/pages/shipping-policy">{% render 'icon', name: 'truck' %}<span>Free UK delivery on every order</span></a></li>
+      <li><a href="/pages/refund-policy">{% render 'icon', name: 'return' %}<span>30-day returns</span></a></li>
+      <li><a href="/pages/faq">{% render 'icon', name: 'shield' %}<span>Secure checkout</span></a></li>
     </ul>
 
     {%- if shop.enabled_payment_types.size > 0 -%}
@@ -60,22 +64,13 @@
 
 <style>
   .site-footer .footer-logo img{max-height:34px;width:auto;display:block;filter:brightness(0) invert(1)}
-  .footer-promise{
-    list-style:none;margin:26px 0 0;padding:22px 0 0;
-    border-top:1px solid rgba(255,255,255,.16);
-    display:flex;flex-wrap:wrap;justify-content:center;gap:14px 34px;
-  }
-  .footer-promise li{display:inline-flex;align-items:center;gap:10px;font-size:13px;color:#fff}
-  /* These icons are stroke-drawn: without an explicit fill they render
-     as solid black shapes on the dark footer. */
-  .footer-promise svg{
-    width:18px;height:18px;flex:none;
-    fill:none;stroke:#fff;stroke-width:1.5;
-    stroke-linecap:round;stroke-linejoin:round;
-  }
+  .site-footer .footer-links a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
+  .footer-promise{list-style:none;margin:26px 0 0;padding:22px 0 0;border-top:1px solid rgba(255,255,255,.16);display:flex;flex-wrap:wrap;justify-content:center;gap:14px 34px}
+  .footer-promise a{display:inline-flex;align-items:center;gap:10px;font-size:13px;color:#fff}
+  .footer-promise a:hover span{text-decoration:underline;text-underline-offset:3px}
+  .footer-promise svg{width:18px;height:18px;flex:none;fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
   .site-footer .payment-row{margin-top:20px}
-  @media(max-width:560px){
-    .footer-promise{flex-direction:column;align-items:flex-start;gap:11px}
-  }
+  @media(max-width:900px){.site-footer .footer-grid{grid-template-columns:1fr 1fr;gap:30px}.site-footer .footer-grid>div:first-child{grid-column:1/-1}}
+  @media(max-width:560px){.footer-promise{flex-direction:column;align-items:flex-start;gap:11px}}
 </style>
 {% schema %}{"name":"Footer","settings":[{"type":"image_picker","id":"logo","label":"Logo"},{"type":"text","id":"logo_url","label":"Logo URL (fallback)"}]}{% endschema %}
