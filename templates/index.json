@@ -59,10 +59,10 @@
     "categories": {
       "type": "category-grid",
       "blocks": {
-        "a": { "type": "category", "settings": { "heading": "Face Care", "collection": "face", "link": "/collections/face" } },
-        "b": { "type": "category", "settings": { "heading": "Hair Care", "collection": "hair", "link": "/collections/hair" } },
-        "c": { "type": "category", "settings": { "heading": "Body Care", "collection": "body", "link": "/collections/body" } },
-        "d": { "type": "category", "settings": { "heading": "Wellness", "collection": "wellness-accessories", "link": "/collections/wellness-accessories" } }
+        "a": { "type": "category", "settings": { "heading": "Face Care", "collection": "face", "handle": "face", "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-category-face-care.png?v=1790480322", "link": "/collections/face" } },
+        "b": { "type": "category", "settings": { "heading": "Hair Care", "collection": "hair", "handle": "hair", "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-category-hair-care.png?v=1790480387", "link": "/collections/hair" } },
+        "c": { "type": "category", "settings": { "heading": "Body Care", "collection": "body", "handle": "body", "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-category-body-personal-care.png?v=1790480401", "link": "/collections/body" } },
+        "d": { "type": "category", "settings": { "heading": "Wellness", "collection": "wellness-accessories", "handle": "wellness-accessories", "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-category-wellness-accessories.png?v=1790480428", "link": "/collections/wellness-accessories" } }
       },
       "block_order": ["a", "b", "c", "d"],
       "settings": { "heading": "Shop by category", "show_labels": true }
