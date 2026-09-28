@@ -15,8 +15,6 @@
         "s1": {
           "type": "slide",
           "settings": {
-            "image": "",
-            "image_mobile": "",
             "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-hero-face.png?v=1790480362",
             "image_url_mobile": "",
             "alt": "Natural-skin portrait for Velkrova face care",
@@ -28,59 +26,283 @@
           }
         }
       },
-      "block_order": ["s1"],
+      "block_order": [
+        "s1"
+      ],
       "settings": {}
     },
     "marquee": {
       "type": "marquee",
       "blocks": {
-        "a": { "type": "item", "settings": { "text": "Free UK delivery on every order", "icon": "truck", "link": "/pages/shipping-policy" } },
-        "b": { "type": "item", "settings": { "text": "30-day returns", "icon": "return", "link": "/pages/refund-policy" } },
-        "c": { "type": "item", "settings": { "text": "Tracked shipping", "icon": "pin", "link": "/pages/shipping-policy" } },
-        "d": { "type": "item", "settings": { "text": "Secure checkout", "icon": "shield", "link": "/pages/faq" } }
+        "a": {
+          "type": "item",
+          "settings": {
+            "text": "Free UK delivery on every order",
+            "icon": "truck",
+            "link": "/pages/shipping-policy"
+          }
+        },
+        "b": {
+          "type": "item",
+          "settings": {
+            "text": "30-day returns",
+            "icon": "return",
+            "link": "/pages/refund-policy"
+          }
+        },
+        "c": {
+          "type": "item",
+          "settings": {
+            "text": "Tracked shipping",
+            "icon": "pin",
+            "link": "/pages/shipping-policy"
+          }
+        },
+        "d": {
+          "type": "item",
+          "settings": {
+            "text": "Secure checkout",
+            "icon": "shield",
+            "link": "/pages/faq"
+          }
+        }
       },
-      "block_order": ["a", "b", "c", "d"],
-      "settings": { "label": "Store benefits", "brand": true }
+      "block_order": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "settings": {
+        "label": "Store benefits",
+        "brand": true
+      }
     },
     "promo": {
       "type": "promo-tiles",
       "blocks": {
-        "t1": { "type": "tile", "settings": { "collection": "face", "product": "anlan-9-in-1-rf-ems-facial-device", "bg_color": "#073f3a", "text_color": "light", "heading": "Clinic-inspired skin tech", "button_label": "Shop face", "button_link": "/collections/face", "button_style": "white" } },
-        "t2": { "type": "tile", "settings": { "collection": "hair", "product": "red-light-scalp-massager", "bg_color": "#e9e1d7", "text_color": "dark", "heading": "Salon-smooth hair at home", "button_label": "Shop hair", "button_link": "/collections/hair", "button_style": "dark" } },
-        "t3": { "type": "tile", "settings": { "collection": "body", "product": "cordless-massage-gun-42-heads", "bg_color": "#2f5d57", "text_color": "light", "heading": "Recovery on your schedule", "button_label": "Shop body", "button_link": "/collections/body", "button_style": "white" } }
+        "t1": {
+          "type": "tile",
+          "settings": {
+            "collection": "face",
+            "product": "anlan-9-in-1-rf-ems-facial-device",
+            "bg_color": "#073f3a",
+            "text_color": "light",
+            "heading": "Clinic-inspired skin tech",
+            "button_label": "Shop face",
+            "button_link": "/collections/face",
+            "button_style": "white"
+          }
+        },
+        "t2": {
+          "type": "tile",
+          "settings": {
+            "collection": "hair",
+            "product": "red-light-scalp-massager",
+            "bg_color": "#e9e1d7",
+            "text_color": "dark",
+            "heading": "Salon-smooth hair at home",
+            "button_label": "Shop hair",
+            "button_link": "/collections/hair",
+            "button_style": "dark"
+          }
+        },
+        "t3": {
+          "type": "tile",
+          "settings": {
+            "collection": "body",
+            "product": "cordless-massage-gun-42-heads",
+            "bg_color": "#2f5d57",
+            "text_color": "light",
+            "heading": "Recovery on your schedule",
+            "button_label": "Shop body",
+            "button_link": "/collections/body",
+            "button_style": "white"
+          }
+        }
       },
-      "block_order": ["t1", "t2", "t3"],
-      "settings": { "heading": "" }
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": ""
+      }
     },
     "featured": {
       "type": "featured-collection-premium",
-      "settings": { "heading": "Most popular", "subheading": "The ones our customers keep coming back for", "collection": "best-sellers", "limit": 12 }
+      "settings": {
+        "heading": "Most popular",
+        "subheading": "The ones our customers keep coming back for",
+        "collection": "best-sellers",
+        "limit": 12
+      }
     },
     "categories": {
       "type": "category-grid",
       "blocks": {
-        "a": { "type": "category", "settings": { "heading": "Face Care", "collection": "face", "handle": "face", "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-category-face-care.png?v=1790480322", "link": "/collections/face" } },
-        "b": { "type": "category", "settings": { "heading": "Hair Care", "collection": "hair", "handle": "hair", "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-category-hair-care.png?v=1790480387", "link": "/collections/hair" } },
-        "c": { "type": "category", "settings": { "heading": "Body Care", "collection": "body", "handle": "body", "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-category-body-personal-care.png?v=1790480401", "link": "/collections/body" } },
-        "d": { "type": "category", "settings": { "heading": "Wellness", "collection": "wellness-accessories", "handle": "wellness-accessories", "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-category-wellness-accessories.png?v=1790480428", "link": "/collections/wellness-accessories" } }
+        "a": {
+          "type": "category",
+          "settings": {
+            "heading": "Face Care",
+            "collection": "face",
+            "handle": "face",
+            "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-category-face-care.png?v=1790480322",
+            "link": "/collections/face"
+          }
+        },
+        "b": {
+          "type": "category",
+          "settings": {
+            "heading": "Hair Care",
+            "collection": "hair",
+            "handle": "hair",
+            "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-category-hair-care.png?v=1790480387",
+            "link": "/collections/hair"
+          }
+        },
+        "c": {
+          "type": "category",
+          "settings": {
+            "heading": "Body Care",
+            "collection": "body",
+            "handle": "body",
+            "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-category-body-personal-care.png?v=1790480401",
+            "link": "/collections/body"
+          }
+        },
+        "d": {
+          "type": "category",
+          "settings": {
+            "heading": "Wellness",
+            "collection": "wellness-accessories",
+            "handle": "wellness-accessories",
+            "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-category-wellness-accessories.png?v=1790480428",
+            "link": "/collections/wellness-accessories"
+          }
+        }
       },
-      "block_order": ["a", "b", "c", "d"],
-      "settings": { "heading": "Shop by category", "show_labels": true }
+      "block_order": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "settings": {
+        "heading": "Shop by category",
+        "show_labels": true
+      }
     },
     "concern": {
       "type": "vk-concern",
       "blocks": {
-        "c1": { "type": "concern", "settings": { "label": "Fine lines & firmness", "text": "Skin that has lost its bounce", "collection": "fine-lines-firmness", "handle": "fine-lines-firmness", "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-concern-fine-lines-firmness.png?v=1790480415", "link": "/collections/fine-lines-firmness" } },
-        "c2": { "type": "concern", "settings": { "label": "Breakouts & congestion", "text": "Clogged pores and uneven texture", "collection": "breakouts-congestion", "handle": "breakouts-congestion", "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-concern-breakouts-congestion.png?v=1790480440", "link": "/collections/breakouts-congestion" } },
-        "c3": { "type": "concern", "settings": { "label": "Tired & puffy eyes", "text": "Mornings that show on your face", "collection": "tired-puffy-eyes", "handle": "tired-puffy-eyes", "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-concern-tired-puffy-eyes.png?v=1790480455", "link": "/collections/tired-puffy-eyes" } },
-        "c4": { "type": "concern", "settings": { "label": "Shaping & firming", "text": "Body massage and contouring", "collection": "shaping-firming", "handle": "shaping-firming", "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-concern-shaping-firming.png?v=1790480468", "link": "/collections/shaping-firming" } },
-        "c5": { "type": "concern", "settings": { "label": "Tension & recovery", "text": "Tight muscles after long days", "collection": "tension-recovery", "handle": "tension-recovery", "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-concern-tension-recovery.png?v=1790480480", "link": "/collections/tension-recovery" } },
-        "c6": { "type": "concern", "settings": { "label": "Thinning & shedding", "text": "Hair that feels thinner", "collection": "thinning-shedding", "handle": "thinning-shedding", "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-concern-thinning-shedding.png?v=1790480492", "link": "/collections/thinning-shedding" } },
-        "c7": { "type": "concern", "settings": { "label": "Damage & breakage", "text": "Dry, brittle, frizzy lengths", "collection": "damage-breakage", "handle": "damage-breakage", "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-concern-damage-breakage.png?v=1790480504", "link": "/collections/damage-breakage" } },
-        "c8": { "type": "concern", "settings": { "label": "Nails & feet", "text": "Salon-style hands and feet", "collection": "nails-feet", "handle": "nails-feet", "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-concern-nails-feet.png?v=1790480517", "link": "/collections/nails-feet" } }
+        "c1": {
+          "type": "concern",
+          "settings": {
+            "label": "Fine lines & firmness",
+            "text": "Skin that has lost its bounce",
+            "collection": "fine-lines-firmness",
+            "handle": "fine-lines-firmness",
+            "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-concern-fine-lines-firmness.png?v=1790480415",
+            "link": "/collections/fine-lines-firmness"
+          }
+        },
+        "c2": {
+          "type": "concern",
+          "settings": {
+            "label": "Breakouts & congestion",
+            "text": "Clogged pores and uneven texture",
+            "collection": "breakouts-congestion",
+            "handle": "breakouts-congestion",
+            "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-concern-breakouts-congestion.png?v=1790480440",
+            "link": "/collections/breakouts-congestion"
+          }
+        },
+        "c3": {
+          "type": "concern",
+          "settings": {
+            "label": "Tired & puffy eyes",
+            "text": "Mornings that show on your face",
+            "collection": "tired-puffy-eyes",
+            "handle": "tired-puffy-eyes",
+            "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-concern-tired-puffy-eyes.png?v=1790480455",
+            "link": "/collections/tired-puffy-eyes"
+          }
+        },
+        "c4": {
+          "type": "concern",
+          "settings": {
+            "label": "Shaping & firming",
+            "text": "Body massage and contouring",
+            "collection": "shaping-firming",
+            "handle": "shaping-firming",
+            "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-concern-shaping-firming.png?v=1790480468",
+            "link": "/collections/shaping-firming"
+          }
+        },
+        "c5": {
+          "type": "concern",
+          "settings": {
+            "label": "Tension & recovery",
+            "text": "Tight muscles after long days",
+            "collection": "tension-recovery",
+            "handle": "tension-recovery",
+            "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-concern-tension-recovery.png?v=1790480480",
+            "link": "/collections/tension-recovery"
+          }
+        },
+        "c6": {
+          "type": "concern",
+          "settings": {
+            "label": "Thinning & shedding",
+            "text": "Hair that feels thinner",
+            "collection": "thinning-shedding",
+            "handle": "thinning-shedding",
+            "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-concern-thinning-shedding.png?v=1790480492",
+            "link": "/collections/thinning-shedding"
+          }
+        },
+        "c7": {
+          "type": "concern",
+          "settings": {
+            "label": "Damage & breakage",
+            "text": "Dry, brittle, frizzy lengths",
+            "collection": "damage-breakage",
+            "handle": "damage-breakage",
+            "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-concern-damage-breakage.png?v=1790480504",
+            "link": "/collections/damage-breakage"
+          }
+        },
+        "c8": {
+          "type": "concern",
+          "settings": {
+            "label": "Nails & feet",
+            "text": "Salon-style hands and feet",
+            "collection": "nails-feet",
+            "handle": "nails-feet",
+            "image_url": "https://cdn.shopify.com/s/files/1/1009/5611/1150/files/velkrova-concern-nails-feet.png?v=1790480517",
+            "link": "/collections/nails-feet"
+          }
+        }
       },
-      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
-      "settings": { "eyebrow": "WHAT ARE YOU WORKING ON?", "heading": "Shop by concern", "subheading": "Start with the thing that bothers you, not the shelf it sits on." }
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6",
+        "c7",
+        "c8"
+      ],
+      "disabled": true,
+      "settings": {
+        "eyebrow": "WHAT ARE YOU WORKING ON?",
+        "heading": "Shop by concern",
+        "subheading": "Start with the thing that bothers you, not the shelf it sits on."
+      }
     },
     "offer": {
       "type": "offer-banner",
@@ -98,7 +320,12 @@
     },
     "more": {
       "type": "featured-collection-premium",
-      "settings": { "heading": "Body & personal care", "subheading": "Massage, recovery and everyday essentials", "collection": "body", "limit": 12 }
+      "settings": {
+        "heading": "Body & personal care",
+        "subheading": "Massage, recovery and everyday essentials",
+        "collection": "body",
+        "limit": 12
+      }
     },
     "brand": {
       "type": "image-text-premium",
@@ -115,13 +342,44 @@
     "compare": {
       "type": "vk-compare",
       "blocks": {
-        "r1": { "type": "row", "settings": { "label": "Free UK delivery, no minimum spend" } },
-        "r2": { "type": "row", "settings": { "label": "30-day returns, not the legal 14" } },
-        "r3": { "type": "row", "settings": { "label": "Tracked on every single order" } },
-        "r4": { "type": "row", "settings": { "label": "Honest timeframes for results" } },
-        "r5": { "type": "row", "settings": { "label": "Routines built for ten minutes" } }
+        "r1": {
+          "type": "row",
+          "settings": {
+            "label": "Free UK delivery, no minimum spend"
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "label": "30-day returns, not the legal 14"
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "label": "Tracked on every single order"
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "label": "Honest timeframes for results"
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "label": "Routines built for ten minutes"
+          }
+        }
       },
-      "block_order": ["r1", "r2", "r3", "r4", "r5"],
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5"
+      ],
       "settings": {
         "eyebrow": "THE VELKROVA DIFFERENCE",
         "heading": "Made for the ten minutes",
@@ -129,20 +387,63 @@
         "text": "Salon-grade devices chosen for routines that fit into a normal evening, backed by delivery and returns terms we put in writing. No thresholds to reach, no fine print at checkout, and honest timeframes for how long results really take.",
         "us_label": "Velkrova",
         "them_label": "Others",
-        "background": "#FFFFFF"
+        "background": "#ffffff"
       }
     },
     "homefaq": {
       "type": "vk-home-faq",
       "blocks": {
-        "q1": { "type": "question", "settings": { "question": "How long will my order take?", "answer": "<p>Orders are typically delivered within <strong>5 to 9 business days</strong>, with free tracked delivery anywhere in the UK and no minimum spend. You will get a tracking link by email as soon as your parcel leaves the warehouse.</p>" } },
-        "q2": { "type": "question", "settings": { "question": "Is delivery really free?", "answer": "<p>Yes, on every order and with no minimum spend. There is no threshold to reach and nothing added at checkout.</p>" } },
-        "q3": { "type": "question", "settings": { "question": "What if it is not right for me?", "answer": "<p>You have <strong>30 days from delivery</strong> to return it, which is longer than the 14 days you are entitled to by law. If an item arrives faulty, we cover the postage both ways. <a href=\"/pages/refund-policy\">Read our returns policy</a>.</p>" } },
-        "q4": { "type": "question", "settings": { "question": "How quickly will I see results?", "answer": "<p>It depends on the device, and we would rather tell you honestly than promise three days. Massage and depuffing are immediate. Skin tone and firmness usually take six to eight weeks of regular use, and anything to do with hair takes eight to twelve. Every product page says which applies.</p>" } },
-        "q5": { "type": "question", "settings": { "question": "Do the devices come with a UK plug?", "answer": "<p>Where a product has plug options, choose UK at checkout. Most of our devices are USB rechargeable, so they work with any charger you already own.</p>" } },
-        "q6": { "type": "question", "settings": { "question": "Is it safe to buy from you?", "answer": "<p>Payments run through Shopify's encrypted checkout, so we never see or store your card details. Every order is tracked, and if anything goes wrong you can <a href=\"/pages/contact\">reach a real person</a>.</p>" } }
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "How long will my order take?",
+            "answer": "<p>Orders are typically delivered within <strong>5 to 9 business days</strong>, with free tracked delivery anywhere in the UK and no minimum spend. You will get a tracking link by email as soon as your parcel leaves the warehouse.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Is delivery really free?",
+            "answer": "<p>Yes, on every order and with no minimum spend. There is no threshold to reach and nothing added at checkout.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "What if it is not right for me?",
+            "answer": "<p>You have <strong>30 days from delivery</strong> to return it, which is longer than the 14 days you are entitled to by law. If an item arrives faulty, we cover the postage both ways. <a href=\"/pages/refund-policy\">Read our returns policy</a>.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "How quickly will I see results?",
+            "answer": "<p>It depends on the device, and we would rather tell you honestly than promise three days. Massage and depuffing are immediate. Skin tone and firmness usually take six to eight weeks of regular use, and anything to do with hair takes eight to twelve. Every product page says which applies.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Do the devices come with a UK plug?",
+            "answer": "<p>Where a product has plug options, choose UK at checkout. Most of our devices are USB rechargeable, so they work with any charger you already own.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "Is it safe to buy from you?",
+            "answer": "<p>Payments run through Shopify's encrypted checkout, so we never see or store your card details. Every order is tracked, and if anything goes wrong you can <a href=\"/pages/contact\">reach a real person</a>.</p>"
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"],
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6"
+      ],
       "settings": {
         "eyebrow": "FAQ",
         "heading": "Frequently asked questions",
@@ -162,5 +463,18 @@
       }
     }
   },
-  "order": ["hero", "marquee", "promo", "featured", "categories", "concern", "offer", "more", "brand", "compare", "homefaq", "newsletter"]
+  "order": [
+    "hero",
+    "marquee",
+    "promo",
+    "featured",
+    "categories",
+    "concern",
+    "offer",
+    "more",
+    "brand",
+    "compare",
+    "homefaq",
+    "newsletter"
+  ]
 }
